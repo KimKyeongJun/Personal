@@ -9,48 +9,48 @@
 	type="text/javascript"></script>
 <script>
 	$().ready( function() {
-				$("#id").blur(function() {
-					$.post("/PersonalProject/member/duplicate", {
-						id : $(this).val()
-					}, function(response) {
-						if (response.possible) {
-							alert(response.data);
-						}
-						else {
-							$("#id").val("");
-							setTimeout( function(){ 
-								$("#id").focus(); 
-								}, 10);
-							alert(response.data);
-						}
-					});					
-				});
+		$("#id").blur(function() {
+			$.post("/PersonalProject/member/duplicate", {
+				id : $(this).val()
+			}, function(response) {
+				if (response.possible) {
+					alert(response.data);
+				}
+				else {
+					$("#id").val("");
+					setTimeout( function(){ 
+						$("#id").focus(); 
+						}, 10);
+					alert(response.data);
+				}
+			});					
+		});
+		
+		$("#passwordConfirm").blur(function() {
+			if ( $("#password").val() != $("#passwordConfirm").val() ) {
+				alert("비밀번호가 일치하지 않습니다");
+				setTimeout( function() { 
+					$("#passwordConfirm").focus(); 
+					}, 10);
+				return;
+			}
+			else {
 				
-				$("#passwordConfirm").blur(function() {
-					if ( $("#password").val() != $("#passwordConfirm").val() ) {
-						alert("비밀번호가 일치하지 않습니다");
-						setTimeout( function() { 
-							$("#passwordConfirm").focus(); 
-							}, 10);
-						return;
-					}
-					else {
-						
-					}
+			}
+		});
+		$("#registBtn").click(
+				function() {
+					$.post("/PersonalProject/member/regist", $(
+							"#registForm").serialize(), function(
+							response) {
+						if (response.regist) {
+							alert("가입되었습니다");
+						} else {
+							alert("가입 실패!");
+						}
+					});
 				});
-				$("#registBtn").click(
-						function() {
-							$.post("/PersonalProject/member/regist", $(
-									"#registForm").serialize(), function(
-									response) {
-								if (response.regist) {
-									alert("가입되었습니다");
-								} else {
-									alert("가입 실패!");
-								}
-							});
-						});
-			});
+	});
 </script>
 </head>
 <body>
