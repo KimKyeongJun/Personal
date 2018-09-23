@@ -4,12 +4,13 @@ public class MemberVO {
 
 	String id;
 	String password;
+	String email;
 	String phone;
 	String mileage;
 	String salt;
 	String loginFailCount;
 	String latestLogin;
-	boolean isAdmin;
+	String isAdmin;
 
 	public String getId() {
 		return id;
@@ -25,6 +26,14 @@ public class MemberVO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPhone() {
@@ -67,11 +76,11 @@ public class MemberVO {
 		this.latestLogin = latestLogin;
 	}
 
-	public boolean isAdmin() {
+	public String isAdmin() {
 		return isAdmin;
 	}
 
-	public void setAdmin(boolean isAdmin) {
+	public void setAdmin(String isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 

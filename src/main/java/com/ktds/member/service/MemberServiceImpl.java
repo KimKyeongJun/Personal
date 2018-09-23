@@ -14,7 +14,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public boolean createMember(MemberVO memberVO) {
-		return this.memberDao.insertMember(memberVO);
+		return this.memberDao.insertMember(memberVO) > 0;
+	}
+	
+	@Override
+	public String readDuplicateId(String id) {
+		return this.memberDao.selectDuplicateId(id);
 	}
 
 }

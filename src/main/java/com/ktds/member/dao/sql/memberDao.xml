@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemberDao">
+
+<insert id="insertMember" parameterType="MemberVO">
+INSERT	INTO	MEMBERS (
+							ID
+							, PASSWORD
+							, EMAIL
+							, PHONE
+							, MILEAGE
+							, SALT
+							, LOGIN_FAIL_COUNT
+							, LATEST_LOGIN
+							, IS_ADMIN
+						)
+VALUES					(
+							#{id}
+							, #{password}
+							, #{email}
+							, #{phone}
+							, 0
+							, '0'
+							, 0
+							, SYSDATE
+							, 'N'
+						)
+</insert>
+
+<select	id="selectDuplicateId" parameterType="string" resultType="string">
+SELECT	ID
+FROM	MEMBERS
+WHERE	ID = #{id}
+</select>
+
+</mapper>
+  
