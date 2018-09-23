@@ -10,24 +10,32 @@
 <script>
 	$().ready( function() {
 				$("#id").blur(function() {
-					if ($(this).val() == "") {
-						alert("아이디는 필수 입력값입니다.");
+					$.post("/PersonalProject/member/duplicate", {
+						id : $(this).val()
+					}, function(response) {
+						if (response.possible) {
+							alert(response.data);
+						}
+						else {
+							$("#id").val("");
+							setTimeout( function(){ 
+								$("#id").focus(); 
+								}, 10);
+							alert(response.data);
+						}
+					});					
+				});
+				
+				$("#passwordConfirm").blur(function() {
+					if ( $("#password").val() != $("#passwordConfirm").val() ) {
+						alert("비밀번호가 일치하지 않습니다");
+						setTimeout( function() { 
+							$("#passwordConfirm").focus(); 
+							}, 10);
 						return;
 					}
 					else {
-						$.post("/PersonalProject/member/duplicate", {
-							id : $(this).val()
-						}, function(response) {
-							if (response.possible) {
-								alert(response.data);
-							}
-							else {
-								$("#id").val("");
-								$("#id").focus();
-								alert(response.data);
-							}
-						});
-						return;
+						
 					}
 				});
 				$("#registBtn").click(
@@ -54,6 +62,9 @@
 		<div>
 			<input type="password" id="password" name="password"
 				placeholder="Password" />
+		</div>
+		<div>
+			<input type="password" id="passwordConfirm" placeholder="PasswordConfirm" />
 		</div>
 		<div>
 			<input type="text" id="phone" name="phone" placeholder="Phone" />
