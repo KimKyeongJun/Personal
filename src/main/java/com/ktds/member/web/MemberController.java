@@ -55,5 +55,10 @@ public class MemberController {
 		}
 		return result;
 	}
+	
+	@GetMapping("/member/login")
+	public String viewLoginPage() {
+		return "member/login";
+	}
 
 }
