@@ -23,7 +23,7 @@ VALUES					(
 							, #{email}
 							, #{phone}
 							, 0
-							, '0'
+							, #{salt}
 							, 0
 							, SYSDATE
 							, 'N'

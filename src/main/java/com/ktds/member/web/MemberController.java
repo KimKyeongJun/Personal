@@ -5,12 +5,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ktds.member.MemberValidator;
 import com.ktds.member.service.MemberService;
 import com.ktds.member.vo.MemberVO;
 
@@ -27,17 +31,30 @@ public class MemberController {
 	
 	@PostMapping("/member/regist")
 	@ResponseBody
-	public Map<String, Object> doMemberRegistAction (@ModelAttribute MemberVO memberVO) {
+	public Map<String, Object> doMemberRegistAction (@Validated({MemberValidator.MemberRegist.class}) @ModelAttribute MemberVO memberVO, Errors errors) {
 		Map<String, Object> result = new HashMap<>();
-		boolean isRegistMember = memberService.createMember(memberVO);
 		
-		if ( isRegistMember ) {
-			result.put("regist",isRegistMember);			
+		if ( errors.hasErrors() ) {
+			StringBuilder errorMessage = new StringBuilder();
+			for ( FieldError fieldError : errors.getFieldErrors() ) {
+				errorMessage.append(fieldError.getDefaultMessage());
+				errorMessage.append("\n");
+				result.put("message", errorMessage);
+			}
+			result.put("regist", false);
+			return result;
 		}
-		else {
-			result.put("regist", isRegistMember);
+		else {			
+			boolean isRegistMember = memberService.createMember(memberVO);
+			
+			if ( isRegistMember ) {
+				result.put("regist",isRegistMember);			
+			}
+			else {
+				result.put("regist", isRegistMember);
+			}
+			return result;
 		}
-		return result;
 	}
 	
 	@PostMapping("/member/duplicate")
@@ -59,6 +76,16 @@ public class MemberController {
 	@GetMapping("/member/login")
 	public String viewLoginPage() {
 		return "member/login";
+	}
+	
+	@GetMapping("/member/findid")
+	public String viewFindIdPage() {
+		return "member/findid";
+	}
+	
+	@GetMapping("/member/guest")
+	public String viewGusetLoginPage() {
+		return "member/guest";
 	}
 
 }

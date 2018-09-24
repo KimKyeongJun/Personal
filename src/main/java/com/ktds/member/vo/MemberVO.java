@@ -1,10 +1,22 @@
 package com.ktds.member.vo;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
+import com.ktds.member.MemberValidator;
+
 public class MemberVO {
 
+	@NotEmpty(message="아이디를 입력해주세요", groups= {MemberValidator.MemberRegist.class, MemberValidator.MemberLogin.class})
 	String id;
+	@NotEmpty(message="비밀번호를 입력해주세요", groups= {MemberValidator.MemberRegist.class, MemberValidator.MemberLogin.class})
+	@Pattern(regexp="((?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,})", message="비밀번호는 8글자 이상 대소문자, 숫자, 특수문자 조합으로 설정해야 합니다.", groups= {MemberValidator.MemberRegist.class})
 	String password;
+	@NotEmpty(message="이메일을 입력해주세요", groups= {MemberValidator.MemberRegist.class})
+	@Email(message="이메일  형식으로 작성해주세요", groups= {MemberValidator.MemberRegist.class})
 	String email;
+	@NotEmpty(message="전화번호를 입력해주세요", groups= {MemberValidator.MemberRegist.class})
 	String phone;
 	String mileage;
 	String salt;

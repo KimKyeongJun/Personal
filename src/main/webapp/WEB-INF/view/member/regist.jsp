@@ -65,7 +65,7 @@
 					
 					var passwordRegex = /^(?=.*[a-zA-z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}/;
 					if ( !passwordRegex.test($("#password").val()) ) {
-						alert("비밀번호");
+						alert("비밀번호는 8글자 이상 20글자 이하 대소문자, 숫자, 특수문자를 포함해야 합니다.");
 						setTimeout( function() { 
 							$("#password").focus(); 
 							}, 10);
@@ -102,7 +102,11 @@
 						if (response.regist) {
 							alert("가입되었습니다");
 							location.href="/PersonalProject/member/login";
-						} else {
+						} 
+						else {
+							if ( response.message ){
+								alert(response.message);
+							}
 							alert("가입 실패!");
 						}
 					});
