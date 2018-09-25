@@ -13,5 +13,9 @@ public interface MemberDao {
 	public int updateLoginFailCount(MemberVO memberVO);
 	
 	public String selectOneSaltById(String id);
+	
+	public int unBlockUser(String id);
+	
+	public Integer isBlockUser(String id);
 
 }

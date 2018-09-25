@@ -41,11 +41,23 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO loginMemberVO = memberDao.selectOneMember(memberVO);
 		
 		if ( loginMemberVO != null ) {
+			memberDao.unBlockUser(loginMemberVO.getId());
 			return true;
 		}
 		else {
 			memberDao.updateLoginFailCount(memberVO);
 			return false;			
 		}
+	}
+	
+	@Override
+	public boolean isBlockUser(String id) {
+		Integer isBlockUser = memberDao.isBlockUser(id);
+		
+		if ( isBlockUser == null) {
+			isBlockUser = 0;
+		}
+		
+		return isBlockUser >= 3;
 	}
 }

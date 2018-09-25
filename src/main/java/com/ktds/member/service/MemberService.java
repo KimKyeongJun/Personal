@@ -9,5 +9,7 @@ public interface MemberService {
 	public String readDuplicateId(String id);
 	
 	public boolean readOneMember(MemberVO memberVO);
+	
+	public boolean isBlockUser(String id);
 
 }

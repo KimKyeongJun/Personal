@@ -12,6 +12,8 @@
 </head>
 <body>
 
+	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
+
 	<div>
 		<span><a href="/PersonalProject/member/login">회원 로그인</a></span>
 		<span>비회원 로그인</span>

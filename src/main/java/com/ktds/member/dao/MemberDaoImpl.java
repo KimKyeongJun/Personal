@@ -39,5 +39,15 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 	public String selectOneSaltById(String id) {
 		return getSqlSession().selectOne("MemberDao.selectOneSaltById", id);
 	}
+	
+	@Override
+	public int unBlockUser(String id) {
+		return getSqlSession().update("MemberDao.unBlockUser", id);
+	}
+	
+	@Override
+	public Integer isBlockUser(String id) {
+		return getSqlSession().selectOne("MemberDao.isBlockUser", id);
+	}
 
 }

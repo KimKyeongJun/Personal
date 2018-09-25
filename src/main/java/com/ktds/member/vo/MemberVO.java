@@ -18,6 +18,8 @@ public class MemberVO {
 	String email;
 	@NotEmpty(message="전화번호를 입력해주세요", groups= {MemberValidator.MemberRegist.class})
 	String phone;
+	@NotEmpty(message="이름을 입력하세요", groups = {MemberValidator.MemberRegist.class})
+	String name;
 	String mileage;
 	String salt;
 	String loginFailCount;
@@ -54,6 +56,22 @@ public class MemberVO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(String isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public String getMileage() {
@@ -86,14 +104,6 @@ public class MemberVO {
 
 	public void setLatestLogin(String latestLogin) {
 		this.latestLogin = latestLogin;
-	}
-
-	public String isAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(String isAdmin) {
-		this.isAdmin = isAdmin;
 	}
 
 }

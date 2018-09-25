@@ -54,6 +54,14 @@
 						return;
 					}
 					
+					if ($("#name").val() == "" ) {
+						alert("이름은 필수 입력값입니다.");
+						setTimeout( function() { 
+							$("#name").focus(); 
+							}, 10);
+						return;
+					}
+					
 					
 					if($("#password").val() == "") {
 						alert("비밀번호는 필수 입력 값입니다.");
@@ -115,10 +123,14 @@
 </script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 
 	<form id="registForm">
 		<div>
 			<input type="text" id="id" name="id" placeholder="아이디" />
+		</div>
+		<div>
+			<input type="text" id="name" name="name" placeholder="이름" />
 		</div>
 		<div>
 			<input type="password" id="password" name="password"

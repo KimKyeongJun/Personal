@@ -12,6 +12,8 @@
 </head>
 <body>
 
+	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
+
 	<form id="idSearchForm">
 		<div>
 			<input type="text" id="name" name="name" placeholder="이름" />

@@ -33,7 +33,7 @@
 							alert("로그인 되었습니다")
 						}
 						else {
-							alert("로그인에 실패하였습니다. 아이디와 비밀번호를 확인하세요!");
+							alert(response.message);
 						}
 			});
 		});
@@ -41,6 +41,7 @@
 </script>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 
 	<div>
 		<span>회원 로그인</span>

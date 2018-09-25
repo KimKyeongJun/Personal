@@ -16,6 +16,7 @@ INSERT	INTO	MEMBERS (
 							, LOGIN_FAIL_COUNT
 							, LATEST_LOGIN
 							, IS_ADMIN
+							, NAME
 						)
 VALUES					(
 							#{id}
@@ -27,6 +28,7 @@ VALUES					(
 							, 0
 							, SYSDATE
 							, 'N'
+							, #{name}
 						)
 </insert>
 
@@ -46,6 +48,7 @@ SELECT	ID
 		, LOGIN_FAIL_COUNT
 		, LATEST_LOGIN
 		, IS_ADMIN
+		, NAME
 FROM	MEMBERS
 WHERE	ID = #{id}
 AND		PASSWORD = #{password}
@@ -60,8 +63,22 @@ WHERE	ID = #{id}
 <update	id="updateLoginFailCount" parameterType="MemberVO">
 UPDATE	MEMBERS
 SET		LOGIN_FAIL_COUNT = LOGIN_FAIL_COUNT + 1
+		, LATEST_LOGIN = SYSDATE
 WHERE	ID = #{id}
 </update>
+
+<update id="unBlockUser" parameterType="string">
+UPDATE	MEMBERS
+SET		LOGIN_FAIL_COUNT = 0
+WHERE	ID = #{id}
+</update>
+
+<select id="isBlockUser" parameterType="string" resultType="int">
+SELECT	LOGIN_FAIL_COUNT
+FROM	MEMBERS
+WHERE	ID = #{id}
+AND		LATEST_LOGIN + 1/24 >= SYSDATE
+</select>
 
 </mapper>
   
