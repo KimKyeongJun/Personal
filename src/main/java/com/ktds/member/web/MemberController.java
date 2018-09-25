@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ktds.member.MemberValidator;
 import com.ktds.member.service.MemberService;
+import com.ktds.member.validator.MemberValidator;
 import com.ktds.member.vo.MemberVO;
 
 @Controller
@@ -76,6 +76,15 @@ public class MemberController {
 	@GetMapping("/member/login")
 	public String viewLoginPage() {
 		return "member/login";
+	}
+	
+	@PostMapping("/member/login")
+	@ResponseBody
+	public Map<String, Object> doMemberLoginAction(@ModelAttribute MemberVO memberVO) {
+		Map<String, Object> result = new HashMap<>();
+		boolean isLogin = memberService.readOneMember(memberVO);
+		result.put("login", isLogin);
+		return result;
 	}
 	
 	@GetMapping("/member/findid")

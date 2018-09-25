@@ -4,7 +4,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-import com.ktds.member.MemberValidator;
+import com.ktds.member.validator.MemberValidator;
 
 public class MemberVO {
 

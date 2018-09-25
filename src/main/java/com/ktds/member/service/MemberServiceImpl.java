@@ -16,14 +16,14 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean createMember(MemberVO memberVO) {
 		String salt = SHA256Util.generateSalt();
-		String password = this.getHashedPassrod(salt, memberVO.getPassword());
+		String password = this.getHashedPassword(salt, memberVO.getPassword());
 		
 		memberVO.setPassword(password);
 		memberVO.setSalt(salt);		
 		return this.memberDao.insertMember(memberVO) > 0;
 	}
 	
-	public String getHashedPassrod(String salt, String password) {
+	public String getHashedPassword(String salt, String password) {
 		return SHA256Util.getEncrypt(password, salt);
 	}
 	
@@ -31,5 +31,21 @@ public class MemberServiceImpl implements MemberService {
 	public String readDuplicateId(String id) {
 		return this.memberDao.selectDuplicateId(id);
 	}
-
+	
+	@Override
+	public boolean readOneMember(MemberVO memberVO) {
+		String salt = memberDao.selectOneSaltById(memberVO.getId());
+		String password = this.getHashedPassword(salt, memberVO.getPassword());
+		
+		memberVO.setPassword(password);
+		MemberVO loginMemberVO = memberDao.selectOneMember(memberVO);
+		
+		if ( loginMemberVO != null ) {
+			return true;
+		}
+		else {
+			memberDao.updateLoginFailCount(memberVO);
+			return false;			
+		}
+	}
 }

@@ -24,5 +24,20 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 	public String selectDuplicateId(String id) {
 		return getSqlSession().selectOne("MemberDao.selectDuplicateId", id);
 	}
+	
+	@Override
+	public MemberVO selectOneMember(MemberVO memberVO) {
+		return getSqlSession().selectOne("MemberDao.selectOneMember", memberVO);
+	}
+	
+	@Override
+	public int updateLoginFailCount(MemberVO memberVO) {
+		return getSqlSession().update("MemberDao.updateLoginFailCount", memberVO);
+	}
+	
+	@Override
+	public String selectOneSaltById(String id) {
+		return getSqlSession().selectOne("MemberDao.selectOneSaltById", id);
+	}
 
 }

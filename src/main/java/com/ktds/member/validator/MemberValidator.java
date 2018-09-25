@@ -1,4 +1,4 @@
-package com.ktds.member;
+package com.ktds.member.validator;
 
 public class MemberValidator {
 	

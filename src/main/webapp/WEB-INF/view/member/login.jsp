@@ -7,8 +7,37 @@
 <title>Insert title here</title>
 <script src="/PersonalProject/js/jquery-3.3.1.min.js"
 	type="text/javascript"></script>
-<script>
-	
+<script type="text/javascript">
+	$().ready(function() {
+		$("#loginBtn").click(function() {
+			if ($("#id").val() == "" ){
+				alert("아이디를 입력하세요");
+				setTimeout( function() { 
+					$("#id").focus(); 
+					}, 10);
+				return;
+			}
+			
+			if ( $("#password").val() == "") {
+				alert("비밀번호를 입력하세요");
+				setTimeout( function() { 
+					$("#password").focus(); 
+					}, 10);
+				return;
+			}
+			
+			$.post("/PersonalProject/member/login",
+					$("#loginForm").serialize(),
+					function(response) {
+						if ( response.login ) {
+							alert("로그인 되었습니다")
+						}
+						else {
+							alert("로그인에 실패하였습니다. 아이디와 비밀번호를 확인하세요!");
+						}
+			});
+		});
+	});	
 </script>
 </head>
 <body>

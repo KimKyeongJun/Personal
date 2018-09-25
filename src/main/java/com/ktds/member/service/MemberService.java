@@ -7,5 +7,7 @@ public interface MemberService {
 	public boolean createMember(MemberVO memberVO);
 	
 	public String readDuplicateId(String id);
+	
+	public boolean readOneMember(MemberVO memberVO);
 
 }

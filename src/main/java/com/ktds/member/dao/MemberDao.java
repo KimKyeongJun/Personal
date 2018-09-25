@@ -7,5 +7,11 @@ public interface MemberDao {
 	public int insertMember(MemberVO memberVO);
 	
 	public String selectDuplicateId(String id);
+	
+	public MemberVO selectOneMember(MemberVO memberVO);
+	
+	public int updateLoginFailCount(MemberVO memberVO);
+	
+	public String selectOneSaltById(String id);
 
 }
