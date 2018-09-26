@@ -45,6 +45,7 @@
 	<ul>
 		<li><a href="/PersonalProject/index">홈</a></li>
 		<li>예약하기</li>
+		<li>고객센터</li>
 		<li><a href="/PersonalProject/member/login">로그인</a></li>
 		<li><a href="/PersonalProject/member/regist">회원가입</a></li>
 		<li>로그아웃</li>
