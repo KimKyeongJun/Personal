@@ -15,5 +15,8 @@
 	<div>
 		공지사항페이지
 	</div>
+	<div>
+		<a href="/PersonalProject/notice/regist">글 작성</a>
+	</div>
 </body>
 </html>

@@ -10,5 +10,10 @@ public class QnaController {
 	public String viewQnaPage() {
 		return "qna/qna";
 	}
+	
+	@GetMapping("/qna/regist")
+	public String viewQnaRegistPage() {
+		return "qna/regist";
+	}
 
 }

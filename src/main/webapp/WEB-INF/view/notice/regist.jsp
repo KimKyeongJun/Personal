@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,16 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="text-align: center;">
+
+	<div>
 		<div>
-			<span><a href="/PersonalProject/notice/notice">공지사항</a></span>
-			<span>QnA</span>
+			<input type="text" id="subject" name="subject" placeholder="제목" />
 		</div>
-		<div>QnA페이지</div>
 		<div>
-			<a href="/PersonalProject/qna/regist">글 작성</a>
+			<textarea id="content" name="content" placeholder="내용"></textarea>
+		</div>
+		<div>
+			<input type="button" id="registBtn" value="등록" />
 		</div>
 	</div>
+
 </body>
 </html>

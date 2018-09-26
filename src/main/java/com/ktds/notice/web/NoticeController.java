@@ -11,5 +11,10 @@ public class NoticeController {
 		return "notice/notice";
 	}
 	
+	@GetMapping("/notice/regist")
+	public String viewNoticeRegistPage() {
+		return "notice/regist";
+	}
+	
 
 }
