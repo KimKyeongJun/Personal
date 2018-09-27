@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnaDao">
+
+<insert id="insertQna" parameterType="QnaVO">
+INSERT	INTO	QNA (
+						QNA_ID	
+						, WRITER
+						, PASSWORD
+						, CONTENT
+						, IS_VISIBLE
+						, CRTDT
+						, SUBJECT
+					)
+VALUES				(
+						'QA-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(QNA_ID_SEQ.NEXTVAL, 6, '0')	
+						, #{writer}
+						, #{password}
+						, #{content}
+						, #{isVisible}
+						, SYSDATE
+						, #{subject}
+					)
+</insert>
+
+<resultMap type="QnaVO" id="qnaVO">
+	<id property="quaId" column="QNA_ID" />
+	<result property="qnaRowNum" column="ROWNUM" />
+	<result property="writer" column="WRITER" />
+	<result property="password" column="PASSWORD" />
+	<result property="content" column="CONTENT" />
+	<result property="isVisible" column="IS_VISIBLE" />
+	<result property="crtDt" column="CRTDT" />
+	<result property="subject" column="SUBJECT" />
+</resultMap>
+
+<select id="selectAllQna" resultMap="qnaVO">
+SELECT  ROWNUM
+        , A.QNA_ID		QNA_ID
+		, A.WRITER		WRITER
+		, A.PASSWORD	PASSWORD
+		, A.CONTENT		CONTENT
+		, A.IS_VISIBLE	IS_VISIBLE
+		, A.CRTDT		CRTDT
+		, A.SUBJECT		SUBJECT
+FROM    (
+            SELECT  *
+            FROM    QNA
+            ORDER   BY CRTDT DESC
+        ) A
+</select>
+
+
+</mapper>

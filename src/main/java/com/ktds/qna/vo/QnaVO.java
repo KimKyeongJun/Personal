@@ -2,13 +2,22 @@ package com.ktds.qna.vo;
 
 public class QnaVO {
 
+	int qnaRowNum;
 	String quaId;
 	String writer;
 	String password;
 	String subject;
 	String content;
-	boolean isVisible;
+	String isVisible;
 	String crtDt;
+
+	public int getQnaRowNum() {
+		return qnaRowNum;
+	}
+
+	public void setQnaRowNum(int qnaRowNum) {
+		this.qnaRowNum = qnaRowNum;
+	}
 
 	public String getQuaId() {
 		return quaId;
@@ -50,20 +59,20 @@ public class QnaVO {
 		this.content = content;
 	}
 
-	public boolean isVisible() {
-		return isVisible;
-	}
-
-	public void setVisible(boolean isVisible) {
-		this.isVisible = isVisible;
-	}
-
 	public String getCrtDt() {
 		return crtDt;
 	}
 
 	public void setCrtDt(String crtDt) {
 		this.crtDt = crtDt;
+	}
+
+	public String getIsVisible() {
+		return isVisible;
+	}
+
+	public void setIsVisible(String isVisible) {
+		this.isVisible = isVisible;
 	}
 
 }
