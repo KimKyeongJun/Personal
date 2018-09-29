@@ -60,4 +60,9 @@ public class MemberServiceImpl implements MemberService {
 		
 		return isBlockUser >= 3;
 	}
+	
+	@Override
+	public String findMemberId(MemberVO memberVO) {
+		return this.memberDao.selectOneMemberId(memberVO);
+	}
 }

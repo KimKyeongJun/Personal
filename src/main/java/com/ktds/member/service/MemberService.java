@@ -11,5 +11,7 @@ public interface MemberService {
 	public boolean readOneMember(MemberVO memberVO);
 	
 	public boolean isBlockUser(String id);
+	
+	public String findMemberId(MemberVO memberVO);
 
 }

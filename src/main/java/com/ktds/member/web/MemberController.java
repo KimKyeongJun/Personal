@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ktds.common.session.Session;
 import com.ktds.member.service.MemberService;
@@ -105,6 +106,30 @@ public class MemberController {
 	@GetMapping("/member/findid")
 	public String viewFindIdPage() {
 		return "member/findid";
+	}
+	
+	@PostMapping("/member/findid")
+	@ResponseBody
+	public Map<String, Object> doMemberIdFindAction (@ModelAttribute MemberVO memberVO, HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		String findId = this.memberService.findMemberId(memberVO);
+		System.out.println("출력: " + findId);
+		if ( findId != null ) {
+			result.put("exist", true);
+			result.put("id", findId);
+			session.setAttribute("_FINDID_", findId);
+		}
+		else {
+			result.put("exist",false);
+		}
+		return result;
+	}
+	
+	@GetMapping("/member/resultfindid")
+	public ModelAndView viewFindMemberIdPage(@RequestParam String resultId) {
+		ModelAndView view = new ModelAndView("member/resultfindid");
+		view.addObject("findId", resultId);
+		return view;
 	}
 	
 	@GetMapping("/member/guest")

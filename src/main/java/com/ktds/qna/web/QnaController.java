@@ -55,6 +55,8 @@ public class QnaController {
 	@GetMapping("/qna/detail/{qnaId}")
 	public ModelAndView viewQnaDetailPage(@PathVariable String qnaId) {
 		ModelAndView view = new ModelAndView("qna/detail");
+		QnaVO oneQnaVO = this.qnaService.readOneQna(qnaId);
+		view.addObject("qna", oneQnaVO);
 		
 		return view;
 	}

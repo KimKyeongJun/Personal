@@ -10,7 +10,20 @@
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 
 
-	 qna 글 내용 페이지
+	 <div style="text-align: center;">
+	 	<div>
+	 		<span>제목</span><span>${qna.subject}</span>
+	 	</div>
+	 	<div>
+	 		<span>작성자</span><span>${qna.writer}</span>
+	 	</div>
+	 	<div>
+	 		<span>작성일</span><span>${qna.crtDt}</span>
+	 	</div>
+	 	<div>
+	 		<span>내용</span><span>${qna.content}</span>
+	 	</div>	 
+	 </div>
 
 </body>
 </html>

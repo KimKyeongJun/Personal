@@ -80,5 +80,13 @@ WHERE	ID = #{id}
 AND		LATEST_LOGIN + 1/24 >= SYSDATE
 </select>
 
+<select id="selectOneMemberId" parameterType="MemberVO" resultType="string">
+SELECT	ID
+FROM	MEMBERS
+WHERE	NAME = #{name}
+AND		EMAIL = #{email}
+AND		PHONE = #{phone}
+</select>
+
 </mapper>
   

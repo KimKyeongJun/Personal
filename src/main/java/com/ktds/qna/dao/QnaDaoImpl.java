@@ -27,5 +27,10 @@ public class QnaDaoImpl extends SqlSessionDaoSupport implements QnaDao {
 		return getSqlSession().selectList("QnaDao.selectAllQna");
 	}
 	
+	@Override
+	public QnaVO selectOneQna(String qnaId) {
+		return getSqlSession().selectOne("QnaDao.selectOneQna", qnaId);
+	}
+	
 
 }

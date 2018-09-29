@@ -17,5 +17,7 @@ public interface MemberDao {
 	public int unBlockUser(String id);
 	
 	public Integer isBlockUser(String id);
+	
+	public String selectOneMemberId(MemberVO memberVO);
 
 }

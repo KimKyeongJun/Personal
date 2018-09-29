@@ -23,5 +23,10 @@ public class QnaServiceImpl implements QnaService {
 	public List<QnaVO> readAllQna() {
 		return this.qnaDao.selectAllQna();
 	}
+	
+	@Override
+	public QnaVO readOneQna(String qnaId) {
+		return this.qnaDao.selectOneQna(qnaId);
+	}
 
 }

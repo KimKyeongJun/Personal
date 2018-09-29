@@ -9,5 +9,7 @@ public interface QnaDao {
 	public int insertQna(QnaVO qnaVO);
 	
 	public List<QnaVO> selectAllQna();
+	
+	public QnaVO selectOneQna(String qnaId);
 
 }

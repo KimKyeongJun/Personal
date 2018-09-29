@@ -49,5 +49,10 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 	public Integer isBlockUser(String id) {
 		return getSqlSession().selectOne("MemberDao.isBlockUser", id);
 	}
+	
+	@Override
+	public String selectOneMemberId(MemberVO memberVO) {
+		return getSqlSession().selectOne("MemberDao.selectOneMemberId", memberVO);
+	}
 
 }

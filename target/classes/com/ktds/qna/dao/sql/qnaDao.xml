@@ -53,5 +53,17 @@ FROM    (
         ) A
 </select>
 
+<select id="selectOneQna" resultMap="qnaVO">
+SELECT	QNA_ID
+		, WRITER
+		, PASSWORD
+		, CONTENT
+		, IS_VISIBLE
+		, CRTDT
+		, SUBJECT
+FROM	QNA
+WHERE	QNA_ID = #{qnaId}
+</select>
+
 
 </mapper>
