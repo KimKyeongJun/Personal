@@ -3,7 +3,7 @@ package com.ktds.qna.vo;
 public class QnaVO {
 
 	int qnaRowNum;
-	String quaId;
+	String qnaId;
 	String writer;
 	String password;
 	String subject;
@@ -19,12 +19,12 @@ public class QnaVO {
 		this.qnaRowNum = qnaRowNum;
 	}
 
-	public String getQuaId() {
-		return quaId;
+	public String getQnaId() {
+		return qnaId;
 	}
 
-	public void setQuaId(String quaId) {
-		this.quaId = quaId;
+	public void setQnaId(String qnaId) {
+		this.qnaId = qnaId;
 	}
 
 	public String getWriter() {

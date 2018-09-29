@@ -6,24 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="/PersonalProject/css/layout.css" />
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="text-align: center;">
-		<div>
-			<span><a href="/PersonalProject/notice/notice">공지사항</a></span>
-			<span>QnA</span>
+	
+		<div style="text-align: center;">
+			<span><a href="/PersonalProject/notice/notice">공지사항</a></span> <span>QnA</span>
 		</div>
-		<div>QnA페이지</div>
-		 <c:choose>
+		
+		<div id="wrapper">
+      <div id="headerWrapper">
+         <div class="number header box">글 번호</div><!-- 
+          --><div class="subject header box">제목</div><!-- 
+          --><div class="writer header box">작성자</div><!-- 
+          --><div class="create-date header box">작성일</div>
+      </div>
+      <c:choose>
       	<c:when test="${not empty qnaList}">
 	      <c:forEach items="${qnaList}" var="qna">
 	         <div class="contentWrapper">
-	            <span>${qna.qnaRowNum}</span>
-	            <span>${qna.subject}</span>
-	            <span>${qna.content}</span>
-	            <span>${qna.crtDt}</span>
-	            <span>${qna.quaId}</span>
+	            <div class="number box">${qna.qnaRowNum}</div><!-- 
+	            --><div class="subject box"><a href="/PersonalProject/qna/detail/${qna.qnaId}">${qna.subject}</a></div><!-- 
+	            --><div class="writer box">${qna.writer}</div><!-- 
+	             --><div class="create-date box">${qna.crtDt}</div>
 	         </div>
 	      </c:forEach>
 	    </c:when>
@@ -33,9 +40,10 @@
 		      </div> 
 	    </c:otherwise>     
       </c:choose>
+      </div>
 		<div>
 			<a href="/PersonalProject/qna/regist">글 작성</a>
 		</div>
-	</div>
+	
 </body>
 </html>

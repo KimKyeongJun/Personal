@@ -27,7 +27,7 @@ VALUES				(
 </insert>
 
 <resultMap type="QnaVO" id="qnaVO">
-	<id property="quaId" column="QNA_ID" />
+	<id property="qnaId" column="QNA_ID" />
 	<result property="qnaRowNum" column="ROWNUM" />
 	<result property="writer" column="WRITER" />
 	<result property="password" column="PASSWORD" />
