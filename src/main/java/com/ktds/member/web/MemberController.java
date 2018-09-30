@@ -93,12 +93,11 @@ public class MemberController {
 		}
 		
 		else {
-			boolean isLogin = memberService.readOneMember(memberVO);
-			if ( isLogin ) {
-				session.setAttribute(Session.USER, memberVO);
+			boolean isLogin = memberService.readOneMember(memberVO,session);
+			if ( !isLogin ) {
+				result.put("message", "로그인 실패. 아이디와 비밀번호를 확인하세요");
 			}
-			result.put("login", isLogin);
-			result.put("message", "로그인 실패. 아이디와 비밀번호를 확인하세요");
+			result.put("login", isLogin);			
 		}
 		return result;
 	}
@@ -135,6 +134,12 @@ public class MemberController {
 	@GetMapping("/member/guest")
 	public String viewGusetLoginPage() {
 		return "member/guest";
+	}
+	
+	@GetMapping("/member/logout")
+	public String doMemberLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
 	}
 
 }

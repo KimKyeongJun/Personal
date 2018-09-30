@@ -30,7 +30,8 @@
 					$("#loginForm").serialize(),
 					function(response) {
 						if ( response.login ) {
-							alert("로그인 되었습니다")
+							alert("로그인 되었습니다");
+							location.href="/PersonalProject/";
 						}
 						else {
 							alert(response.message);

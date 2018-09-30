@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <style type="text/css">
   body {
     padding: 0px;
@@ -46,8 +47,15 @@
 		<li><a href="/PersonalProject/">홈</a></li>
 		<li>예약하기</li>
 		<li><a href="/PersonalProject/notice/notice">고객센터</a></li>
-		<li><a href="/PersonalProject/member/login">로그인</a></li>
-		<li><a href="/PersonalProject/member/regist">회원가입</a></li>
-		<li>로그아웃</li>
+		<c:choose>
+			<c:when test="${empty sessionScope._USER_}">
+				<li><a href="/PersonalProject/member/login">로그인</a></li>
+				<li><a href="/PersonalProject/member/regist">회원가입</a></li>
+			</c:when>				
+			<c:otherwise>
+				<li>${sessionScope._USER_.name}님.</li>
+				<li><a href="/PersonalProject/member/logout">로그아웃</a></li>
+			</c:otherwise>
+		</c:choose>
 	</ul>
 </nav>

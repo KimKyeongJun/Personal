@@ -1,8 +1,11 @@
 package com.ktds.member.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ktds.common.session.Session;
 import com.ktds.common.util.SHA256Util;
 import com.ktds.member.dao.MemberDao;
 import com.ktds.member.vo.MemberVO;
@@ -41,6 +44,25 @@ public class MemberServiceImpl implements MemberService {
 		MemberVO loginMemberVO = memberDao.selectOneMember(memberVO);
 		
 		if ( loginMemberVO != null ) {
+			memberDao.unBlockUser(loginMemberVO.getId());
+			return true;
+		}
+		else {
+			memberDao.updateLoginFailCount(memberVO);
+			return false;			
+		}
+	}
+	
+	@Override
+	public boolean readOneMember(MemberVO memberVO, HttpSession session) {
+		String salt = memberDao.selectOneSaltById(memberVO.getId());
+		String password = this.getHashedPassword(salt, memberVO.getPassword());
+		
+		memberVO.setPassword(password);
+		MemberVO loginMemberVO = memberDao.selectOneMember(memberVO);
+		
+		if ( loginMemberVO != null ) {
+			session.setAttribute(Session.USER, loginMemberVO);
 			memberDao.unBlockUser(loginMemberVO.getId());
 			return true;
 		}
