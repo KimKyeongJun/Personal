@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="QnaReplyDao">
+
+<insert id="insertOneQnaReply" parameterType="QnaReplyVO">
+INSERT	INTO	QNAREPLY	(
+								REPLY_ID
+								, CONTENT
+								, QNA_ID
+								, ADMIN_ID
+								, CRTDT								
+							)
+VALUES						(
+								'RP-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(REP_ID_SEQ.NEXTVAL, 6, '0')
+								, #{content}
+								, #{qnaId}
+								, #{adminId}
+								, SYSDATE
+							)
+</insert>
+</mapper>

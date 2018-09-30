@@ -12,49 +12,59 @@
     background-color: #2056ac;
     padding: 15px;
     margin-bottom: 15px;
+    text-align: center;
   }
 
   nav ul {
     padding: 0px;
     margin: 0px;
-    color: #FFFFFF;
+    
   }
 
   nav ul > li {
     display: inline-block;
     margin-left: 30px;
+    color: #FFFFFF;
   }
 
   nav ul > li:first-child {
     margin-left: 0px;
   }
+  
+  nav ul > .leftMenu {
+  	text-align: left;
+  }
+  
+  .rightMenu {
+  	text-align: right;
+  }
 
-  li > a, a:visited {
+  li > .menuLink, .menuLink:visited {
     text-decoration: none;
     color: #FFFFFF;
   }
 
-  li > a:active {
+  li > .menuLink:active {
     text-decoration: underline;
   }
 
-  li > a:hover {
+  li > .menuLink:hover {
     color: #999;
   }
 </style>
 <nav>
 	<ul>
-		<li><a href="/PersonalProject/">홈</a></li>
-		<li>예약하기</li>
-		<li><a href="/PersonalProject/notice/notice">고객센터</a></li>
+		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/">홈</a></li>
+		<li class="leftMenu">티켓 예매</li>
+		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/notice/notice">고객센터</a></li>
 		<c:choose>
 			<c:when test="${empty sessionScope._USER_}">
-				<li><a href="/PersonalProject/member/login">로그인</a></li>
-				<li><a href="/PersonalProject/member/regist">회원가입</a></li>
+				<li><a class="menuLink" href="/PersonalProject/member/login">로그인</a></li>
+				<li><a class="menuLink" href="/PersonalProject/member/regist">회원가입</a></li>
 			</c:when>				
 			<c:otherwise>
 				<li>${sessionScope._USER_.name}님.</li>
-				<li><a href="/PersonalProject/member/logout">로그아웃</a></li>
+				<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>

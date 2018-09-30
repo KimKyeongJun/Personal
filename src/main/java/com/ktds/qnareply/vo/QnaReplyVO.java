@@ -8,8 +8,28 @@ public class QnaReplyVO {
 	String replyId;
 	String content;
 	String crtDt;
+	String qnaId;
+	String adminId;
 	QnaVO qnaVO;
 	MemberVO memberVO;
+	
+	
+	
+	public String getAdminId() {
+		return adminId;
+	}
+
+	public void setAdminId(String adminId) {
+		this.adminId = adminId;
+	}
+
+	public String getQnaId() {
+		return qnaId;
+	}
+
+	public void setQnaId(String qnaId) {
+		this.qnaId = qnaId;
+	}
 
 	public String getReplyId() {
 		return replyId;
