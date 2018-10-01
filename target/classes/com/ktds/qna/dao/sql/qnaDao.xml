@@ -28,7 +28,7 @@ VALUES				(
 
 <resultMap type="QnaVO" id="qnaVO">
 	<id property="qnaId" column="QNA_ID" />
-	<result property="qnaRowNum" column="ROWNUM" />
+	<result property="qnaRowNum" column="RNUM" />
 	<result property="writer" column="WRITER" />
 	<result property="password" column="PASSWORD" />
 	<result property="content" column="CONTENT" />
@@ -37,20 +37,36 @@ VALUES				(
 	<result property="subject" column="SUBJECT" />
 </resultMap>
 
-<select id="selectAllQna" resultMap="qnaVO">
-SELECT  ROWNUM
-        , A.QNA_ID		QNA_ID
-		, A.WRITER		WRITER
-		, A.PASSWORD	PASSWORD
-		, A.CONTENT		CONTENT
-		, A.IS_VISIBLE	IS_VISIBLE
-		, A.CRTDT		CRTDT
-		, A.SUBJECT		SUBJECT
-FROM    (
-            SELECT  *
-            FROM    QNA
-            ORDER   BY CRTDT DESC
-        ) A
+<select id="selectAllQna" parameterType="QnaSearchVO" resultMap="qnaVO">
+SELECT	*
+FROM	(
+			SELECT	A.*
+					,	ROWNUM RNUM
+			FROM	(
+						SELECT	QNA_ID
+								, WRITER
+								, PASSWORD
+								, CONTENT
+								, IS_VISIBLE
+								, CRTDT
+								, SUBJECT
+						FROM 	QNA
+						<if test="searchKeyword != null and searchKeyword != '' ">
+						WHERE	SUBJECT	LIKE '%' || #{searchKeyword} || '%'
+						</if>
+						ORDER BY QNA_ID DESC
+					) A
+			WHERE	ROWNUM <![CDATA[<=]]> #{endRow}
+		)
+WHERE	RNUM >= #{startRow}	
+</select>
+
+<select id="selectAllQnaCount" parameterType="QnaSearchVO" resultType="_int">
+SELECT	COUNT(1)
+FROM	QNA
+<if test="searchKeyword != null and searchKeyword != '' ">
+WHERE	SUBJECT	LIKE '%' || #{searchKeyword} || '%'
+</if>
 </select>
 
 <select id="selectOneQna" resultMap="qnaVO">

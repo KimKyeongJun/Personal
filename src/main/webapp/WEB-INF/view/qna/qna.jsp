@@ -41,6 +41,16 @@
 	    </c:otherwise>     
       </c:choose>
       </div>
+      
+      <div class="padded">
+      	<form id="searchForm" onsubmit="javascript:movePage(0);">
+      		${pagenation}
+      		<div>
+      			<input type="text" name="searchKeyword" value="${qnaSearchVO.searchKeyword}">
+      			<a href="/PersonalProject/qna/init">검색 초기화</a>
+      		</div>
+      	</form>
+      </div>
 		<div>
 			<a href="/PersonalProject/qna/regist">글 작성</a>
 		</div>
