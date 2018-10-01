@@ -55,16 +55,21 @@
 <nav>
 	<ul>
 		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/">홈</a></li>
-		<li class="leftMenu">티켓 예매</li>
+		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/movie/movie">티켓 예매</a></li>
 		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/notice/notice">고객센터</a></li>
 		<c:choose>
-			<c:when test="${empty sessionScope._USER_}">
+			<c:when test="${!empty sessionScope._USER_}">
+				<li>${sessionScope._USER_.name}님</li>
+				<li>마이 페이지</li>
+				<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
+			</c:when>
+			<c:when test="${!empty sessionScope._GUEST_}">				
+				<li>${sessionScope._GUEST_.name}님</li>
+				<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
+			</c:when>			
+			<c:otherwise>
 				<li><a class="menuLink" href="/PersonalProject/member/login">로그인</a></li>
 				<li><a class="menuLink" href="/PersonalProject/member/regist">회원가입</a></li>
-			</c:when>				
-			<c:otherwise>
-				<li>${sessionScope._USER_.name}님.</li>
-				<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
 			</c:otherwise>
 		</c:choose>
 	</ul>

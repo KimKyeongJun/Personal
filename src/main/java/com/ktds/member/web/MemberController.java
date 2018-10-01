@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ktds.common.session.Session;
 import com.ktds.member.service.MemberService;
 import com.ktds.member.validator.MemberValidator;
 import com.ktds.member.vo.MemberVO;
@@ -133,6 +134,16 @@ public class MemberController {
 	@GetMapping("/member/guest")
 	public String viewGusetLoginPage() {
 		return "member/guest";
+	}
+	
+	@PostMapping("/member/guest")
+	public String doGuestLoginAction( @ModelAttribute MemberVO memberVO, HttpSession session ) {
+		System.out.println("출력 : " + memberVO.getName());
+		System.out.println("출력 : " + memberVO.getPhone());
+		System.out.println("출력 : " + memberVO.getEmail());
+		
+		session.setAttribute(Session.GUEST, memberVO);
+		return "redirect:/";
 	}
 	
 	@GetMapping("/member/logout")

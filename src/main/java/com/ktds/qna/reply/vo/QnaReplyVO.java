@@ -13,8 +13,6 @@ public class QnaReplyVO {
 	QnaVO qnaVO;
 	MemberVO memberVO;
 	
-	
-	
 	public String getAdminId() {
 		return adminId;
 	}

@@ -13,6 +13,14 @@
 	<mvc:resources location="/WEB-INF/static/js/" mapping="/js/**" />
 	<mvc:resources location="/WEB-INF/static/css/" mapping="/css/**" />
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/movie/**"/>
+			<bean	id="sessionInterceptor"
+					class="com.ktds.common.interceptors.SessionInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 	<bean 
 		id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
