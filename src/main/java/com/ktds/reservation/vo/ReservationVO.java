@@ -1,8 +1,8 @@
 package com.ktds.reservation.vo;
 
 import com.ktds.member.vo.MemberVO;
-import com.ktds.showinglist.vo.ShowingListVO;
-import com.ktds.showingseat.vo.ShowingSeatVO;
+import com.ktds.showing.list.vo.ShowingListVO;
+import com.ktds.showing.seat.vo.ShowingSeatVO;
 
 public class ReservationVO {
 

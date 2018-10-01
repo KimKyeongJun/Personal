@@ -16,12 +16,12 @@
 					}, 10);
 				return;
 			}
+			+++
 			
 			$.post("/PersonalProject/qna/reply"
 					, $("#qnaReplyForm").serialize()
 					, function(response) {
 						if ( response.regist ) {
-							alert("등록완료");
 							location.href="/PersonalProject/qna/detail/${qna.qnaId}";
 						}
 						else {
