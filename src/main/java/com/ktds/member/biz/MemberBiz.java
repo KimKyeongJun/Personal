@@ -2,7 +2,6 @@ package com.ktds.member.biz;
 
 import javax.servlet.http.HttpSession;
 
-import com.ktds.member.vo.LoginVO;
 import com.ktds.member.vo.MemberVO;
 
 public interface MemberBiz {

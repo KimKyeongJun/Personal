@@ -79,7 +79,7 @@ public class MemberBizImpl implements MemberBiz {
 		if (isBlockUser == null) {
 			isBlockUser = 0;
 		}
-
+		System.out.println("출력" + isBlockUser);
 		return isBlockUser >= 3;
 	}
 	

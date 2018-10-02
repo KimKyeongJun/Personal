@@ -63,7 +63,6 @@ WHERE	ID = #{id}
 <update	id="updateLoginFailCount" parameterType="string">
 UPDATE	MEMBERS
 SET		LOGIN_FAIL_COUNT = LOGIN_FAIL_COUNT + 1
-		, LATEST_LOGIN = SYSDATE
 WHERE	ID = #{id}
 </update>
 
