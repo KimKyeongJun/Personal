@@ -1,13 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="/PersonalProject/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		$("#ticket").click(function() {
+			var userCheck = "${sessionScope._USER_.id}";
+			var guestCheck = "${sessionScope._GUEST_.name}";
+			if( userCheck == "" && guestCheck == "" ) {
+				alert("로그인 후 이용하세요.");
+			}
+		});
+	});
+</script>
  <style type="text/css">
   body {
     padding: 0px;
     margin: 0px;
     font-size: 12pt;
   }
-
+  
   nav {
     background-color: #2056ac;
     padding: 15px;
@@ -55,7 +67,7 @@
 <nav>
 	<ul>
 		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/">홈</a></li>
-		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/movie/movie">티켓 예매</a></li>
+		<li class="leftMenu"><a id="ticket" class="menuLink" href="/PersonalProject/movie/movie">티켓 예매</a></li>		
 		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/notice/notice">고객센터</a></li>
 		<c:choose>
 			<c:when test="${!empty sessionScope._USER_}">

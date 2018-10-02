@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ktds.qna.reply.service.QnaReplyService;
 import com.ktds.qna.reply.vo.QnaReplyVO;
+import com.nhncorp.lucy.security.xss.XssFilter;
 
 @Controller
 public class QnaReplyController {
@@ -22,8 +23,11 @@ public class QnaReplyController {
 	@ResponseBody
 	public Map<String, Object> doQnaReplyAction(@ModelAttribute QnaReplyVO qnaReplyVO) {
 		Map<String, Object> result = new HashMap<>();
+		
+		XssFilter filter = XssFilter.getInstance("lucy-xss-superset.xml");
+		qnaReplyVO.setContent(filter.doFilter(qnaReplyVO.getContent()));
 		boolean isRegist = this.qnaReplyService.registOneQnaReply(qnaReplyVO);
 		result.put("regist", isRegist);
-		return result;		
+		return result;
 	}	
 }

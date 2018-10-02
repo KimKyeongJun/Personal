@@ -10,7 +10,7 @@ public interface MemberDao {
 	
 	public MemberVO selectOneMember(MemberVO memberVO);
 	
-	public int updateLoginFailCount(MemberVO memberVO);
+	public int updateLoginFailCount(String id);
 	
 	public String selectOneSaltById(String id);
 	
@@ -19,5 +19,7 @@ public interface MemberDao {
 	public Integer isBlockUser(String id);
 	
 	public String selectOneMemberId(MemberVO memberVO);
+	
+	public String selectOneMemberIsAdmin(String id);
 
 }

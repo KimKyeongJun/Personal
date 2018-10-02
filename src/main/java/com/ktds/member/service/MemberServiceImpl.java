@@ -5,25 +5,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ktds.common.session.Session;
 import com.ktds.common.util.SHA256Util;
-import com.ktds.member.dao.MemberDao;
+import com.ktds.member.biz.MemberBiz;
+import com.ktds.member.vo.LoginVO;
 import com.ktds.member.vo.MemberVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired
-	private MemberDao memberDao;
+	private MemberBiz memberBiz;
 
 	@Override
 	public boolean createMember(MemberVO memberVO) {
-		String salt = SHA256Util.generateSalt();
-		String password = this.getHashedPassword(salt, memberVO.getPassword());
-		
-		memberVO.setPassword(password);
-		memberVO.setSalt(salt);		
-		return this.memberDao.insertMember(memberVO) > 0;
+		return this.memberBiz.createMember(memberVO);
 	}
 	
 	public String getHashedPassword(String salt, String password) {
@@ -32,59 +27,39 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public String readDuplicateId(String id) {
-		return this.memberDao.selectDuplicateId(id);
+		return this.memberBiz.readDuplicateId(id);
 	}
 	
 	@Override
 	public boolean readOneMember(MemberVO memberVO) {
-		String salt = memberDao.selectOneSaltById(memberVO.getId());
-		String password = this.getHashedPassword(salt, memberVO.getPassword());
-		
-		memberVO.setPassword(password);
-		MemberVO loginMemberVO = memberDao.selectOneMember(memberVO);
-		
-		if ( loginMemberVO != null ) {
-			memberDao.unBlockUser(loginMemberVO.getId());
-			return true;
-		}
-		else {
-			memberDao.updateLoginFailCount(memberVO);
-			return false;			
-		}
+		return this.memberBiz.readOneMember(memberVO);
 	}
 	
 	@Override
 	public boolean readOneMember(MemberVO memberVO, HttpSession session) {
-		String salt = memberDao.selectOneSaltById(memberVO.getId());
-		String password = this.getHashedPassword(salt, memberVO.getPassword());
-		
-		memberVO.setPassword(password);
-		MemberVO loginMemberVO = memberDao.selectOneMember(memberVO);
-		
-		if ( loginMemberVO != null ) {
-			session.setAttribute(Session.USER, loginMemberVO);
-			memberDao.unBlockUser(loginMemberVO.getId());
-			return true;
-		}
-		else {
-			memberDao.updateLoginFailCount(memberVO);
-			return false;			
-		}
+		return this.memberBiz.readOneMember(memberVO, session);
 	}
 	
 	@Override
 	public boolean isBlockUser(String id) {
-		Integer isBlockUser = memberDao.isBlockUser(id);
-		
-		if ( isBlockUser == null) {
-			isBlockUser = 0;
-		}
-		
-		return isBlockUser >= 3;
+		return this.memberBiz.isBlockUser(id);
+	}
+	@Override
+	public boolean increaseLoginFailCount(String id) {
+		return this.memberBiz.increaseLoginFailCount(id);
+	}
+	@Override
+	public boolean unBlockUser(String id) {
+		return this.memberBiz.unBlockUser(id);
 	}
 	
 	@Override
 	public String findMemberId(MemberVO memberVO) {
-		return this.memberDao.selectOneMemberId(memberVO);
+		return this.memberBiz.findMemberId(memberVO);
+	}
+	
+	@Override
+	public String readOneMemberIsAdmin(String id) {
+		return this.memberBiz.readOneMemberIsAdmin(id);
 	}
 }

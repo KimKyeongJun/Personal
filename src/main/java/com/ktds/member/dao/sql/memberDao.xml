@@ -60,7 +60,7 @@ FROM	MEMBERS
 WHERE	ID = #{id}
 </select>
 
-<update	id="updateLoginFailCount" parameterType="MemberVO">
+<update	id="updateLoginFailCount" parameterType="string">
 UPDATE	MEMBERS
 SET		LOGIN_FAIL_COUNT = LOGIN_FAIL_COUNT + 1
 		, LATEST_LOGIN = SYSDATE
@@ -86,6 +86,12 @@ FROM	MEMBERS
 WHERE	NAME = #{name}
 AND		EMAIL = #{email}
 AND		PHONE = #{phone}
+</select>
+
+<select id="selectOneMemberIsAdmin" parameterType="string" resultType="string">
+SELECT	IS_ADMIN
+FROM	MEMBERS
+WHERE	ID = #{id}
 </select>
 
 </mapper>

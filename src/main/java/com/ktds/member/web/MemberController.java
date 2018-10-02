@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -20,7 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ktds.common.session.Session;
 import com.ktds.member.service.MemberService;
 import com.ktds.member.validator.MemberValidator;
+import com.ktds.member.vo.LoginVO;
 import com.ktds.member.vo.MemberVO;
+import com.ktds.user.User;
 
 @Controller
 public class MemberController {
@@ -85,9 +88,14 @@ public class MemberController {
 	@PostMapping("/member/login")
 	@ResponseBody
 	public Map<String, Object> doMemberLoginAction(@ModelAttribute MemberVO memberVO, HttpSession session) {
+		
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getDetails();
+		
+		memberVO.setId(user.getUsername());
+		memberVO.setPassword(user.getPassword());
 		Map<String, Object> result = new HashMap<>();
 		
-		if ( memberService.isBlockUser(memberVO.getId()) ) {
+		/*if ( memberService.isBlockUser(memberVO.getId()) ) {
 			result.put("login", false);
 			result.put("message", "비밀번호 3회 오류로 계정이 잠겼습니다. 1시간 후 다시 시도해주세요");
 		}
@@ -98,7 +106,12 @@ public class MemberController {
 				result.put("message", "로그인 실패. 아이디와 비밀번호를 확인하세요");
 			}
 			result.put("login", isLogin);			
+		}*/
+		boolean isLogin = memberService.readOneMember(memberVO,session);
+		if ( !isLogin ) {
+			result.put("message", "로그인 실패. 아이디와 비밀번호를 확인하세요");
 		}
+		result.put("login", isLogin);
 		return result;
 	}
 	
@@ -112,7 +125,6 @@ public class MemberController {
 	public Map<String, Object> doMemberIdFindAction (@ModelAttribute MemberVO memberVO, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
 		String findId = this.memberService.findMemberId(memberVO);
-		System.out.println("출력: " + findId);
 		if ( findId != null ) {
 			result.put("exist", true);
 			result.put("id", findId);

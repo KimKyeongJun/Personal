@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,6 @@
 					}, 10);
 				return;
 			}
-			+++
 			
 			$.post("/PersonalProject/qna/reply"
 					, $("#qnaReplyForm").serialize()
@@ -59,6 +59,23 @@
 	 		<input type="hidden" id="adminId" name="adminId" value="${sessionScope._USER_.id}" />
 	 	</form>
 	 </div>
+	 
+	 <div>
+	 	
+	 </div>
+	 	<c:choose>
+	 		<c:when test="${not empty qnaReplyList}">
+	 			<c:forEach items="${qnaReplyList}" var="qnaReply">
+	 				<div>
+	 					<span>${qnaReply.memberVO.name}</span>
+	 					<span>${qnaReply.crtDt}</span>
+	 				</div>
+	 				<div>
+	 					${qnaReply.content}
+	 				</div>
+	 			</c:forEach>
+	 		</c:when>
+	 	</c:choose>
 	 <div>
 	 	<a href="/PersonalProject/qna/qna">목록</a>
 	 </div>

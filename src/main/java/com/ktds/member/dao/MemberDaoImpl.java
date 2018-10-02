@@ -31,8 +31,8 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 	}
 	
 	@Override
-	public int updateLoginFailCount(MemberVO memberVO) {
-		return getSqlSession().update("MemberDao.updateLoginFailCount", memberVO);
+	public int updateLoginFailCount(String id) {
+		return getSqlSession().update("MemberDao.updateLoginFailCount", id);
 	}
 	
 	@Override
@@ -53,6 +53,11 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 	@Override
 	public String selectOneMemberId(MemberVO memberVO) {
 		return getSqlSession().selectOne("MemberDao.selectOneMemberId", memberVO);
+	}
+	
+	@Override
+	public String selectOneMemberIsAdmin(String id) {
+		return getSqlSession().selectOne("MemberDao.selectOneMemberIsAdmin", id);
 	}
 
 }

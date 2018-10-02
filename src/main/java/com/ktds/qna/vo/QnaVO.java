@@ -1,5 +1,9 @@
 package com.ktds.qna.vo;
 
+import java.util.List;
+
+import com.ktds.qna.reply.vo.QnaReplyVO;
+
 public class QnaVO {
 
 	int qnaRowNum;
@@ -10,6 +14,8 @@ public class QnaVO {
 	String content;
 	String isVisible;
 	String crtDt;
+
+	List<QnaReplyVO> qnaReplyList;
 
 	public int getQnaRowNum() {
 		return qnaRowNum;
@@ -73,6 +79,14 @@ public class QnaVO {
 
 	public void setIsVisible(String isVisible) {
 		this.isVisible = isVisible;
+	}
+
+	public List<QnaReplyVO> getQnaReplyList() {
+		return qnaReplyList;
+	}
+
+	public void setQnaReplyList(List<QnaReplyVO> qnaReplyList) {
+		this.qnaReplyList = qnaReplyList;
 	}
 
 }

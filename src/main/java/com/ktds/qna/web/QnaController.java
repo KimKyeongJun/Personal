@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ktds.common.session.Session;
+import com.ktds.qna.reply.vo.QnaReplyVO;
 import com.ktds.qna.service.QnaService;
 import com.ktds.qna.vo.QnaSearchVO;
 import com.ktds.qna.vo.QnaVO;
@@ -31,7 +32,7 @@ public class QnaController {
 	QnaService qnaService;
 	
 	@RequestMapping("/qna/qna")
-	public ModelAndView viewQnaPage(@ModelAttribute QnaSearchVO qnaSearchVO, HttpServletRequest request, HttpSession session) {
+	public ModelAndView viewQnaListPage(@ModelAttribute QnaSearchVO qnaSearchVO, HttpServletRequest request, HttpSession session) {
 		// 전체 검색 or 상세 -> 목록 or 글쓰기
 				if ( qnaSearchVO.getSearchKeyword() == null ) {
 					qnaSearchVO = (QnaSearchVO) session.getAttribute(Session.SERARCH);
@@ -75,6 +76,11 @@ public class QnaController {
 	@ResponseBody
 	public Map<String, Object> doQndRegistAction(@ModelAttribute QnaVO qnaVO) {
 		Map<String, Object> result = new HashMap<>();
+		
+		XssFilter filter = XssFilter.getInstance("lucy-xss-superset.xml");
+		qnaVO.setWriter(filter.doFilter(qnaVO.getWriter()));
+		qnaVO.setSubject(filter.doFilter(qnaVO.getSubject()));
+		qnaVO.setContent(filter.doFilter(qnaVO.getContent()));
 		boolean isRegist = qnaService.createQna(qnaVO);
 		
 		if ( isRegist ) {
@@ -92,7 +98,17 @@ public class QnaController {
 	public ModelAndView viewQnaDetailPage(@PathVariable String qnaId) {
 		ModelAndView view = new ModelAndView("qna/detail");
 		QnaVO oneQnaVO = this.qnaService.readOneQna(qnaId);
+		
+		XssFilter filter = XssFilter.getInstance("lucy-xss-superset.xml");
+		oneQnaVO.setWriter(filter.doFilter(oneQnaVO.getWriter()));
+		oneQnaVO.setSubject(filter.doFilter(oneQnaVO.getSubject()));
+		oneQnaVO.setContent(filter.doFilter(oneQnaVO.getContent()));
+		
+		for (QnaReplyVO qnaReplyVO : oneQnaVO.getQnaReplyList()) {
+			qnaReplyVO.setContent(filter.doFilter(qnaReplyVO.getContent()));
+		}
 		view.addObject("qna", oneQnaVO);
+		view.addObject("qnaReplyList",oneQnaVO.getQnaReplyList());
 		
 		return view;
 	}

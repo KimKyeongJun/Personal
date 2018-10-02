@@ -52,7 +52,7 @@ FROM	(
 								, SUBJECT
 						FROM 	QNA
 						<if test="searchKeyword != null and searchKeyword != '' ">
-						WHERE	SUBJECT	LIKE '%' || #{searchKeyword} || '%'
+						WHERE	WRITER	LIKE '%' || #{searchKeyword} || '%'
 						</if>
 						ORDER BY QNA_ID DESC
 					) A

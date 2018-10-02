@@ -4,13 +4,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.ktds.common.session.Session;
+import com.ktds.member.dao.MemberDao;
 import com.ktds.member.vo.MemberVO;
 
 public class SessionInterceptor extends HandlerInterceptorAdapter {
 	
+	private MemberDao memberDao;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -26,5 +29,19 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		
+		HttpSession session = request.getSession();
+		
+		MemberVO loginMemberVO = (MemberVO) session.getAttribute(Session.USER);
+		
+		if ( loginMemberVO != null ) {
+			//MemberVO newMemberVO = this.memberDao.selectOneMember(loginMemberVO);
+			//session.setAttribute(Session.USER, newMemberVO);
+		}
 	}
 }

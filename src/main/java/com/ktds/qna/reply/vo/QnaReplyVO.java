@@ -1,7 +1,6 @@
 package com.ktds.qna.reply.vo;
 
 import com.ktds.member.vo.MemberVO;
-import com.ktds.qna.vo.QnaVO;
 
 public class QnaReplyVO {
 
@@ -10,7 +9,6 @@ public class QnaReplyVO {
 	String crtDt;
 	String qnaId;
 	String adminId;
-	QnaVO qnaVO;
 	MemberVO memberVO;
 	
 	public String getAdminId() {
@@ -53,20 +51,12 @@ public class QnaReplyVO {
 		this.crtDt = crtDt;
 	}
 
-	public QnaVO getQnaVO() {
-		return qnaVO;
-	}
-
-	public void setQnaVO(QnaVO qnaVO) {
-		this.qnaVO = qnaVO;
-	}
-
 	public MemberVO getMemberVO() {
 		return memberVO;
 	}
 
 	public void setMemberVO(MemberVO memberVO) {
 		this.memberVO = memberVO;
-	}
+	}	
 
 }
