@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -18,11 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ktds.User;
 import com.ktds.common.session.Session;
 import com.ktds.member.service.MemberService;
 import com.ktds.member.validator.MemberValidator;
-import com.ktds.member.vo.LoginVO;
 import com.ktds.member.vo.MemberVO;
 
 @Controller
@@ -88,9 +85,14 @@ public class MemberController {
 	@PostMapping("/member/login")
 	@ResponseBody
 	public Map<String, Object> doMemberLoginAction(@ModelAttribute MemberVO memberVO, HttpSession session) {
-		//User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		/*User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		
+		memberVO.setId(user.getUsername());
+		memberVO.setPassword(user.getPassword());
+		
+		System.out.println("출력" + memberVO.getId());
+		*/
 		Map<String, Object> result = new HashMap<>();
 		
 		if ( memberService.isBlockUser(memberVO.getId()) ) {
@@ -105,11 +107,15 @@ public class MemberController {
 			}
 			result.put("login", isLogin);			
 		}
-		/*boolean isLogin = memberService.readOneMember(memberVO, session);
+		
+		/*
+		boolean isLogin = memberService.readOneMember(memberVO, session);
+		System.out.println("출력 : isLogin" + isLogin);
 		if ( !isLogin ) {
 			result.put("message", "로그인 실패. 아이디와 비밀번호를 확인하세요");
 		}
-		result.put("login", isLogin);*/
+		result.put("login", isLogin);
+		*/
 		return result;
 	}
 	

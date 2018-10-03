@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.ktds.common.util.SHA256Util;
 import com.ktds.member.biz.MemberBiz;
-import com.ktds.member.vo.LoginVO;
 import com.ktds.member.vo.MemberVO;
 
 @Service

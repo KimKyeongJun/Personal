@@ -1,6 +1,5 @@
 package com.ktds.member.dao;
 
-import com.ktds.member.vo.LoginVO;
 import com.ktds.member.vo.MemberVO;
 
 public interface MemberDao {

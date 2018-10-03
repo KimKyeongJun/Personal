@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import com.ktds.common.session.Session;
 import com.ktds.common.util.SHA256Util;
 import com.ktds.member.dao.MemberDao;
-import com.ktds.member.vo.LoginVO;
 import com.ktds.member.vo.MemberVO;
 
 @Component
@@ -56,6 +55,10 @@ public class MemberBizImpl implements MemberBiz {
 	@Override
 	public boolean readOneMember(MemberVO memberVO, HttpSession session) {
 		String salt = memberDao.selectOneSaltById(memberVO.getId());
+		if (salt == null ) {
+			return false;
+		}
+		//여기 수정해야함
 		String password = this.getHashedPassword(salt, memberVO.getPassword());
 
 		memberVO.setPassword(password);

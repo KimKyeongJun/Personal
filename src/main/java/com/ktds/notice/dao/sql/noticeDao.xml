@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NoticeDao">
+<insert id="insertOnaNotice" parameterType="NoticeVO">
+INSERT	INTO	NOTICE	(
+							NOTICE_ID
+							, SUBJECT
+							, CONTENT
+							, ADMIN_ID
+							, CRTDT
+						)
+VALUES					(
+							'NO-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(NOT_ID_SEQ.NEXTVAL, 6, '0')
+							, #{subject}
+							, #{content}
+							, #{adminId}
+							, SYSDATE
+						)
+</insert>
+
+<resultMap type="NoticeVO" id="noticeMap">
+	<id property="noticeId" column="NOTICE_ID" />
+	<result property="rowNum" column="ROWNUM" />
+	<result property="subject" column="SUBJECT"/>
+	<result property="content" column="CONTENT"/>
+	<result property="adminId" column="ADMIN_ID"/>
+	<result property="crtDt" column="CRTDT"/>
+	<association property="memberVO" javaType="MemberVO">
+		<id property="id" column="ID" />
+		<result property="password" column="PASSWORD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mileage" column="MILEAGE"/>
+		<result property="salt" column="SALT"/>
+		<result property="loginFailCount" column="LOGIN_FAIL_COUNT"/>
+		<result property="latestLogin" column="LATEST_LOGIN"/>
+		<result property="isAdmin" column="IS_ADMIN"/>
+		<result property="name" column="NAME"/>		
+	</association>
+</resultMap>  
+
+<select	id="selectAllNotice" resultMap="noticeMap">
+SELECT	ROWNUM
+        , N.NOTICE_ID
+		, N.SUBJECT
+		, N.CONTENT
+		, N.ADMIN_ID
+		, N.CRTDT
+		, M.ID
+        , M.PASSWORD
+        , M.EMAIL
+        , M.PHONE
+        , M.MILEAGE
+        , M.SALT
+        , M.LOGIN_FAIL_COUNT
+        , M.LATEST_LOGIN
+        , M.IS_ADMIN
+        , M.NAME
+FROM	NOTICE N
+        , MEMBERS M
+WHERE   N.ADMIN_ID = M.ID
+</select>
+</mapper>
+  
