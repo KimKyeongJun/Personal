@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div>
+	<div style="text-align: center;">
 		<span>공지사항</span>
 		<span><a href="/PersonalProject/qna/qna">QnA</a></span>
 	</div>
@@ -26,8 +27,8 @@
       	<c:when test="${not empty noticeList}">
 	      <c:forEach items="${noticeList}" var="notice">
 	         <div class="contentWrapper">
-	            <div class="number box">1</div><!-- 
-	            --><div class="subject box"><a href="/PersonalProject/qna/detail/${qna.qnaId}">${notice.subject}</a></div><!-- 
+	            <div class="number box">${notice.rowNum}</div><!-- 
+	            --><div class="subject box"><a href="/PersonalProject/notice/detail/${notice.noticeId}">${notice.subject}</a></div><!-- 
 	            --><div class="writer box">${notice.memberVO.name}</div><!-- 
 	             --><div class="create-date box">${notice.crtDt}</div>
 	         </div>
@@ -41,7 +42,9 @@
       </c:choose>
       </div>	
 	<div>
-		<a href="/PersonalProject/notice/regist">글 작성</a>
+		<s:authorize access="hasRole('ROLE_ADMIN')">
+			<a href="/PersonalProject/notice/regist">글 작성</a>
+		</s:authorize>
 	</div>
 </body>
 </html>

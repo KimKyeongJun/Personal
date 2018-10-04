@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,7 +35,7 @@ public class QnaController {
 	public ModelAndView viewQnaListPage(@ModelAttribute QnaSearchVO qnaSearchVO, HttpServletRequest request, HttpSession session) {
 		// 전체 검색 or 상세 -> 목록 or 글쓰기
 				if ( qnaSearchVO.getSearchKeyword() == null ) {
-					qnaSearchVO = (QnaSearchVO) session.getAttribute(Session.SERARCH);
+					qnaSearchVO = (QnaSearchVO) session.getAttribute(Session.QNASEARCH);
 					if ( qnaSearchVO == null ) {
 						qnaSearchVO = new QnaSearchVO();
 						qnaSearchVO.setPageNo(0);
@@ -52,7 +52,7 @@ public class QnaController {
 				}
 				
 				
-				session.setAttribute(Session.SERARCH, qnaSearchVO);
+				session.setAttribute(Session.QNASEARCH, qnaSearchVO);
 				
 				ModelAndView view = new ModelAndView("qna/qna");
 				view.addObject("qnaList", pageExplorer.getList());
@@ -63,7 +63,7 @@ public class QnaController {
 	
 	@RequestMapping("/qna/init")
 	public String viewBoardListPageForInitiate(HttpSession session) {
-		session.removeAttribute(Session.SERARCH);
+		session.removeAttribute(Session.QNASEARCH);
 		return "redirect:/qna/qna";
 	}
 	
@@ -94,8 +94,8 @@ public class QnaController {
 		return result;
 	}
 	
-	@GetMapping("/qna/detail/{qnaId}")
-	public ModelAndView viewQnaDetailPage(@PathVariable String qnaId) {
+	@GetMapping("/qna/detail")
+	public ModelAndView viewQnaDetailPage(@RequestParam String qnaId) {
 		ModelAndView view = new ModelAndView("qna/detail");
 		QnaVO oneQnaVO = this.qnaService.readOneQna(qnaId);
 		

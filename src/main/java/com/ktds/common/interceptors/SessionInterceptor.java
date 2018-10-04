@@ -15,6 +15,10 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 	
 	private MemberDao memberDao;
 	
+	public void setMemberDao(MemberDao memberDao) {
+		this.memberDao = memberDao;
+	}
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
@@ -36,12 +40,11 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 			ModelAndView modelAndView) throws Exception {
 		
 		HttpSession session = request.getSession();
-		
 		MemberVO loginMemberVO = (MemberVO) session.getAttribute(Session.USER);
 		
 		if ( loginMemberVO != null ) {
-			//MemberVO newMemberVO = this.memberDao.selectOneMember(loginMemberVO);
-			//session.setAttribute(Session.USER, newMemberVO);
+			MemberVO newMemberVO = this.memberDao.selectOneMember(loginMemberVO);
+			session.setAttribute(Session.USER, newMemberVO);
 		}
 	}
 }

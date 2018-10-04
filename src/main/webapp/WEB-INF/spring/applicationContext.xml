@@ -9,7 +9,6 @@
 			
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.ktds" />
-	
 	<mvc:resources location="/WEB-INF/static/js/" mapping="/js/**" />
 	<mvc:resources location="/WEB-INF/static/css/" mapping="/css/**" />
 	
@@ -17,7 +16,9 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/movie/**"/>
 			<bean	id="sessionInterceptor"
-					class="com.ktds.common.interceptors.SessionInterceptor"/>
+					class="com.ktds.common.interceptors.SessionInterceptor">
+				<property name="memberDao" ref="memberDaoImpl" />
+			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
@@ -27,6 +28,4 @@
 		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />	
 	</bean>
-
-
 </beans>

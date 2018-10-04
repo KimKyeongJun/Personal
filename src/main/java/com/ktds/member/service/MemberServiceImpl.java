@@ -9,7 +9,7 @@ import com.ktds.common.util.SHA256Util;
 import com.ktds.member.biz.MemberBiz;
 import com.ktds.member.vo.MemberVO;
 
-@Service
+@Service("memberServiceImpl")
 public class MemberServiceImpl implements MemberService {
 	
 	@Autowired

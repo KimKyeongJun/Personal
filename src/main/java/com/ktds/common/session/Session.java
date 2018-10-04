@@ -4,6 +4,7 @@ public interface Session {
 	
 	String USER = "_USER_";
 	String GUEST = "_GUEST_";
-	String SERARCH = "_SEARCH_";
+	String NOTICESERARCH = "_NOTICESERARCH_";
+	String QNASEARCH= "_QNASEARCH_";
 
 }

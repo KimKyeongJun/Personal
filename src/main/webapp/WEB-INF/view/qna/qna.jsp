@@ -8,6 +8,24 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css"
 	href="/PersonalProject/css/layout.css" />
+<script src="/PersonalProject/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		$(".qnaLink").click(function() {
+			var password = prompt("비밀번호를 입력하세요");
+			if ( password != $(this).closest(".contentWrapper").children(".qnaPassword").text() ) {
+				alert("비밀번호를 확인하세요!");
+				location.href="/PersonalProject/qna/qna"
+			}
+			else {
+				var qnaId = $(this).closest(".contentWrapper").children(".qnaId").text();
+				alert(qnaId);
+				location.href="/PersonalProject/qna/detail?qnaId="+qnaId;
+			}
+			//alert( $(this).closest(".contentWrapper").children(".qnaPassword").text() );
+		});
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
@@ -27,8 +45,11 @@
       	<c:when test="${not empty qnaList}">
 	      <c:forEach items="${qnaList}" var="qna">
 	         <div class="contentWrapper">
+	         	<div class="isVisible" style="display: none;">${qna.isVisible}</div>
+	         	<div class="qnaPassword" style="display: none;">${qna.password}</div>
+	         	<div class="qnaId" style="display: none;">${qna.qnaId}</div>
 	            <div class="number box">${qna.qnaRowNum}</div><!-- 
-	            --><div class="subject box"><a href="/PersonalProject/qna/detail/${qna.qnaId}">${qna.subject}</a></div><!-- 
+	            --><div class="subject box"><span class="qnaLink">${qna.subject}</span></div><!-- 
 	            --><div class="writer box">${qna.writer}</div><!-- 
 	             --><div class="create-date box">${qna.crtDt}</div>
 	         </div>

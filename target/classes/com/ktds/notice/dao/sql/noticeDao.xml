@@ -23,7 +23,7 @@ VALUES					(
 
 <resultMap type="NoticeVO" id="noticeMap">
 	<id property="noticeId" column="NOTICE_ID" />
-	<result property="rowNum" column="ROWNUM" />
+	<result property="rowNum" column="RNUM" />
 	<result property="subject" column="SUBJECT"/>
 	<result property="content" column="CONTENT"/>
 	<result property="adminId" column="ADMIN_ID"/>
@@ -42,9 +42,50 @@ VALUES					(
 	</association>
 </resultMap>  
 
-<select	id="selectAllNotice" resultMap="noticeMap">
-SELECT	ROWNUM
-        , N.NOTICE_ID
+<select	id="selectAllNotice" parameterType="NoticeSearchVO" resultMap="noticeMap">
+SELECT	*
+FROM	(
+			SELECT	A.*
+					, ROWNUM RNUM
+			FROM	(
+						SELECT	N.NOTICE_ID
+								, N.SUBJECT
+								, N.CONTENT
+								, N.ADMIN_ID
+								, N.CRTDT
+								, M.ID
+						        , M.PASSWORD
+						        , M.EMAIL
+						        , M.PHONE
+						        , M.MILEAGE
+						        , M.SALT
+						        , M.LOGIN_FAIL_COUNT
+						        , M.LATEST_LOGIN
+						        , M.IS_ADMIN
+						        , M.NAME
+						FROM	NOTICE N
+						        , MEMBERS M
+						WHERE   N.ADMIN_ID = M.ID
+						<if test ="searchKeyword !=null and searchKeyword !='' " >
+						AND		N.SUBJECT LIKE '%' || #{searchKeyword} || '%'
+						</if>
+						ORDER	BY	NOTICE_ID DESC
+					) A
+			WHERE	ROWNUM <![CDATA[<=]]> #{endRow}
+		)
+WHERE	RNUM >= #{startRow}
+</select>
+
+<select id="selectAllNoticeCount" parameterType="NoticeSearchVO" resultType="_int">
+SELECT	COUNT(1)
+FROM	NOTICE
+<if test="searchKeyword != null and searchKeyword != '' ">
+WHERE	SUBJECT	LIKE '%' || #{searchKeyword} || '%'
+</if>
+</select>
+
+<select	id="selectOneNotice" parameterType="string" resultMap="noticeMap">
+SELECT	N.NOTICE_ID
 		, N.SUBJECT
 		, N.CONTENT
 		, N.ADMIN_ID
@@ -62,6 +103,7 @@ SELECT	ROWNUM
 FROM	NOTICE N
         , MEMBERS M
 WHERE   N.ADMIN_ID = M.ID
+AND		N.NOTICE_ID = #{noticeId}
 </select>
 </mapper>
   

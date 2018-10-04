@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
@@ -21,6 +22,7 @@ import com.ktds.common.session.Session;
 import com.ktds.member.service.MemberService;
 import com.ktds.member.validator.MemberValidator;
 import com.ktds.member.vo.MemberVO;
+import com.ktds.user.User;
 
 @Controller
 public class MemberController {
@@ -82,17 +84,15 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	@PostMapping("/member/login")
+	@GetMapping("/member/logincheck")
 	@ResponseBody
 	public Map<String, Object> doMemberLoginAction(@ModelAttribute MemberVO memberVO, HttpSession session) {
-		/*User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getDetails();		
 		
 		memberVO.setId(user.getUsername());
 		memberVO.setPassword(user.getPassword());
 		
-		System.out.println("출력" + memberVO.getId());
-		*/
 		Map<String, Object> result = new HashMap<>();
 		
 		if ( memberService.isBlockUser(memberVO.getId()) ) {
@@ -154,10 +154,6 @@ public class MemberController {
 	
 	@PostMapping("/member/guest")
 	public String doGuestLoginAction( @ModelAttribute MemberVO memberVO, HttpSession session ) {
-		System.out.println("출력 : " + memberVO.getName());
-		System.out.println("출력 : " + memberVO.getPhone());
-		System.out.println("출력 : " + memberVO.getEmail());
-		
 		session.setAttribute(Session.GUEST, memberVO);
 		return "redirect:/";
 	}

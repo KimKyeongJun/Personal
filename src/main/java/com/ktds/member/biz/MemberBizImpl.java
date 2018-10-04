@@ -38,6 +38,9 @@ public class MemberBizImpl implements MemberBiz {
 	@Override
 	public boolean readOneMember(MemberVO memberVO) {
 		String salt = memberDao.selectOneSaltById(memberVO.getId());
+		if ( salt == null ) {
+			return false;
+		}
 		String password = this.getHashedPassword(salt, memberVO.getPassword());
 
 		memberVO.setPassword(password);
@@ -66,11 +69,11 @@ public class MemberBizImpl implements MemberBiz {
 
 		if (loginMemberVO != null) {
 			session.setAttribute(Session.USER, loginMemberVO);
-			memberDao.unBlockUser(loginMemberVO.getId());
+			//memberDao.unBlockUser(loginMemberVO.getId());
 			return true;
 		} 
 		else {
-			memberDao.updateLoginFailCount(memberVO.getId());
+			//memberDao.updateLoginFailCount(memberVO.getId());
 			return false;
 		}
 	}
@@ -82,7 +85,6 @@ public class MemberBizImpl implements MemberBiz {
 		if (isBlockUser == null) {
 			isBlockUser = 0;
 		}
-		System.out.println("출력" + isBlockUser);
 		return isBlockUser >= 3;
 	}
 	

@@ -11,6 +11,7 @@
 		<typeAlias type="com.ktds.qna.vo.QnaSearchVO" alias="QnaSearchVO"/>
 		<typeAlias type="com.ktds.qna.reply.vo.QnaReplyVO" alias="QnaReplyVO"/>
 		<typeAlias type="com.ktds.notice.vo.NoticeVO" alias="NoticeVO"/>
+		<typeAlias type="com.ktds.notice.vo.NoticeSearchVO" alias="NoticeSearchVO"/>
 	</typeAliases>
 	
 </configuration>

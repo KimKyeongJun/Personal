@@ -1,13 +1,16 @@
 package com.ktds.notice.service;
 
-import java.util.List;
-
+import com.ktds.notice.vo.NoticeSearchVO;
 import com.ktds.notice.vo.NoticeVO;
+
+import io.github.seccoding.web.pager.explorer.PageExplorer;
 
 public interface NoticeService {
 	
 	public boolean createOnaNotice(NoticeVO noticeVO);
 	
-	public List<NoticeVO> findAllNotice();
+	public PageExplorer findAllNotice(NoticeSearchVO noticeSearchVO);
+	
+	public NoticeVO findOneNotice(String noticeId);
 
 }
