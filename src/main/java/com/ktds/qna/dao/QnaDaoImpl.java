@@ -1,6 +1,7 @@
 package com.ktds.qna.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -36,6 +37,16 @@ public class QnaDaoImpl extends SqlSessionDaoSupport implements QnaDao {
 	@Override
 	public int selectAllQnaCount(QnaSearchVO qnaSearchVO) {
 		return getSqlSession().selectOne("QnaDao.selectAllQnaCount", qnaSearchVO);
+	}
+	
+	@Override
+	public String selectOneQnaCheck(Map<String, String> param) {
+		return getSqlSession().selectOne("QnaDao.selectOneQnaCheck", param);
+	}
+	
+	@Override
+	public String selectGetSaltByQnaId(String qnaId) {
+		return getSqlSession().selectOne("QnaDao.selectGetSaltByQnaId", qnaId);
 	}
 	
 	

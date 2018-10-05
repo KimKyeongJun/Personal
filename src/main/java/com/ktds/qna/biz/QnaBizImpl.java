@@ -1,8 +1,12 @@
 package com.ktds.qna.biz;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ktds.common.util.SHA256Util;
 import com.ktds.qna.dao.QnaDao;
 import com.ktds.qna.vo.QnaSearchVO;
 import com.ktds.qna.vo.QnaVO;
@@ -21,7 +25,16 @@ public class QnaBizImpl implements QnaBiz {
 
 	@Override
 	public boolean createQna(QnaVO qnaVO) {
+		String salt = SHA256Util.generateSalt();
+		String password = SHA256Util.getEncrypt(qnaVO.getPassword(), salt);
+		qnaVO.setPassword(password);
+		qnaVO.setSalt(salt);
+		
 		return this.qnaDao.insertQna(qnaVO) > 0;
+	}
+	
+	public String getHashedPassword(String salt, String password) {
+		return SHA256Util.getEncrypt(password, salt);
 	}
 
 	@Override
@@ -42,6 +55,21 @@ public class QnaBizImpl implements QnaBiz {
 		pageExplorer.setList(this.qnaDao.selectAllQna(qnaSearchVO));
 
 		return pageExplorer;
+	}
+	
+	@Override
+	public String readGetSaltByQnaId(String qnaId) {
+		return this.qnaDao.selectGetSaltByQnaId(qnaId);
+	}
+	
+	@Override
+	public String readOneQnaCheck(String qnaId, String password) {
+		Map<String, String> param = new HashMap<>();
+		String salt = readGetSaltByQnaId(qnaId);
+		String saltPassword = getHashedPassword(salt,password);
+		param.put("qnaId", qnaId);
+		param.put("password", saltPassword);
+		return this.qnaDao.selectOneQnaCheck(param);
 	}
 
 }

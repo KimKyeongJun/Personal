@@ -12,5 +12,9 @@ public interface QnaBiz {
 	public QnaVO readOneQna(String qnaId);
 
 	public PageExplorer readAllQna(QnaSearchVO qnaSearchVO);
+	
+	public String readGetSaltByQnaId(String qnaId);
+	
+	public String readOneQnaCheck(String qnaId, String password);
 
 }

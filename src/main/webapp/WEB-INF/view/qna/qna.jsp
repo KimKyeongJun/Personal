@@ -12,20 +12,22 @@
 <script type="text/javascript">
 	$().ready(function() {
 		$(".qnaLink").click(function() {
-			var password = prompt("비밀번호를 입력하세요");
-			if ( password != $(this).closest(".contentWrapper").children(".qnaPassword").text() ) {
-				alert("비밀번호를 확인하세요!");
-				location.href="/PersonalProject/qna/qna"
-			}
-			else {
-				var qnaId = $(this).closest(".contentWrapper").children(".qnaId").text();
-				alert(qnaId);
+			var qnaId = $(this).closest(".contentWrapper").children(".qnaId").text();
+			if ( $(this).closest(".contentWrapper").children(".isVisible").text() == "Y" ) {
 				location.href="/PersonalProject/qna/detail?qnaId="+qnaId;
 			}
-			//alert( $(this).closest(".contentWrapper").children(".qnaPassword").text() );
+			else {
+				window.open("/PersonalProject/qna/password?qnaId="+qnaId,'상세','width=400, height=150, left=250, top=350, toolbar=no, status=no, scrollbars=yes');
+			}
 		});
 	});
 </script>
+<style>
+.qnaLink:hover {
+    color: #999;
+    text-decoration: underline;
+  }
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
@@ -46,10 +48,9 @@
 	      <c:forEach items="${qnaList}" var="qna">
 	         <div class="contentWrapper">
 	         	<div class="isVisible" style="display: none;">${qna.isVisible}</div>
-	         	<div class="qnaPassword" style="display: none;">${qna.password}</div>
 	         	<div class="qnaId" style="display: none;">${qna.qnaId}</div>
 	            <div class="number box">${qna.qnaRowNum}</div><!-- 
-	            --><div class="subject box"><span class="qnaLink">${qna.subject}</span></div><!-- 
+	            --><div class="subject box"><span class="qnaLink">${qna.subject}<c:if test="${qna.isVisible eq 'N'}"><img src="/PersonalProject/img/lock.jpg" width="20px"height="20px"></c:if></span></div><!-- 
 	            --><div class="writer box">${qna.writer}</div><!-- 
 	             --><div class="create-date box">${qna.crtDt}</div>
 	         </div>
@@ -75,6 +76,5 @@
 		<div>
 			<a href="/PersonalProject/qna/regist">글 작성</a>
 		</div>
-	
 </body>
 </html>

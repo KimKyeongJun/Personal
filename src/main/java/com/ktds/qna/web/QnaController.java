@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -98,19 +99,43 @@ public class QnaController {
 	public ModelAndView viewQnaDetailPage(@RequestParam String qnaId) {
 		ModelAndView view = new ModelAndView("qna/detail");
 		QnaVO oneQnaVO = this.qnaService.readOneQna(qnaId);
-		
+		System.out.println("QnaController 출력" + qnaId);
 		XssFilter filter = XssFilter.getInstance("lucy-xss-superset.xml");
 		oneQnaVO.setWriter(filter.doFilter(oneQnaVO.getWriter()));
 		oneQnaVO.setSubject(filter.doFilter(oneQnaVO.getSubject()));
 		oneQnaVO.setContent(filter.doFilter(oneQnaVO.getContent()));
 		
-		for (QnaReplyVO qnaReplyVO : oneQnaVO.getQnaReplyList()) {
-			qnaReplyVO.setContent(filter.doFilter(qnaReplyVO.getContent()));
+		if ( oneQnaVO.getQnaReplyList() != null ) {			
+			for (QnaReplyVO qnaReplyVO : oneQnaVO.getQnaReplyList()) {
+				qnaReplyVO.setContent(filter.doFilter(qnaReplyVO.getContent()));
+			}
+			view.addObject("qnaReplyList",oneQnaVO.getQnaReplyList());
 		}
 		view.addObject("qna", oneQnaVO);
-		view.addObject("qnaReplyList",oneQnaVO.getQnaReplyList());
 		
 		return view;
+	}
+	
+	@GetMapping("/qna/password")
+	public ModelAndView viewPasswordChcekPage(@RequestParam String qnaId) {
+		ModelAndView view = new ModelAndView("qna/password");
+		view.addObject("qnaId", qnaId);
+		return view;
+	}
+	
+	@PostMapping("/qna/password")
+	@ResponseBody
+	public Map<String, Object> doDetailPasswordCheck(@ModelAttribute QnaVO qnaVO) {
+		Map<String, Object> result = new HashMap<>();
+		String detailQnaId = this.qnaService.readOneQnaCheck(qnaVO.getQnaId(), qnaVO.getPassword());
+		if (detailQnaId != null ) {
+			result.put("qnaId", detailQnaId);
+			result.put("status", true);
+		}
+		else {
+			result.put("status", false);
+		}
+		return result;
 	}
 
 }

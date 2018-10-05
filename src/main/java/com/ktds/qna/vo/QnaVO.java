@@ -14,6 +14,7 @@ public class QnaVO {
 	String content;
 	String isVisible;
 	String crtDt;
+	String salt;
 
 	List<QnaReplyVO> qnaReplyList;
 
@@ -87,6 +88,14 @@ public class QnaVO {
 
 	public void setQnaReplyList(List<QnaReplyVO> qnaReplyList) {
 		this.qnaReplyList = qnaReplyList;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 }

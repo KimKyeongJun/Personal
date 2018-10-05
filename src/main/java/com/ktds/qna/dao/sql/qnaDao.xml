@@ -14,6 +14,7 @@ INSERT	INTO	QNA (
 						, IS_VISIBLE
 						, CRTDT
 						, SUBJECT
+						, SALT
 					)
 VALUES				(
 						'QA-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(QNA_ID_SEQ.NEXTVAL, 6, '0')	
@@ -23,6 +24,7 @@ VALUES				(
 						, #{isVisible}
 						, SYSDATE
 						, #{subject}
+						, #{salt}
 					)
 </insert>
 
@@ -35,6 +37,7 @@ VALUES				(
 	<result property="isVisible" column="IS_VISIBLE" />
 	<result property="crtDt" column="CRTDT" />
 	<result property="subject" column="SUBJECT" />
+	<result property="salt" column="SALT" />
 </resultMap>
 
 <select id="selectAllQna" parameterType="QnaSearchVO" resultMap="qnaVO">
@@ -50,6 +53,7 @@ FROM	(
 								, IS_VISIBLE
 								, CRTDT
 								, SUBJECT
+								, SALT
 						FROM 	QNA
 						<if test="searchKeyword != null and searchKeyword != '' ">
 						WHERE	WRITER	LIKE '%' || #{searchKeyword} || '%'
@@ -77,8 +81,22 @@ SELECT	QNA_ID
 		, IS_VISIBLE
 		, CRTDT
 		, SUBJECT
+		, SALT
 FROM	QNA
 WHERE	QNA_ID = #{qnaId}
+</select>
+
+<select id="selectGetSaltByQnaId" parameterType="string" resultType="string">
+SELECT	SALT
+FROM	QNA
+WHERE	QNA_ID = #{qnaId}
+</select>
+
+<select	id="selectOneQnaCheck" parameterType="map" resultType="string">
+SELECT	QNA_ID
+FROM	QNA
+WHERE	QNA_ID = #{qnaId}
+AND		PASSWORD = #{password}
 </select>
 
 

@@ -32,13 +32,20 @@ public class QnaServiceImpl implements QnaService {
 	public QnaVO readOneQna(String qnaId) {
 		QnaVO qnaVO = this.qnaBiz.readOneQna(qnaId);
 		List<QnaReplyVO> qnaReplyList = this.qnaReplyBiz.selectOneQnaAllReply(qnaId);
-		qnaVO.setQnaReplyList(qnaReplyList);		
+		if ( !qnaReplyList.isEmpty() ) {
+			qnaVO.setQnaReplyList(qnaReplyList);			
+		}
 		return qnaVO;
 	}
 
 	@Override
 	public PageExplorer readAllQna(QnaSearchVO qnaSearchVO) {		
 		return this.qnaBiz.readAllQna(qnaSearchVO);
+	}
+	
+	@Override
+	public String readOneQnaCheck(String qnaId, String password) {
+		return this.qnaBiz.readOneQnaCheck(qnaId, password);
 	}
 
 }
