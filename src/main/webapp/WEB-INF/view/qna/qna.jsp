@@ -17,7 +17,7 @@
 				location.href="/PersonalProject/qna/detail?qnaId="+qnaId;
 			}
 			else {
-				window.open("/PersonalProject/qna/password?qnaId="+qnaId,'상세','width=400, height=150, left=250, top=350, toolbar=no, status=no, scrollbars=yes');
+				window.open("/PersonalProject/qna/password?qnaId="+qnaId,'상세','width=400, height=150, left=400, top=350, toolbar=no, status=no, scrollbars=yes');
 			}
 		});
 	});

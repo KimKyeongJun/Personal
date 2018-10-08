@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ShowingSeatDao">
+
+<resultMap id="showingSeat" type="ShowingSeatVO">
+	<id property="showingNum" column="SHOWING_NUM" />
+	<result property="seatNumber" column="SEAT_NUMBER"/>
+</resultMap>
+
+<select	id="selectAllSeat" parameterType="int" resultMap="showingSeat">
+SELECT	SEAT_NUMBER
+		, SHOWING_NUM
+FROM	SHOWINGSEAT
+WHERE	SHOWING_NUM = #{showingNum}
+</select>
+
+</mapper>
+  

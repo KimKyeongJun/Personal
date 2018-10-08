@@ -13,6 +13,6 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />	
-	영화 관련 페이지
+	<a href="/PersonalProject/showingseat?showingNum=1"> 상영관 정보 </a>
 </body>
 </html>
