@@ -19,7 +19,13 @@
 		<s:intercept-url pattern="/member/logincheck"
 			access="permitAll" />
 		<s:intercept-url pattern="/member/regist"
-			access="permitAll" />			
+			access="permitAll" />
+		<s:intercept-url pattern="/member/duplicate"
+			access="permitAll" />		
+		<s:intercept-url pattern="/member/findid"
+			access="permitAll" />		
+		<s:intercept-url pattern="/member/resultfindid"
+			access="permitAll" />		
 		<s:intercept-url pattern="/member"
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<s:intercept-url pattern="/member/**"
