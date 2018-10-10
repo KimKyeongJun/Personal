@@ -23,7 +23,7 @@
 					, $("#qnaReplyForm").serialize()
 					, function(response) {
 						if ( response.regist ) {
-							location.href="/PersonalProject/qna/detail/${qna.qnaId}";
+							location.href="/PersonalProject/qna/detail?qnaId=${qna.qnaId}";
 						}
 						else {
 							alert("등록실패!");

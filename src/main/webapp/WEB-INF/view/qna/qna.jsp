@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/PersonalProject/css/layout.css" />
 <script src="/PersonalProject/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+<s:authorize access="hasRole('ROLE_ADMIN')" var="isAdmin"></s:authorize>
 <script type="text/javascript">
 	$().ready(function() {
 		$(".qnaLink").click(function() {
@@ -17,7 +19,12 @@
 				location.href="/PersonalProject/qna/detail?qnaId="+qnaId;
 			}
 			else {
-				window.open("/PersonalProject/qna/password?qnaId="+qnaId,'상세','width=400, height=150, left=400, top=350, toolbar=no, status=no, scrollbars=yes');
+				if ( ${isAdmin} == true ){
+					location.href="/PersonalProject/qna/detail?qnaId="+qnaId;
+				}
+				else{
+					window.open("/PersonalProject/qna/password?qnaId="+qnaId,'상세','width=400, height=150, left=400, top=350, toolbar=no, status=no, scrollbars=yes');
+				}
 			}
 		});
 	});

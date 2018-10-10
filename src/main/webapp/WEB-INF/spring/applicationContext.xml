@@ -16,6 +16,8 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/movie/**"/>
+			<mvc:exclude-mapping path="/movie/movie"/>
+			<mvc:exclude-mapping path="/movie/regist"/>
 			<bean	id="sessionInterceptor"
 					class="com.ktds.common.interceptors.SessionInterceptor">
 				<property name="memberDao" ref="memberDaoImpl" />

@@ -6,7 +6,10 @@ import com.ktds.showing.vo.ShowingVO;
 public class ShowingListVO {
 
 	String showingId;
-	String showingDate;
+	String startDate;
+	String endDate;
+	int showingNum;
+	String movieCode;
 
 	MovieVO movieVO;
 	ShowingVO showingVO;
@@ -19,12 +22,28 @@ public class ShowingListVO {
 		this.showingId = showingId;
 	}
 
-	public String getShowingDate() {
-		return showingDate;
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setShowingDate(String showingDate) {
-		this.showingDate = showingDate;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public int getShowingNum() {
+		return showingNum;
+	}
+
+	public void setShowingNum(int showingNum) {
+		this.showingNum = showingNum;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public MovieVO getMovieVO() {
@@ -41,6 +60,14 @@ public class ShowingListVO {
 
 	public void setShowingVO(ShowingVO showingVO) {
 		this.showingVO = showingVO;
+	}
+
+	public String getMovieCode() {
+		return movieCode;
+	}
+
+	public void setMovieCode(String movieCode) {
+		this.movieCode = movieCode;
 	}
 
 }

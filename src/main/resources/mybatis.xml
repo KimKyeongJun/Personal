@@ -13,6 +13,10 @@
 		<typeAlias type="com.ktds.notice.vo.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.ktds.notice.vo.NoticeSearchVO" alias="NoticeSearchVO"/>
 		<typeAlias type="com.ktds.showing.seat.vo.ShowingSeatVO" alias="ShowingSeatVO"/>
+		<typeAlias type="com.ktds.movie.vo.MovieVO" alias="MovieVO"/>
+		<typeAlias type="com.ktds.showing.list.vo.ShowingListVO" alias="ShowingListVO"/>
+		<typeAlias type="com.ktds.showing.vo.ShowingVO" alias="ShowingVO"/>
+		
 	</typeAliases>
 	
 </configuration>
