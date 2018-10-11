@@ -11,6 +11,14 @@
 				alert("로그인 후 이용하세요.");
 			}
 		});
+		$("#movieMenu").mouseenter(function() {
+			$(".subMenu").slideDown(100);
+			$("#parentMenu").hide();
+		});
+		$("#movieMenu").mouseleave(function() {
+			$(".subMenu").slideUp(100);
+			$("#parentMenu").show();
+		});
 	});
 </script>
  <style type="text/css">
@@ -37,6 +45,9 @@
     display: inline-block;
     margin-left: 30px;
     color: #FFFFFF;
+  }
+  .subMenuList {
+  	display: line-block;
   }
 
   nav ul > li:first-child {
@@ -67,7 +78,20 @@
 <nav>
 	<ul>
 		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/">홈</a></li>
-		<li class="leftMenu"><a id="ticket" class="menuLink" href="/PersonalProject/movie/movie">티켓 예매</a></li>		
+		<li id="movieMenu" class="leftMenu">
+			<div id="parentMenu">영화</div>
+			<div class="subMenu" style="display: none;">
+				<div class="subMenuList">
+					영화 예매
+				</div>			
+				<div class="subMenuList">
+					<a href="/PersonalProject/movie/showinglist">상영 중 영화</a>
+				</div>			
+				<div class="subMenuList">
+					영화 정보
+				</div>			
+			</div>
+		</li>		
 		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/notice/notice">고객센터</a></li>
 		<c:choose>
 			<c:when test="${!empty sessionScope._USER_}">

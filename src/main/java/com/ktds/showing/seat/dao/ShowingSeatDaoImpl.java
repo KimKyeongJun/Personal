@@ -22,4 +22,9 @@ public class ShowingSeatDaoImpl extends SqlSessionDaoSupport implements ShowingS
 	public List<ShowingSeatVO> selectAllSeat(int showingNum) {
 		return getSqlSession().selectList("ShowingSeatDao.selectAllSeat", showingNum);
 	}
+	
+	@Override
+	public int insertRegistSeat(ShowingSeatVO showingSeatVO) {
+		return getSqlSession().insert("ShowingSeatDao.insertRegistSeat", showingSeatVO);
+	}
 }

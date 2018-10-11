@@ -17,5 +17,16 @@ FROM	SHOWINGSEAT
 WHERE	SHOWING_NUM = #{showingNum}
 </select>
 
+<insert id="insertRegistSeat" parameterType="ShowingSeatVO">
+INSERT	INTO	SHOWINGSEAT  	(
+									SEAT_NUMBER
+									, SHOWING_NUM
+								)
+VALUES							(
+									#{seatNumber}
+									, #{showingNum}
+								)
+</insert>
+
 </mapper>
   

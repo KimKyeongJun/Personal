@@ -1,10 +1,11 @@
 package com.ktds.showing.list.service;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,21 +26,31 @@ public class ShowingListServiceImpl implements ShowingListService {
 	@Override
 	public boolean registOneShowingList(ShowingListVO showingListVO) {
 		int movieRunningTime = this.movieBiz.readOneMovieRunningTime(showingListVO.getMovieCode());
-		
 		String startDate = showingListVO.getStartDate().replace("T", " ");
+		System.out.println("Service 출력 : " + startDate);
 		showingListVO.setStartDate(startDate);
 		try {
-			Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.KOREA).parse(startDate);
+			Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(startDate);
+			System.out.println("Service date 형변환 출력 : " + date);
 			Calendar cal = Calendar.getInstance();
+			/*cal.get(Calendar.HOUR_OF_DAY);
+			cal.set(Calendar.AM_PM, Calendar.AM);*/
 		    cal.setTime(date);
 		    cal.add(Calendar.MINUTE, movieRunningTime);
-			String finishDate = new SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.KOREA).format(cal.getTime());
+		    System.out.println("Service cal 출력 : " + cal.getTime());
+			String finishDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").format(cal.getTime());
+			System.out.println("Service 끝나는 시간 출력 : " + finishDate);
 			showingListVO.setEndDate(finishDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}		
 		
 		return this.showingListBiz.registOneShowingList(showingListVO);
+	}
+	
+	@Override
+	public List<ShowingListVO> readAllShowingList() {
+		return this.showingListBiz.readAllShowingList();
 	}
 
 }

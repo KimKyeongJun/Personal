@@ -22,5 +22,40 @@ VALUES	(
 			, #{endDate}
 		)
 </insert>
+
+<resultMap id="showingListMap" type="ShowingListVO">
+	<id column="SHOWING_ID" property="showingId"/>
+	<result property="movieCode" column="MOVIE_CODE"/>
+	<result property="showingNum" column="SHOWING_NUM"/>
+	<result property="startDate" column="START_TIME"/>
+	<result property="endDate" column="END_TIME"/>
+	<association property="movieVO" javaType="MovieVO">
+		<id property="movieCode" column="MOVIE_CODE"/>
+		<result property="movieName" column="MOVIE_NAME"/>
+		<result property="runningTime" column="RUNNING_TIME"/>
+	</association>
+</resultMap>
+<select	id="selectAllShowingList" resultMap="showingListMap">
+SELECT	S.SHOWING_ID
+		, S.MOVIE_CODE
+		, S.SHOWING_NUM
+		, S.START_TIME
+		, S.END_TIME
+		, M.MOVIE_CODE
+		, M.MOVIE_NAME
+		, M.RUNNING_TIME
+FROM	SHOWINGLIST S
+		, MOVIE M
+WHERE	S.MOVIE_CODE = M.MOVIE_CODE
+ORDER	BY	SHOWING_NUM
+</select>
+
+<select id="selectStartDateTimeMovie" parameterType="ShowingListVO" resultType="int">
+SELECT	COUNT(1)
+FROM	SHOWINGLIST
+WHERE	START_TIME <![CDATA[>=]]> #{startDate}
+AND		END_TIME <![CDATA[<=]]> #{endDate}
+AND		SHOWING_NUM = #{showingNum}
+</select>
 </mapper>
   

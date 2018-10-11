@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +21,8 @@ import com.ktds.qna.reply.vo.QnaReplyVO;
 import com.ktds.qna.service.QnaService;
 import com.ktds.qna.vo.QnaSearchVO;
 import com.ktds.qna.vo.QnaVO;
+import com.ktds.showing.seat.dao.ShowingSeatDao;
+import com.ktds.showing.seat.vo.ShowingSeatVO;
 import com.nhncorp.lucy.security.xss.XssFilter;
 
 import io.github.seccoding.web.pager.explorer.PageExplorer;
@@ -32,8 +33,12 @@ public class QnaController {
 	@Autowired
 	QnaService qnaService;
 	
+	@Autowired
+	ShowingSeatDao showingSeatDao;
+	
 	@RequestMapping("/qna/qna")
 	public ModelAndView viewQnaListPage(@ModelAttribute QnaSearchVO qnaSearchVO, HttpServletRequest request, HttpSession session) {
+				
 		// 전체 검색 or 상세 -> 목록 or 글쓰기
 				if ( qnaSearchVO.getSearchKeyword() == null ) {
 					qnaSearchVO = (QnaSearchVO) session.getAttribute(Session.QNASEARCH);

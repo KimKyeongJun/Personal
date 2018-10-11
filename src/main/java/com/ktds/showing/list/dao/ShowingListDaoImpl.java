@@ -1,5 +1,8 @@
 package com.ktds.showing.list.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,5 +21,21 @@ public class ShowingListDaoImpl extends SqlSessionDaoSupport implements ShowingL
 	@Override
 	public int insertOneShowingList(ShowingListVO showingListVO) {
 		return getSqlSession().insert("ShowingListDao.insertOneShowingList", showingListVO);
+	}
+	
+	@Override
+	public String selectEndTimeOfDay(Map<String, String> param) {
+		return getSqlSession().selectOne("ShowingListDao.selectEndTimeOfDay", param);
+	}
+	
+	@Override
+	public int selectStartDateTimeMovie(ShowingListVO showingListVO) {
+		System.out.println("Dao 출력 " + getSqlSession().selectOne("ShowingListDao.selectStartDateTimeMovie", showingListVO));
+		return getSqlSession().selectOne("ShowingListDao.selectStartDateTimeMovie", showingListVO);
+	}
+	
+	@Override
+	public List<ShowingListVO> selectAllShowingList() {
+		return getSqlSession().selectList("ShowingListDao.selectAllShowingList");
 	}
 }

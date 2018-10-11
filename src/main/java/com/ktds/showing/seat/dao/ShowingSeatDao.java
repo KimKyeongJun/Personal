@@ -7,5 +7,7 @@ import com.ktds.showing.seat.vo.ShowingSeatVO;
 public interface ShowingSeatDao {
 	
 	public List<ShowingSeatVO> selectAllSeat(int showingNum);
+	
+	public int insertRegistSeat(ShowingSeatVO showingSeatVO);
 
 }

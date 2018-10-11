@@ -42,7 +42,7 @@
 		</div>
 		<div>
 			<p>상영날짜</p>
-			<input type="datetime-local" name="startDate" />
+			<input type="datetime-local" name="startDate" min="2018-10-11T00:00 "/>
 		</div>
 		<div>
 			<input type="button" id="registBtn" value="등록" />
