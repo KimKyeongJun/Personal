@@ -21,7 +21,7 @@
 				<span>${showing.startDate}</span>
 				<span>${showing.showingNum}</span>
 			</div>
-			<a href="#" onclick="window.open('/PersonalProject/reserve/showingseat?movieCode=${showing.movieVO.movieCode}&startDate=${showing.startDate}&showingNum=${showing.showingNum}', '_blank', 'width=800 height=600')">예매하기</a>
+			<a href="#" onclick="window.open('/PersonalProject/reserve/showingseat?movieCode=${showing.movieVO.movieCode}&showingId=${showing.showingId}&showingNum=${showing.showingNum}', '_blank', 'width=800 height=600')">예매하기</a>
 		</c:forEach>
 	</div>
 

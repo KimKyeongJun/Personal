@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReservationDao">
+
+<insert id="insertOneReservation" parameterType="ReservationVO">
+INSERT	INTO	RESERVATION	(
+								RESERVATION_ID
+								, ID
+								, RESERVATION_DATE
+								, SHOWING_ID
+								, SEAT_NUMBER
+								, SHOWING_NUM
+								, NAME
+								, PHONE							
+							)
+VALUES						(
+								'RV-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(RSV_SEQ_ID.NEXTVAL, 6, '0')
+								<choose>
+									<when test = "id != null">
+									, #{id}
+									</when>
+									<otherwise>
+									, ''
+									</otherwise>
+								</choose>
+								, SYSDATE
+								, #{showingId}
+								, #{seatNumber}
+								, #{showingNum}
+								<choose>
+									<when test ="name != null and phone != null">
+									, #{name}
+									, #{phone}
+									</when>
+									<otherwise>
+									, ''
+									, ''
+									</otherwise>								
+								</choose>
+							)
+</insert>
+</mapper>
+  
