@@ -1,5 +1,7 @@
 package com.ktds.reservation.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,11 @@ public class ReservationDaoImpl extends SqlSessionDaoSupport implements Reservat
 	@Override
 	public int insertOneReservation(ReservationVO reservationVO) {
 		return getSqlSession().insert("ReservationDao.insertOneReservation", reservationVO);
+	}
+	
+	@Override
+	public List<String> selectReservationSeatList(String showingId) {
+		return getSqlSession().selectList("ReservationDao.selectReservationSeatList", showingId);
 	}
 
 }

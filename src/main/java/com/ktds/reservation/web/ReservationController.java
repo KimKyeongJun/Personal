@@ -1,7 +1,6 @@
 package com.ktds.reservation.web;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -19,14 +18,9 @@ import com.ktds.common.session.Session;
 import com.ktds.member.vo.MemberVO;
 import com.ktds.reservation.service.ReservationService;
 import com.ktds.reservation.vo.ReservationVO;
-import com.ktds.showing.seat.service.ShowingSeatService;
-import com.ktds.showing.seat.vo.ShowingSeatVO;
 
 @Controller
 public class ReservationController {
-	
-	@Autowired
-	private ShowingSeatService showingSeatService;
 	
 	@Autowired
 	private ReservationService reservationService;
@@ -34,10 +28,14 @@ public class ReservationController {
 	@GetMapping("/reserve/showingseat")
 	public ModelAndView viewReservationPage(@RequestParam String movieCode, @RequestParam String showingId, @RequestParam int showingNum) {
 		ModelAndView view = new ModelAndView("showingseat/showingseat");
-		List<ShowingSeatVO> showingSeat = this.showingSeatService.readAllSeat(showingNum);
-		view.addObject("showingSeat", showingSeat);
+		
+		Map<String, Object> seatList = this.reservationService.readReservationSeatList(showingNum, showingId);
+		view.addObject("showingSeat", seatList.get("showingSeat"));
+		view.addObject("reservationSeatList", seatList.get("reservationSeatList"));
 		view.addObject("showingId",showingId);
 		view.addObject("showingNum",showingNum);
+		
+		
 		return view;
 	}
 	
@@ -60,6 +58,11 @@ public class ReservationController {
 		boolean isRegist = reservationService.registOneReservation(reservationVO);
 		result.put("status", isRegist);
 		return result;
+	}
+	
+	@GetMapping("/reserve/confirm")
+	public String viewReservationConfirmPage() {
+		return "reservation/confirm";
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.ktds.reservation.biz;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,7 +12,7 @@ import com.ktds.reservation.vo.ReservationVO;
 public class ReservationBizImpl implements ReservationBiz {
 	
 	@Autowired
-	private ReservationDao reservationDao;
+	private ReservationDao reservationDao;	
 	
 	@Override
 	public boolean registOneReservation(ReservationVO reservationVO) {
@@ -20,6 +22,11 @@ public class ReservationBizImpl implements ReservationBiz {
 			this.reservationDao.insertOneReservation(reservationVO);
 		}
 		return true;
+	}
+	
+	@Override
+	public List<String> readReservationSeatList(String showingId) {
+		return this.reservationDao.selectReservationSeatList(showingId);
 	}
 
 }

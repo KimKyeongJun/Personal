@@ -42,5 +42,11 @@ VALUES						(
 								</choose>
 							)
 </insert>
+
+<select	id="selectReservationSeatList" parameterType="string" resultType="string">
+SELECT	SEAT_NUMBER
+FROM    RESERVATION
+WHERE   SHOWING_ID = #{showingId}
+</select>
 </mapper>
   

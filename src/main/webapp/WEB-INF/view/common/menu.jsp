@@ -12,11 +12,11 @@
 			}
 		});
 		$("#movieMenu").mouseenter(function() {
-			$(".subMenu").slideDown(100);
+			$(".subMenu").stop().slideDown(100);
 			$("#parentMenu").hide();
 		});
 		$("#movieMenu").mouseleave(function() {
-			$(".subMenu").slideUp(100);
+			$(".subMenu").stop().slideUp(100);
 			$("#parentMenu").show();
 		});
 	});

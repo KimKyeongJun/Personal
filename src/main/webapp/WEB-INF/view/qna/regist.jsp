@@ -43,7 +43,7 @@
 				<textarea id="content" name="content" placeholder="내용"></textarea>
 			</div>
 			<div>
-				<span><input type="radio" name="isVisible" value="Y">공개</span>
+				<span><input type="radio" name="isVisible" value="Y" checked="checked" >공개</span>
 				<span><input type="radio" name="isVisible" value="N">비공개</span>
 			</div>		
 			<div>
