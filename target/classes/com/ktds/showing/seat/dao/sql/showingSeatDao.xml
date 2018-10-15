@@ -8,11 +8,13 @@
 <resultMap id="showingSeat" type="ShowingSeatVO">
 	<id property="showingNum" column="SHOWING_NUM" />
 	<result property="seatNumber" column="SEAT_NUMBER"/>
+	<result property="price" column="PRICE"/>
 </resultMap>
 
 <select	id="selectAllSeat" parameterType="int" resultMap="showingSeat">
 SELECT	SEAT_NUMBER
 		, SHOWING_NUM
+		, PRICE
 FROM	SHOWINGSEAT
 WHERE	SHOWING_NUM = #{showingNum}
 </select>

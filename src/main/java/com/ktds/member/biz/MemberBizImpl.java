@@ -1,5 +1,8 @@
 package com.ktds.member.biz;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +109,13 @@ public class MemberBizImpl implements MemberBiz {
 	@Override
 	public String readOneMemberIsAdmin(String id) {
 		return this.memberDao.selectOneMemberIsAdmin(id);
+	}
+	
+	@Override
+	public boolean updateOneMemberById(String id, int mileage) {
+		Map<String, Object> param = new HashMap<>();
+		param.put("id", id);
+		param.put("mileage",mileage);
+		return this.memberDao.updateOneMemberById(param) > 0;
 	}
 }

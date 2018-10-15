@@ -24,6 +24,7 @@
 			}
 		});
 		
+		var price = 0;
 		$(".seatBtn").click(function() {
 			var input = '<div class="seatDiv" data-count ="'+$(this).data('count')+'">'+$(this).val()+'</div>';
 			var formInput = '<input type="hidden" data-count ="'+$(this).data('count')+'" class="seatClass" multiple name="seatNumberList" value="'+$(this).val()+'" />'
@@ -35,6 +36,8 @@
 				seat.css('background-color', '#f44336');
 				$(".seatDiv[data-count='"+seatValue+"']").remove();
 				$(".seatClass[data-count='"+seatValue+"']").remove();
+				price -= seat.data('price');
+				//$("#totalPrice").text("가격: " + price + "원");
 			}
 			else {
 				if ( $(".seatDiv").length > 3 ){
@@ -43,9 +46,14 @@
 				else {						
 					$(this).css('background-color', 'gray');
 					$("#shadowInput").append(input);
-					$("#reserveForm").append(formInput);					
+					$("#reserveForm").append(formInput);
+					price += seat.data('price');
+					$("#totalPrice").text("가격: " + price + "원");
+					
 				}
 			}
+			$("#totalPrice").text("가격: " + price + "원");
+			$("#priceForm").val(price);
 			
 		});
 		
@@ -56,7 +64,10 @@
 			}			
 			
 			if ( confirm ("예매하시겠습니까?") ){
-				alert("네");
+				$("#reserveForm").attr ({
+					"method" : "get",
+					"action" : "/PersonalProject/reserve/confirm"
+				}).submit();
 			}
 			else {
 				
@@ -93,7 +104,7 @@
 				<span style="padding: 5px;">
 					<button class="seatBtn"
 						value="${seat.seatNumber}"
-						style="width: 30px; height: 35px; background-color: #f44336;" data-count="${status.count}"></button>
+						style="width: 30px; height: 35px; background-color: #f44336;" data-price="${seat.price}" data-count="${status.count}"></button>
 				</span>
 				<c:if test="${ status.count%10 eq 0 }">
 					<br />
@@ -107,13 +118,14 @@
 			<form id="reserveForm">
 				<input type="hidden" name="showingId" value="${showingId}" />
 				<input type="hidden" name="showingNum" value="${showingNum}" />
+				<input type="hidden" name="price" id="priceForm" />
 			</form>
 		</div>
 		<div id="shadowInput">
-			
 		</div>
-		<input type="button" value="좌석 다시 선택" onClick="window.location.reload()">
-		<input type="button" id="reserveBtn" value="예매하기" /> 
+		<div id="totalPrice">가격: 0원</div>
+			<input type="button" value="좌석 다시 선택" onClick="window.location.reload()">
+			<input type="button" id="reserveBtn" value="예매하기" /> 
 		<!-- <a href="/PersonalProject/reserve">예매하기</a> -->
 	</div>
 	

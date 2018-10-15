@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,8 +42,7 @@ public class ReservationController {
 	
 	@PostMapping("/reserve")
 	@ResponseBody
-	public Map<String, Object> doMovieRegistAction(@ModelAttribute ReservationVO reservationVO, HttpSession session) {
-		Map<String, Object> result = new HashMap<>();
+	public boolean doMovieRegistAction(@ModelAttribute ReservationVO reservationVO, HttpSession session) {
 		
 		MemberVO userMemberVO = (MemberVO) session.getAttribute(Session.USER);
 		MemberVO guestMemberVO = (MemberVO) session.getAttribute(Session.GUEST);
@@ -53,16 +53,14 @@ public class ReservationController {
 		else {
 			reservationVO.setName(guestMemberVO.getName());
 			reservationVO.setPhone(guestMemberVO.getPhone());
-		}
+		}		
 		
-		boolean isRegist = reservationService.registOneReservation(reservationVO);
-		result.put("status", isRegist);
-		return result;
+		return reservationService.registOneReservation(reservationVO,session);
 	}
 	
-	@GetMapping("/reserve/confirm")
-	public String viewReservationConfirmPage() {
-		return "reservation/confirm";
+	@GetMapping("/reserve/result")
+	public String viewReservationResultPage() {
+		return "reservation/reservationresult";
 	}
 
 }

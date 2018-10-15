@@ -25,23 +25,23 @@ VALUES	(
 
 <resultMap id="showingListMap" type="ShowingListVO">
 	<id column="SHOWING_ID" property="showingId"/>
-	<result property="movieCode" column="MOVIE_CODE"/>
+	<result property="movieCode" column="S_MOVIE_CODE"/>
 	<result property="showingNum" column="SHOWING_NUM"/>
 	<result property="startDate" column="START_TIME"/>
 	<result property="endDate" column="END_TIME"/>
 	<association property="movieVO" javaType="MovieVO">
-		<id property="movieCode" column="MOVIE_CODE"/>
+		<id property="movieCode" column="M_MOVIE_CODE"/>
 		<result property="movieName" column="MOVIE_NAME"/>
 		<result property="runningTime" column="RUNNING_TIME"/>
 	</association>
 </resultMap>
 <select	id="selectAllShowingList" resultMap="showingListMap">
 SELECT	S.SHOWING_ID
-		, S.MOVIE_CODE
+		, S.MOVIE_CODE	S_MOVIE_CODE
 		, S.SHOWING_NUM
 		, S.START_TIME
 		, S.END_TIME
-		, M.MOVIE_CODE
+		, M.MOVIE_CODE	M_MOVIE_CODE
 		, M.MOVIE_NAME
 		, M.RUNNING_TIME
 FROM	SHOWINGLIST S
@@ -56,6 +56,21 @@ FROM	SHOWINGLIST
 WHERE	START_TIME <![CDATA[>=]]> #{startDate}
 AND		END_TIME <![CDATA[<=]]> #{endDate}
 AND		SHOWING_NUM = #{showingNum}
+</select>
+
+<select	id="selectOneShowingList" parameterType="string" resultMap="showingListMap">
+SELECT	S.SHOWING_ID
+		, S.MOVIE_CODE	S_MOVIE_CODE
+		, S.SHOWING_NUM
+		, S.START_TIME
+		, S.END_TIME
+		, M.MOVIE_CODE	M_MOVIE_CODE
+		, M.MOVIE_NAME
+		, M.RUNNING_TIME
+FROM	SHOWINGLIST S
+		, MOVIE M
+WHERE	S.MOVIE_CODE = M.MOVIE_CODE
+AND		S.SHOWING_ID = #{showingId}
 </select>
 </mapper>
   

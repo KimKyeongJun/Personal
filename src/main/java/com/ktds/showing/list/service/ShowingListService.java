@@ -10,4 +10,5 @@ public interface ShowingListService {
 	
 	public List<ShowingListVO> readAllShowingList();
 
+	public ShowingListVO readOneShowingList(String showingId);
 }

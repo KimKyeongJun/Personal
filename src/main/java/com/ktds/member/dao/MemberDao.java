@@ -1,5 +1,7 @@
 package com.ktds.member.dao;
 
+import java.util.Map;
+
 import com.ktds.member.vo.MemberVO;
 
 public interface MemberDao {
@@ -21,5 +23,7 @@ public interface MemberDao {
 	public String selectOneMemberId(MemberVO memberVO);
 	
 	public String selectOneMemberIsAdmin(String id);
+	
+	public int updateOneMemberById(Map<String, Object> param);
 
 }

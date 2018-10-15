@@ -6,6 +6,7 @@ public class ShowingSeatVO {
 
 	String seatNumber;
 	int showingNum;
+	int price;
 
 	ShowingVO showingVO;
 
@@ -23,6 +24,14 @@ public class ShowingSeatVO {
 
 	public void setShowingNum(int showingNum) {
 		this.showingNum = showingNum;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public ShowingVO getShowingVO() {

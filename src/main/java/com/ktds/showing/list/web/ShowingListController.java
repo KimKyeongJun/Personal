@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ktds.reservation.vo.ReservationVO;
 import com.ktds.showing.list.service.ShowingListService;
 import com.ktds.showing.list.vo.ShowingListVO;
 
@@ -36,6 +37,16 @@ public class ShowingListController {
 		List<ShowingListVO> showingList = this.showingListService.readAllShowingList();
 		ModelAndView view = new ModelAndView("movie/showinglist");
 		view.addObject("showingList", showingList);
+		return view;
+	}
+	
+	@GetMapping("/reserve/confirm")
+	public ModelAndView viewReservationConfirmPage(@ModelAttribute ReservationVO reservationVO) {
+		ShowingListVO showingListVO = this.showingListService.readOneShowingList(reservationVO.getShowingId());
+		System.out.println("ReservationController " + showingListVO.getMovieVO().getMovieName());
+		System.out.println("!!!ReservationController" + reservationVO.getShowingId());
+		ModelAndView view = new ModelAndView("reservation/confirm");
+		view.addObject("showingListVO", showingListVO);
 		return view;
 	}
 

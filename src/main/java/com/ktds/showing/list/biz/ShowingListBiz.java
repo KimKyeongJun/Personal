@@ -13,5 +13,7 @@ public interface ShowingListBiz {
 	public boolean findStartDateTimeMovie(ShowingListVO showingListVO);
 	
 	public List<ShowingListVO> readAllShowingList();
+	
+	public ShowingListVO readOneShowingList(String showingId);
 
 }

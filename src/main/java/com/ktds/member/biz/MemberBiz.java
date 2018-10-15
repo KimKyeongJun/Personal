@@ -23,5 +23,7 @@ public interface MemberBiz {
 	public String findMemberId(MemberVO memberVO);
 	
 	public String readOneMemberIsAdmin(String id);
+	
+	public boolean updateOneMemberById(String id, int mileage);
 
 }

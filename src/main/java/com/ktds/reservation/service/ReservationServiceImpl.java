@@ -4,9 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ktds.common.session.Session;
+import com.ktds.member.biz.MemberBiz;
+import com.ktds.member.vo.MemberVO;
 import com.ktds.reservation.biz.ReservationBiz;
 import com.ktds.reservation.vo.ReservationVO;
 import com.ktds.showing.seat.biz.ShowingSeatBiz;
@@ -21,8 +26,15 @@ public class ReservationServiceImpl implements ReservationService{
 	@Autowired
 	private ShowingSeatBiz showingSeatBiz;
 	
+	@Autowired
+	private MemberBiz memberBiz;
+	
 	@Override
-	public boolean registOneReservation(ReservationVO reservationVO) {
+	public boolean registOneReservation(ReservationVO reservationVO, HttpSession session) {
+		MemberVO memberVO = (MemberVO) session.getAttribute(Session.USER);
+		if ( memberVO != null && !reservationVO.getMileage().isEmpty() ) {
+			this.memberBiz.updateOneMemberById(memberVO.getId(), Integer.parseInt(reservationVO.getMileage()));
+		}
 		return this.reservationBiz.registOneReservation(reservationVO);
 	}
 	

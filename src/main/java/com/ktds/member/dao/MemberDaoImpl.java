@@ -1,5 +1,7 @@
 package com.ktds.member.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +60,11 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 	@Override
 	public String selectOneMemberIsAdmin(String id) {
 		return getSqlSession().selectOne("MemberDao.selectOneMemberIsAdmin", id);
+	}
+	
+	@Override
+	public int updateOneMemberById(Map<String, Object> param) {
+		return getSqlSession().insert("MemberDao.updateOneMemberById", param);
 	}
 
 }

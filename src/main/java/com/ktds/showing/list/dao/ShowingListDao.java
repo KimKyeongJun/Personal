@@ -14,5 +14,7 @@ public interface ShowingListDao {
 	public int selectStartDateTimeMovie(ShowingListVO showingListVO);
 	
 	public List<ShowingListVO> selectAllShowingList();
+	
+	public ShowingListVO selectOneShowingList(String showingId);
 
 }

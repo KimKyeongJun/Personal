@@ -94,5 +94,11 @@ FROM	MEMBERS
 WHERE	ID = #{id}
 </select>
 
+<update	id="updateOneMemberById" parameterType="map">
+UPDATE	MEMBERS
+SET		MILEAGE = MILEAGE - #{mileage}
+WHERE	ID = #{id}
+</update>
+
 </mapper>
   

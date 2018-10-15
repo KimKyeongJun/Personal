@@ -17,6 +17,8 @@ public class ReservationVO {
 	private String name;
 	private String phone;
 	private String id;
+	private String price;
+	private String mileage;
 
 	private MemberVO memberVO;
 	private ShowingListVO showingListVO;
@@ -86,6 +88,14 @@ public class ReservationVO {
 		this.seatNumber = seatNumber;
 	}
 
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
 	public List<String> getSeatNumberList() {
 		return seatNumberList;
 	}
@@ -116,6 +126,14 @@ public class ReservationVO {
 
 	public void setShowingSeatVO(ShowingSeatVO showingSeatVO) {
 		this.showingSeatVO = showingSeatVO;
+	}
+
+	public String getMileage() {
+		return mileage;
+	}
+
+	public void setMileage(String mileage) {
+		this.mileage = mileage;
 	}
 
 }

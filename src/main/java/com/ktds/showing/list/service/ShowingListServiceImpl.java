@@ -52,5 +52,10 @@ public class ShowingListServiceImpl implements ShowingListService {
 	public List<ShowingListVO> readAllShowingList() {
 		return this.showingListBiz.readAllShowingList();
 	}
+	
+	@Override
+	public ShowingListVO readOneShowingList(String showingId) {
+		return this.showingListBiz.readOneShowingList(showingId);
+	}
 
 }
