@@ -9,12 +9,14 @@
 	<id property="movieCode" column="MOVIE_CODE"/>
 	<result property="movieName" column="MOVIE_NAME"/>
 	<result property="runningTime" column="RUNNING_TIME"/>
+	<result property="poster" column="POSTER"/>
 </resultMap>
 
 <select id="selectAllMovies" resultMap="movieMap">
 SELECT	MOVIE_CODE
 		, MOVIE_NAME
 		, RUNNING_TIME
+		, POSTER
 FROM	MOVIE
 </select>
 

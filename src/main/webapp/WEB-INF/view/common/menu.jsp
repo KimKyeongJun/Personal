@@ -30,7 +30,7 @@
   
   nav {
     background-color: #2056ac;
-    padding: 15px;
+    padding: 25px;
     margin-bottom: 15px;
     text-align: center;
   }

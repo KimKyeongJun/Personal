@@ -9,7 +9,16 @@
 <title>Insert title here</title>
 <script src="/PersonalProject/js/jquery-3.3.1.min.js"
 	type="text/javascript"></script>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+	$().ready(function() {
+		$("input[type=radio][name=rating]").click(function() {
+			if ( $(this).val() == "" ){
+				alert("평점을 선택해주세요!")
+			}
+			alert( $(this).val() );
+		});
+	});
+</script>
 <style>
 fieldset,
 label {
@@ -116,5 +125,6 @@ label {
   		
 	</form>
 
+	<a href="/PersonalProject/movie/apilist">리스트</a>
 </body>
 </html>

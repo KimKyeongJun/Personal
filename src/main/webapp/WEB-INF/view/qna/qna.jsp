@@ -57,7 +57,7 @@
 	         	<div class="isVisible" style="display: none;">${qna.isVisible}</div>
 	         	<div class="qnaId" style="display: none;">${qna.qnaId}</div>
 	            <div class="number box">${qna.qnaRowNum}</div><!-- 
-	            --><div class="subject box"><span class="qnaLink">${qna.subject}<c:if test="${qna.isVisible eq 'N'}"><img src="/PersonalProject/img/lock.jpg" width="20px"height="20px"></c:if></span></div><!-- 
+	            --><div class="subject box"><span class="qnaLink">${qna.subject}<c:if test="${qna.isVisible eq 'N'}"><img src="/PersonalProject/img/lock.png" width="20px"height="20px"></c:if></span></div><!-- 
 	            --><div class="writer box">${qna.writer}</div><!-- 
 	             --><div class="create-date box">${qna.crtDt}</div>
 	         </div>

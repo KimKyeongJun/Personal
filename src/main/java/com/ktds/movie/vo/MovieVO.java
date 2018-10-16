@@ -5,6 +5,7 @@ public class MovieVO {
 	String movieCode;
 	String movieName;
 	int runningTime;
+	String poster;
 
 	public String getMovieCode() {
 		return movieCode;
@@ -12,7 +13,7 @@ public class MovieVO {
 
 	public void setMovieCode(String movieCode) {
 		this.movieCode = movieCode;
-	}	
+	}
 
 	public String getMovieName() {
 		return movieName;
@@ -28,6 +29,14 @@ public class MovieVO {
 
 	public void setRunningTime(int runningTime) {
 		this.runningTime = runningTime;
+	}
+
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
 	}
 
 }
