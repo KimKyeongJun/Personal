@@ -23,5 +23,15 @@ public class MovieBizimpl implements MovieBiz {
 	public int readOneMovieRunningTime(String movieCode) {
 		return this.movieDao.selectOneMovieRunningTime(movieCode);
 	}
+	
+	@Override
+	public MovieVO readOneMovie(String movieCode) {
+		return this.movieDao.selectOneMovie(movieCode);
+	}
+	
+	@Override
+	public double readOneMovieGrade(String movieCode) {
+		return this.movieDao.selectOneMovieGrade(movieCode);
+	}
 
 }

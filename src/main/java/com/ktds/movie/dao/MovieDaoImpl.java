@@ -27,5 +27,15 @@ public class MovieDaoImpl extends SqlSessionDaoSupport implements MovieDao {
 	public int selectOneMovieRunningTime(String movieCode) {
 		return getSqlSession().selectOne("MovieDao.selectOneMovieRunningTime", movieCode);
 	}
+	
+	@Override
+	public MovieVO selectOneMovie(String movieCode) {
+		return getSqlSession().selectOne("MovieDao.selectOneMovie", movieCode);
+	}
+	
+	@Override
+	public double selectOneMovieGrade(String movieCode) {
+		return getSqlSession().selectOne("MovieDao.selectOneMovieGrade", movieCode);
+	}
 
 }

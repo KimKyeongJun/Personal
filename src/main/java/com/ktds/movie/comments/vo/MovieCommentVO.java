@@ -8,6 +8,8 @@ public class MovieCommentVO {
 	String commentId;
 	String content;
 	double grade;
+	String id;
+	String movieCode;
 	MovieVO movieVO;
 	MemberVO memberVO;
 
@@ -33,6 +35,22 @@ public class MovieCommentVO {
 
 	public void setGrade(double grade) {
 		this.grade = grade;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getMovieCode() {
+		return movieCode;
+	}
+
+	public void setMovieCode(String movieCode) {
+		this.movieCode = movieCode;
 	}
 
 	public MovieVO getMovieVO() {

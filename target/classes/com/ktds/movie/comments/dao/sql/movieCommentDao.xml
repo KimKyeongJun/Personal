@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MovieCommentDao">
+
+<insert id="insertMovieComment" parameterType="MovieCommentVO">
+INSERT	INTO	MOVIECOMMENTS	(
+									COMMENT_ID
+									, MOVIE_CODE
+									, CONTENT
+									, GRADE
+									, ID
+								)
+VALUES							(
+									'MC-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(MVC_ID_SEQ.NEXTVAL, 6, '0')
+									, #{movieCode}
+									, #{content}
+									, #{grade}
+									, #{id}
+								)
+</insert>
+
+<resultMap type="MovieCommentVO" id="movieCommentMap">
+	<id property="commentId" column="COMMENT_ID"/>
+	<result property="movieCode" column="MOVIE_CODE"/>
+	<result property="content" column="CONTENT"/>
+	<result property="grade" column="GRADE"/>
+	<result property="id" column="MO_ID"/>
+	<association property="memberVO" javaType="MemberVO">
+		<id property="id" column="M_ID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mileage" column="MILEAGE"/>
+		<result property="salt" column="SALT"/>
+		<result property="loginFailCount" column="LOGIN_FAIL_COUNT"/>
+		<result property="latestLogin" column="LATEST_LOGIN"/>
+		<result property="isAdmin" column="IS_ADMIN"/>
+		<result property="name" column="NAME"/>
+	</association>
+</resultMap>
+
+<select id="selectAllMovieCommentOfMovieCode" parameterType="string" resultMap="movieCommentMap">
+SELECT	MO.COMMENT_ID
+		, MO.MOVIE_CODE
+		, MO.CONTENT
+		, MO.GRADE
+		, MO.ID	MO_ID
+		, M.ID  M_ID
+		, M.PASSWORD
+		, M.EMAIL
+		, M.PHONE
+		, M.MILEAGE
+		, M.SALT
+		, M.LOGIN_FAIL_COUNT
+		, M.LATEST_LOGIN
+		, M.IS_ADMIN
+		, M.NAME
+FROM	MOVIECOMMENTS MO
+		, MEMBERS M
+WHERE	M.ID = MO.ID
+AND		MO.MOVIE_CODE = #{movieCode}
+</select>
+</mapper>
+  

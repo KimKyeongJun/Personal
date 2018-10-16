@@ -10,5 +10,7 @@ public interface MovieService {
 	public Map<String, Object> readAllMovies();
 	
 	public  List<MovieVO> readAllMovie();
+	
+	public MovieVO readOneMovie(String movieCode);
 
 }

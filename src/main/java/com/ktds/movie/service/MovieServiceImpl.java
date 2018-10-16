@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ktds.movie.biz.MovieBiz;
+import com.ktds.movie.comments.biz.MovieCommentBiz;
+import com.ktds.movie.comments.vo.MovieCommentVO;
 import com.ktds.movie.vo.MovieVO;
 import com.ktds.showing.biz.ShowingBiz;
 
@@ -16,6 +18,9 @@ public class MovieServiceImpl implements MovieService{
 
 	@Autowired
 	private MovieBiz movieBiz;
+	
+	@Autowired
+	private MovieCommentBiz movieCommentBiz;
 	
 	@Autowired
 	private ShowingBiz showingBiz;
@@ -30,6 +35,16 @@ public class MovieServiceImpl implements MovieService{
 	@Override
 	public List<MovieVO> readAllMovie() {
 		return this.movieBiz.readAllMovies();
+	}
+	
+	@Override
+	public MovieVO readOneMovie(String movieCode) {
+		double grade = this.movieBiz.readOneMovieGrade(movieCode);
+		MovieVO movieVO = this.movieBiz.readOneMovie(movieCode);
+		movieVO.setGrade(Math.round(grade*100)/100.0);
+		List<MovieCommentVO> movieCommentList = this.movieCommentBiz.readAllMovieCommentOfMovieCode(movieCode);
+		movieVO.setMovieCommentList(movieCommentList);
+		return movieVO;
 	}
 	
 }

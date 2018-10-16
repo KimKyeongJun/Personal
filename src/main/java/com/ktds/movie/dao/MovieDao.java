@@ -9,5 +9,9 @@ public interface MovieDao {
 	public List<MovieVO> selectAllMovies();
 	
 	public int selectOneMovieRunningTime(String movieCode);
+	
+	public MovieVO selectOneMovie(String movieCode);
+	
+	public double selectOneMovieGrade(String movieCode);
 
 }

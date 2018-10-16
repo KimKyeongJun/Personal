@@ -19,10 +19,24 @@ SELECT	MOVIE_CODE
 		, POSTER
 FROM	MOVIE
 </select>
+<select id="selectOneMovie" parameterType="string" resultMap="movieMap">
+SELECT	MOVIE_CODE
+		, MOVIE_NAME
+		, RUNNING_TIME
+		, POSTER
+FROM	MOVIE
+WHERE	MOVIE_CODE = #{movieCode}
+</select>
 
 <select id="selectOneMovieRunningTime" parameterType="string" resultType="int">
 SELECT	RUNNING_TIME
 FROM	MOVIE
+WHERE	MOVIE_CODE = #{movieCode}
+</select>
+
+<select	id="selectOneMovieGrade" parameterType="string" resultType="double">
+SELECT	NVL( AVG(GRADE), 0 )
+FROM	MOVIECOMMENTS
 WHERE	MOVIE_CODE = #{movieCode}
 </select>
 
