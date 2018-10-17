@@ -43,26 +43,27 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-
-	<div>
-		<span>회원 로그인</span>
-		<span><a href="/PersonalProject/member/guest">비회원 로그인</a></span>
-	</div>
-
-	<form id="loginForm">
+	<div style="top:100px; position:relative">
 		<div>
-			<input type="text" id="id" name="id" placeholder="아이디" />
+			<span>회원 로그인</span>
+			<span><a href="/PersonalProject/member/guest">비회원 로그인</a></span>
 		</div>
+	
+		<form id="loginForm">
+			<div>
+				<input type="text" id="id" name="id" placeholder="아이디" />
+			</div>
+			<div>
+				<input type="password" id="password" name="password"
+					placeholder="비밀번호" />
+			</div>
+			<div>
+				<input type="button" id="loginBtn" value="로그인" />
+			</div>
+		</form>
 		<div>
-			<input type="password" id="password" name="password"
-				placeholder="비밀번호" />
+			<a href="/PersonalProject/member/findid">아이디 찾기</a>
 		</div>
-		<div>
-			<input type="button" id="loginBtn" value="로그인" />
-		</div>
-	</form>
-	<div>
-		<a href="/PersonalProject/member/findid">아이디 찾기</a>
 	</div>
 
 

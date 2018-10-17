@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,15 +27,15 @@ public class ShowingListController {
 	@ResponseBody
 	public Map<String, Object> doRegistOneShowingListAction(@ModelAttribute ShowingListVO showingListVO) {
 		Map<String, Object> result = new HashMap<>();
-		System.out.println("ShowingListController 출력 " +showingListVO.getStartDate());
 		boolean isRegist = this.showingListService.registOneShowingList(showingListVO);
 		result.put("status", isRegist);
 		return result;
 	}
 	
 	@GetMapping("/movie/showinglist")
-	public ModelAndView viewShowingListPage() {
-		List<ShowingListVO> showingList = this.showingListService.readAllShowingList();
+	public ModelAndView viewShowingListPage(@RequestParam(required=false) String movieCode) {
+		System.out.println("QQQ"+movieCode);
+		List<ShowingListVO> showingList = this.showingListService.readAllShowingList(movieCode);
 		ModelAndView view = new ModelAndView("movie/showinglist");
 		view.addObject("showingList", showingList);
 		return view;

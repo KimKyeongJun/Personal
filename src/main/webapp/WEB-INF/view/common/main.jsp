@@ -24,14 +24,14 @@
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 	
-	<div>
+	<div id="container" style="top:100px; position:relative; ">
 		<c:forEach items="${movieList}" var="movie">
 			<div style="position: relative;">
 				<div style="position: relative; float:left;"><a href="/PersonalProject/movie/comment/${movie.movieCode}"><img src="/PersonalProject/img/${movie.poster}"></a></div>
 				<div style="display: block; position: relative; float:left;">
 					<div>${movie.movieName}</div>
 					<div>상영시간 ${movie.runningTime}분</div>
-					<a class="reserveLink" href="/PersonalProject/movie/showinglist">예매하기</a>
+					<a class="reserveLink" href="/PersonalProject/movie/showinglist?movieCode=${movie.movieCode}">예매하기</a>
 				</div>
 			</div>
 		</c:forEach>

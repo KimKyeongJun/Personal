@@ -24,5 +24,9 @@ public interface MemberService {
 	public String findMemberId(MemberVO memberVO);
 	
 	public String readOneMemberIsAdmin(String id);
+	
+	public boolean readOneGuestUser(MemberVO memberVO);
+	
+	public boolean readOneMemberForModify(MemberVO memberVO);
 
 }

@@ -12,6 +12,14 @@
 	type="text/javascript"></script>
 <script type="text/javascript">
 	$().ready(function() {
+		var userSession = "${sessionScope._USER_.name}";
+		
+		if ( userSession == "" ) {
+			$("#movieComment").prop('readonly',true);
+			$("#movieComment").val("영화 후기는 회원만 등록하실 수 있습니다");
+			$("#registBtn").prop("disabled", true);
+		}
+		
 		var isCheck=false;
 		$("input[type=radio][name=grade]").on('click', function() {
 			isCheck = $(this).prop("checked");
@@ -104,75 +112,76 @@ label {
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	
-	<div>
-		<img src="/PersonalProject/img/${movieVO.poster}"/>
-		제목 : ${movieVO.movieName}
-		평점 : ${movieVO.grade}
+	<div style="top:100px; position:relative">
+		<div>
+			<img src="/PersonalProject/img/${movieVO.poster}"/>
+			제목 : ${movieVO.movieName}
+			평점 : ${movieVO.grade}
+		</div>
+		<div>
+			<c:choose>
+				<c:when test="${not empty  movieVO.movieCommentList}">
+					<c:forEach items="${movieVO.movieCommentList}" var="comment">
+						<div>
+							<h5>${comment.memberVO.name}</h5>
+							<div style="padding-left: 10px;">${comment.content}</div>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
+					등록된 후기가 없습니다
+				</c:otherwise>
+			</c:choose>
+		</div>
+		<div>
+			<form id="registForm">
+				<div>
+					<input type="hidden" name="movieCode" value="${movieVO.movieCode}"/>
+				</div>
+				<div>
+					내용<input type="text" id="movieComment" name="content" placeholder="후기를 입력해주세요">
+				</div>
+				<div>
+					<fieldset class="rating">
+						<legend>평점</legend>
+						<input type="radio" id="5star" name="grade" value="5" />
+						<label class="full" for="5star"></label>
+						
+						<input type="radio" id="4halfstar" name="grade" value="4.5" />
+						<label class="half" for="4halfstar"></label>
+						
+						<input type="radio" id="4star" name="grade" value="4" />
+						<label class="full" for="4star"></label>
+						
+						<input type="radio" id="3halfstar" name="grade" value="3.5" />
+						<label class="half" for="3halfstar" ></label>
+						
+						<input type="radio" id="3star" name="grade" value="3" />
+						<label class="full" for="3star"></label>
+						
+						<input type="radio" id="2halfstar" name="grade" value="2.5" />
+						<label class="half" for="2halfstar"></label>
+						
+						<input type="radio" id="2star" name="grade" value="2" />
+						<label class="full" for="2star"></label>
+						
+						<input type="radio" id="1halfstar" name="grade" value="1.5" />
+						<label class="half" for="1halfstar"></label>
+						
+						<input type="radio" id="1star" name="grade" value="1" />
+						<label class="full" for="1star" ></label>
+						
+						<input type="radio" id="halfstar" name="grade" value="0.5" />
+						<label class="half" for="halfstar"></label>
+			  		</fieldset>
+				</div>
+		  		<div>
+			  		<input type="button" id="registBtn" value="등록"/>
+		  		</div>
+		  		
+			</form>
+		</div>
 	</div>
-	<div>
-		<c:choose>
-			<c:when test="${not empty  movieVO.movieCommentList}">
-				<c:forEach items="${movieVO.movieCommentList}" var="comment">
-					<div>
-						<h5>${comment.memberVO.name}</h5>
-						<div style="padding-left: 10px;">${comment.content}</div>
-					</div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				등록된 후기가 없습니다
-			</c:otherwise>
-		</c:choose>
-	</div>
-	<div>
-		<form id="registForm">
-			<div>
-				<input type="hidden" name="movieCode" value="${movieVO.movieCode}"/>
-			</div>
-			<div>
-				내용<input type="text" id="movieComment" name="content" placeholder="후기를 입력해주세요">
-			</div>
-			<div>
-				<fieldset class="rating">
-					<legend>평점</legend>
-					<input type="radio" id="5star" name="grade" value="5" />
-					<label class="full" for="5star" title="핵잼"></label>
-					
-					<input type="radio" id="4halfstar" name="grade" value="4.5" />
-					<label class="half" for="4halfstar" title="존잼"></label>
-					
-					<input type="radio" id="4star" name="grade" value="4" />
-					<label class="full" for="4star" title="꿀잼"></label>
-					
-					<input type="radio" id="3halfstar" name="grade" value="3.5" />
-					<label class="half" for="3halfstar" title="걍잼"></label>
-					
-					<input type="radio" id="3star" name="grade" value="3" />
-					<label class="full" for="3star" title="잼"></label>
-					
-					<input type="radio" id="2halfstar" name="grade" value="2.5" />
-					<label class="half" for="2halfstar" title="노잼"></label>
-					
-					<input type="radio" id="2star" name="grade" value="2" />
-					<label class="full" for="2star" title="걍노잼"></label>
-					
-					<input type="radio" id="1halfstar" name="grade" value="1.5" />
-					<label class="half" for="1halfstar" title="꿀노잼"></label>
-					
-					<input type="radio" id="1star" name="grade" value="1" />
-					<label class="full" for="1star" title="존노잼"></label>
-					
-					<input type="radio" id="halfstar" name="grade" value="0.5" />
-					<label class="half" for="halfstar" title="핵노잼"></label>
-		  		</fieldset>
-			</div>
-	  		<div>
-		  		<input type="button" id="registBtn" value="등록"/>
-	  		</div>
-	  		
-		</form>
-	</div>
-
+	<jsp:include page="/WEB-INF/view/common/footer.jsp" />
 </body>
 </html>

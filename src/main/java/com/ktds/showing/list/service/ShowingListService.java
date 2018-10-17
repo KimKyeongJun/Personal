@@ -8,7 +8,7 @@ public interface ShowingListService {
 	
 	public boolean registOneShowingList(ShowingListVO showingListVO);
 	
-	public List<ShowingListVO> readAllShowingList();
+	public List<ShowingListVO> readAllShowingList(String movieCode);
 
 	public ShowingListVO readOneShowingList(String showingId);
 }

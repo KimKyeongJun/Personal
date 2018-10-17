@@ -50,5 +50,15 @@ public class ReservationServiceImpl implements ReservationService{
 		return result;
 	}
 	
+	@Override
+	public List<ReservationVO> readAllReservationList(MemberVO memberVO) {
+		return this.reservationBiz.readAllReservationList(memberVO);
+	}
+	
+	@Override
+	public ReservationVO readOneReservation(String reservationId) {
+		return this.reservationBiz.readOneReservation(reservationId);
+	}
+	
 
 }

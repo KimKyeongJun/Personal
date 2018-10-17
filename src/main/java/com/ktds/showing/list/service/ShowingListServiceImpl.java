@@ -49,8 +49,8 @@ public class ShowingListServiceImpl implements ShowingListService {
 	}
 	
 	@Override
-	public List<ShowingListVO> readAllShowingList() {
-		return this.showingListBiz.readAllShowingList();
+	public List<ShowingListVO> readAllShowingList(String movieCode) {
+		return this.showingListBiz.readAllShowingList(movieCode);
 	}
 	
 	@Override

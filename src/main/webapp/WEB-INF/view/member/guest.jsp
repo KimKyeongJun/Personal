@@ -41,10 +41,17 @@
 				return;
 			}
 			
-			$("#guestForm").attr({
-				action: "/PersonalProject/member/guest",
-				method: "post"
-			}).submit();
+			$.post("/PersonalProject/member/guest"
+					, $("#guestForm").serialize()
+					, function(response) {
+						if ( response )	{
+							location.href="/PersonalProject";
+						}
+						else {
+							alert("회원에 등록되어 있는 정보입니다. 아이디를 찾아주세요.");
+							location.href="/PersonalProject/member/findid";
+						}
+			});
 		});
 	});
 
@@ -53,28 +60,29 @@
 <body>
 
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-
-	<div>
-		<span><a href="/PersonalProject/member/login">회원 로그인</a></span>
-		<span>비회원 로그인</span>
+	<div style="top:100px; position:relative">
+		<div>
+			<span><a href="/PersonalProject/member/login">회원 로그인</a></span>
+			<span>비회원 로그인</span>
+		</div>
+	
+		<form id="guestForm">
+			<div>
+				<input type="text" id="name" name="name" placeholder="이름" />
+			</div>
+			<div>
+				<input type="text" id="phone" name="phone"
+					placeholder="전화번호" />
+			</div>
+			<div>
+				<input type="email" id="email" name="email"
+					placeholder="이메일" />
+			</div>		
+			<div>
+				<input type="button" id="guestBtn" value="등록" />
+			</div>
+		</form>
 	</div>
-
-	<form id="guestForm">
-		<div>
-			<input type="text" id="name" name="name" placeholder="이름" />
-		</div>
-		<div>
-			<input type="text" id="phone" name="phone"
-				placeholder="전화번호" />
-		</div>
-		<div>
-			<input type="email" id="email" name="email"
-				placeholder="이메일" />
-		</div>		
-		<div>
-			<input type="button" id="guestBtn" value="등록" />
-		</div>
-	</form>
 
 </body>
 </html>

@@ -35,8 +35,8 @@ public class ShowingListDaoImpl extends SqlSessionDaoSupport implements ShowingL
 	}
 	
 	@Override
-	public List<ShowingListVO> selectAllShowingList() {
-		return getSqlSession().selectList("ShowingListDao.selectAllShowingList");
+	public List<ShowingListVO> selectAllShowingList(String movieCode) {
+		return getSqlSession().selectList("ShowingListDao.selectAllShowingList", movieCode);
 	}
 	
 	@Override

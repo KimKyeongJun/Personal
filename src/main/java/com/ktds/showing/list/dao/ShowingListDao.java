@@ -13,7 +13,7 @@ public interface ShowingListDao {
 	
 	public int selectStartDateTimeMovie(ShowingListVO showingListVO);
 	
-	public List<ShowingListVO> selectAllShowingList();
+	public List<ShowingListVO> selectAllShowingList(String movieCode);
 	
 	public ShowingListVO selectOneShowingList(String showingId);
 

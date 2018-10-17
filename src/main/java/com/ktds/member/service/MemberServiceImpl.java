@@ -61,4 +61,14 @@ public class MemberServiceImpl implements MemberService {
 	public String readOneMemberIsAdmin(String id) {
 		return this.memberBiz.readOneMemberIsAdmin(id);
 	}
+	
+	@Override
+	public boolean readOneGuestUser(MemberVO memberVO) {
+		return this.memberBiz.readOneGuestUser(memberVO);
+	}
+	
+	@Override
+	public boolean readOneMemberForModify(MemberVO memberVO) {
+		return this.memberBiz.readOneMemberForModify(memberVO);
+	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
 <script src="/PersonalProject/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$().ready(function() {
@@ -22,91 +23,138 @@
 	});
 </script>
  <style type="text/css">
-  body {
-    padding: 0px;
-    margin: 0px;
-    font-size: 12pt;
-  }
+ html,body{
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+}
+#container {
+	
+}
+
+#navibar{
+	position: absolute;
+	height: 50px;
+	background-color: #2056ac;
+	width: 100%;
+	top: 0;
+	z-index: 99999;
+}		
+
+#navibar>ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: 1200px;
+	margin: 0 auto;
+}
+
+#navibar>ul>li{
+	float: left;
+	width: 150px;
+	height: 50px;
+}
+
+#navibar>ul>li a{
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+	font: bold 14px/50px "맑은고딕",verdana;
+	transition: all .4s;
+}
+
+#navibar>ul>li:hover>a{
+	color: #001ab7;
+	background-color: #FFFFFF;
+}
+
+.smenu{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background-color: #3a3a3a;	
+	height: 0;
+	overflow: hidden;
+	transition: height .4s ease-out;
+}
+
+
+
+#navibar>ul>li:nth-child(2):hover>.smenu{
+	height: 150px;
+}
+
+#navibar>ul>li:nth-child(3):hover>.smenu{
+	height: 100px;
+}
+#navibar>ul>li:nth-child(4):hover>.smenu{
+	height: 100px;
+}
+
+#navibar>ul>li:nth-child(6):hover>.smenu{
+	height: 100px;
+}
+
+.smenu>li:hover>a{
+	color: #3A3939 !important;
+	background-color: #CCC;
+}
   
-  nav {
-    background-color: #2056ac;
-    padding: 25px;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  nav ul {
-    padding: 0px;
-    margin: 0px;
-    
-  }
-
-  nav ul > li {
-    display: inline-block;
-    margin-left: 30px;
-    color: #FFFFFF;
-  }
-  .subMenuList {
-  	display: line-block;
-  }
-
-  nav ul > li:first-child {
-    margin-left: 0px;
-  }
   
-  nav ul > .leftMenu {
-  	text-align: left;
-  }
-  
-  .rightMenu {
-  	text-align: right;
-  }
-
-  li > .menuLink, .menuLink:visited {
-    text-decoration: none;
-    color: #FFFFFF;
-  }
-
-  li > .menuLink:active {
-    text-decoration: underline;
-  }
-
-  li > .menuLink:hover {
-    color: #999;
-  }
 </style>
-<nav>
-	<ul>
-		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/">홈</a></li>
-		<li id="movieMenu" class="leftMenu">
-			<div id="parentMenu">영화</div>
-			<div class="subMenu" style="display: none;">
-				<div class="subMenuList">
-					영화 예매
-				</div>			
-				<div class="subMenuList">
-					<a href="/PersonalProject/movie/showinglist">상영 중 영화</a>
-				</div>			
-				<div class="subMenuList">
-					영화 정보
-				</div>			
-			</div>
-		</li>		
-		<li class="leftMenu"><a class="menuLink" href="/PersonalProject/notice/notice">고객센터</a></li>
-		<c:choose>
-			<c:when test="${!empty sessionScope._USER_}">
-				<li>${sessionScope._USER_.name}님</li>
-				<li>마이 페이지</li>
-				<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
-			</c:when>
-			<c:when test="${!empty sessionScope._GUEST_}">				
-				<li>${sessionScope._GUEST_.name}님</li>
-				<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
-			</c:when>			
-			<c:otherwise>
-				<li><a class="menuLink" href="/PersonalProject/member/login">로그인</a></li>
-				<li><a class="menuLink" href="/PersonalProject/member/regist">회원가입</a></li>
-			</c:otherwise>
-		</c:choose>
-	</ul>
+
+<nav id="navibar">
+		<ul>
+			<li><a href="/PersonalProject/">홈</a></li>
+			<li><a>영화</a>
+				<ul class="smenu">
+					<li><a href="#">영화 정보</a></li>
+					<li><a href="/PersonalProject/movie/showinglist">상영 중 영화</a></li>
+					<s:authorize access="hasRole('ROLE_ADMIN')" var="isAdmin" />
+					<c:choose>
+						<c:when test="${isAdmin}">
+							<li><a href="/PersonalProject/movie/movie">영화 등록</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="#">영화 예매</a></li>
+						</c:otherwise>					
+					</c:choose>
+				</ul>
+			
+			
+			</li>
+			<li><a href="/PersonalProject/notice/notice">고객센터</a>
+				<ul class="smenu">
+					<li><a href="/PersonalProject/notice/notice">공지사항</a></li>
+					<li><a href="/PersonalProject/qna/qna">QnA</a></li>
+				</ul>			
+			</li>
+			<c:choose>
+				<c:when test="${not empty sessionScope._USER_}">
+					<li><a>마이 페이지</a>
+						<ul class="smenu">
+							<li><a href="/PersonalProject/reserve/inquiry">예매 조회</a></li>
+							<li><a href="/PersonalProject/member/passwordcheck">회원정보수정</a></li>
+						</ul>
+					</li>
+					<li style="width:250px;"><a>${sessionScope._USER_.name}님 (보유 마일리지: ${sessionScope._USER_.mileage}점)</a>
+					</li>
+					<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
+				</c:when>
+				<c:when test="${!empty sessionScope._GUEST_}">				
+					<li><a href="/PersonalProject/reserve/inquiry">예매 조회</a></li>
+					<li><a>${sessionScope._GUEST_.name}님</a></li>
+					<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a class="menuLink" href="/PersonalProject/member/login">로그인</a></li>
+					<li><a class="menuLink" href="/PersonalProject/member/regist">회원가입</a></li>
+				</c:otherwise>				
+			</c:choose>
+		</ul>	
 </nav>
+

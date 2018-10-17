@@ -26,7 +26,7 @@
 
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 
-	<div>
+	<div style="top:100px; position:relative">
 		<form id="registForm">
 			<div>
 				<input type="text" id="subject" name="subject" placeholder="제목" />

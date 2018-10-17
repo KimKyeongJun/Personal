@@ -9,7 +9,8 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="text-align: center;">
+	
+	<div style="text-align: center; top:100px; position:relative;">
 		<div>
 			<span>영화제목</span>
 			<span>상영날짜</span>
@@ -24,6 +25,7 @@
 			<a href="#" onclick="window.open('/PersonalProject/reserve/showingseat?movieCode=${showing.movieVO.movieCode}&showingId=${showing.showingId}&showingNum=${showing.showingNum}', '_blank', 'width=800 height=600')">예매하기</a>
 		</c:forEach>
 	</div>
-
+	
+	<jsp:include page="/WEB-INF/view/common/footer.jsp" />
 </body>
 </html>

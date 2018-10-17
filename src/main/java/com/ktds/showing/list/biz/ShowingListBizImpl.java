@@ -44,8 +44,8 @@ public class ShowingListBizImpl implements ShowingListBiz {
 	}
 	
 	@Override
-	public List<ShowingListVO> readAllShowingList() {
-		return this.showingListDao.selectAllShowingList();
+	public List<ShowingListVO> readAllShowingList(String movieCode) {
+		return this.showingListDao.selectAllShowingList(movieCode);
 	}
 	
 	@Override

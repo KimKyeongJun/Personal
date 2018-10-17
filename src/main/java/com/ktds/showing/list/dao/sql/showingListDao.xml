@@ -35,7 +35,8 @@ VALUES	(
 		<result property="runningTime" column="RUNNING_TIME"/>
 	</association>
 </resultMap>
-<select	id="selectAllShowingList" resultMap="showingListMap">
+
+<select	id="selectAllShowingList" parameterType="String" resultMap="showingListMap">
 SELECT	S.SHOWING_ID
 		, S.MOVIE_CODE	S_MOVIE_CODE
 		, S.SHOWING_NUM
@@ -47,6 +48,9 @@ SELECT	S.SHOWING_ID
 FROM	SHOWINGLIST S
 		, MOVIE M
 WHERE	S.MOVIE_CODE = M.MOVIE_CODE
+<if test="_parameter != null">
+AND		S.MOVIE_CODE = #{_parameter}
+</if>
 ORDER	BY	SHOWING_NUM
 </select>
 

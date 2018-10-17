@@ -57,6 +57,23 @@ public class MemberBizImpl implements MemberBiz {
 			return false;
 		}
 	}
+	
+	@Override
+	public boolean readOneMemberForModify(MemberVO memberVO) {
+		String salt = memberDao.selectOneSaltById(memberVO.getId());
+		if ( salt == null ) {
+			return false;
+		}
+		String password = this.getHashedPassword(salt, memberVO.getPassword());
+		memberVO.setPassword(password);
+		
+		MemberVO modifyMemberVO = memberDao.selectOneMember(memberVO);
+		if ( modifyMemberVO != null ) {
+			return true;
+		}
+		
+		return false;
+	}
 
 	@Override
 	public boolean readOneMember(MemberVO memberVO, HttpSession session) {
@@ -117,5 +134,10 @@ public class MemberBizImpl implements MemberBiz {
 		param.put("id", id);
 		param.put("mileage",mileage);
 		return this.memberDao.updateOneMemberById(param) > 0;
+	}
+	
+	@Override
+	public boolean readOneGuestUser(MemberVO memberVO) {
+		return this.memberDao.selectOneGuestUser(memberVO) == 0 ;
 	}
 }

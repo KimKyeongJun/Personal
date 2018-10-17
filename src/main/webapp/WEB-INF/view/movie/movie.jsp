@@ -23,34 +23,36 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<form id="registForm">
-		<div>
-			<p>영화</p>
-			<select	name="movieCode">
-				<c:forEach items="${movieList}" var="movie">
-						<option value="${movie.movieCode}">${movie.movieName}</option>
-				</c:forEach>		
-			</select>
-		</div>
-		<div>
-			<p>상영관</p>
-			<select	name="showingNum">
-				<c:forEach items="${showingList}" var="showing">
-						<option value="${showing}">${showing}</option>
-				</c:forEach>		
-			</select>
-		</div>
-		<div>
-			<p>상영날짜</p>
-			<input type="datetime-local" name="startDate" min="2018-10-11T00:00 "/>
-		</div>
-		<div>
-			<input type="button" id="registBtn" value="등록" />
-		</div>
-	</form>
+	<div style="top:100px; position:relative; ">
+	
+		<form id="registForm">
+			<div>
+				<p>영화</p>
+				<select	name="movieCode">
+					<c:forEach items="${movieList}" var="movie">
+							<option value="${movie.movieCode}">${movie.movieName}</option>
+					</c:forEach>		
+				</select>
+			</div>
+			<div>
+				<p>상영관</p>
+				<select	name="showingNum">
+					<c:forEach items="${showingList}" var="showing">
+							<option value="${showing}">${showing}</option>
+					</c:forEach>		
+				</select>
+			</div>
+			<div>
+				<p>상영날짜</p>
+				<input type="datetime-local" name="startDate" min="2018-10-11T00:00 "/>
+			</div>
+			<div>
+				<input type="button" id="registBtn" value="등록" />
+			</div>
+		</form>
+	
+	</div>
 	
 	
-	
-	<a href="/PersonalProject/showingseat?showingNum=1"> 상영관 정보 </a>
 </body>
 </html>

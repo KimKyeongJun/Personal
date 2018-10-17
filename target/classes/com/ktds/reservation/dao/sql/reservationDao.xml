@@ -48,5 +48,119 @@ SELECT	SEAT_NUMBER
 FROM    RESERVATION
 WHERE   SHOWING_ID = #{showingId}
 </select>
+
+<resultMap type="ReservationVO" id="reservationMap">
+	<id property="reservationId" column="RESERVATION_ID" />
+	<result property="id" column="R_ID"/>
+	<result property="reservationDate" column="RESERVATION_DATE"/>
+	<result property="showingId" column="R_SHOWING_ID"/>
+	<result property="seatNumber" column="SEAT_NUMBER"/>
+	<result property="showingNum" column="R_SHOWING_NUM"/>
+	<result property="phone" column="PHONE"/>
+	
+	<association property="memberVO" javaType="MemberVO">
+		<id property="id" column="M_ID"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="email" column="EMAIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="mileage" column="MILEAGE"/>
+		<result property="salt" column="SALT"/>
+		<result property="loginFailCount" column="LOGIN_FAIL_COUNT"/>
+		<result property="latestLogin" column="LATEST_LOGIN"/>
+		<result property="isAdmin" column="IS_ADMIN"/>
+		<result property="name" column="NAME"/>
+	</association>
+	
+	<association property="showingListVO" javaType="ShowingListVO">
+		<id property="showingId" column="S_SHOWING_ID" />
+		<result property="movieCode" column="S_MOVIE_CODE"/>
+		<result property="showingNum" column="S_SHOWING_NUM"/>
+		<result property="startDate" column="START_TIME"/>
+		<result property="endDate" column="END_TIME"/>
+	</association>
+	
+	<association property="movieVO" javaType="MovieVO">
+		<id property="movieCode" column="MO_MOVIE_CODE" />
+		<result property="movieName" column="MOVIE_NAME"/>
+		<result property="runningTime" column="RUNNING_TIME"/>
+		<result property="poster" column="POSTER"/>
+	</association>
+</resultMap>
+
+<select id="selectAllReservationList" parameterType="MemberVO" resultMap="reservationMap">
+SELECT  R.RESERVATION_ID
+		, R.ID	R_ID
+		, R.RESERVATION_DATE
+		, R.SHOWING_ID	R_SHOWING_ID
+		, R.SEAT_NUMBER
+		, R.SHOWING_NUM	R_SHOWING_NUM
+		, R.NAME
+		, R.PHONE
+		, S.SHOWING_ID	S_SHOWING_ID
+		, S.MOVIE_CODE	S_MOVIE_CODE
+		, S.SHOWING_NUM	S_SHOWING_NUM
+		, S.START_TIME
+		, S.END_TIME		
+		, MO.MOVIE_CODE	MO_MOVIE_CODE
+		, MO.MOVIE_NAME
+		, MO.RUNNING_TIME
+		, MO.POSTER
+<if test = "id != null">
+		, M.ID	M_ID
+		, M.PASSWORD
+		, M.EMAIL
+		, M.PHONE
+		, M.MILEAGE
+		, M.SALT
+		, M.LOGIN_FAIL_COUNT
+		, M.LATEST_LOGIN
+		, M.IS_ADMIN
+		, M.NAME
+</if>
+FROM    RESERVATION R
+        , SHOWINGLIST S
+        , MOVIE MO
+<if test = "id !=null">
+        , MEMBERS M
+</if>
+WHERE   MO.MOVIE_CODE = S.MOVIE_CODE
+AND     R.SHOWING_ID = S.SHOWING_ID
+<choose>
+	<when test ="id != null">
+		AND     R.ID = M.ID
+		AND     R.ID = #{id}
+	</when>
+	<otherwise>
+		AND		R.NAME = #{name}
+		AND		R.PHONE = #{phone}
+	</otherwise>
+</choose>
+</select>
+
+<select	id="selectOneReservation" parameterType="string" resultMap="reservationMap">
+SELECT  R.RESERVATION_ID
+		, R.ID	R_ID
+		, R.RESERVATION_DATE
+		, R.SHOWING_ID	R_SHOWING_ID
+		, R.SEAT_NUMBER
+		, R.SHOWING_NUM	R_SHOWING_NUM
+		, R.NAME
+		, R.PHONE
+		, S.SHOWING_ID	S_SHOWING_ID
+		, S.MOVIE_CODE	S_MOVIE_CODE
+		, S.SHOWING_NUM	S_SHOWING_NUM
+		, S.START_TIME
+		, S.END_TIME		
+		, MO.MOVIE_CODE	MO_MOVIE_CODE
+		, MO.MOVIE_NAME
+		, MO.RUNNING_TIME
+		, MO.POSTER
+FROM    RESERVATION R
+        , SHOWINGLIST S
+        , MOVIE MO
+WHERE   MO.MOVIE_CODE = S.MOVIE_CODE
+AND     R.SHOWING_ID = S.SHOWING_ID
+AND		R.RESERVATION_ID = #{reservationId}
+</select>
 </mapper>
   

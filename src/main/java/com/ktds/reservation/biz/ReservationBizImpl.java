@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ktds.member.vo.MemberVO;
 import com.ktds.reservation.dao.ReservationDao;
 import com.ktds.reservation.vo.ReservationVO;
 
@@ -27,6 +28,16 @@ public class ReservationBizImpl implements ReservationBiz {
 	@Override
 	public List<String> readReservationSeatList(String showingId) {
 		return this.reservationDao.selectReservationSeatList(showingId);
+	}
+	
+	@Override
+	public List<ReservationVO> readAllReservationList(MemberVO memberVO) {
+		return this.reservationDao.selectAllReservationList(memberVO);
+	}
+	
+	@Override
+	public ReservationVO readOneReservation(String reservationId) {
+		return this.reservationDao.selectOneReservation(reservationId);
 	}
 
 }

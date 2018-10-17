@@ -124,31 +124,32 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-
-	<form id="registForm">
-		<div>
-			<input type="text" id="fid" name="id" placeholder="아이디" />
-		</div>
-		<div>
-			<input type="text" id="fname" name="name" placeholder="이름" />
-		</div>
-		<div>
-			<input type="password" id="fpassword" name="password"
-				placeholder="비밀번호" />
-		</div>
-		<div>
-			<input type="password" id="fpasswordConfirm" placeholder="비밀번호 확인" />
-		</div>
-		<div>
-			<input type="text" id="fphone" name="phone" placeholder="휴대폰 번호 ( -없이 입력 )" />
-		</div>
-		<div>
-			<input type="email" id="femail" name="email" placeholder="이메일" />
-		</div>
-		<div>
-			<input type="button" id="registBtn" value="가입하기" />
-		</div>
-	</form>
+	<div style="top:100px; position:relative">
+		<form id="registForm">
+			<div>
+				<input type="text" id="fid" name="id" placeholder="아이디" />
+			</div>
+			<div>
+				<input type="text" id="fname" name="name" placeholder="이름" />
+			</div>
+			<div>
+				<input type="password" id="fpassword" name="password"
+					placeholder="비밀번호" />
+			</div>
+			<div>
+				<input type="password" id="fpasswordConfirm" placeholder="비밀번호 확인" />
+			</div>
+			<div>
+				<input type="text" id="fphone" name="phone" placeholder="휴대폰 번호 ( -없이 입력 )" />
+			</div>
+			<div>
+				<input type="email" id="femail" name="email" placeholder="이메일" />
+			</div>
+			<div>
+				<input type="button" id="registBtn" value="가입하기" />
+			</div>
+		</form>
+	</div>
 
 </body>
 </html>

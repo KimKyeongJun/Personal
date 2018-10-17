@@ -3,6 +3,7 @@ package com.ktds.reservation.vo;
 import java.util.List;
 
 import com.ktds.member.vo.MemberVO;
+import com.ktds.movie.vo.MovieVO;
 import com.ktds.showing.list.vo.ShowingListVO;
 import com.ktds.showing.seat.vo.ShowingSeatVO;
 
@@ -23,6 +24,7 @@ public class ReservationVO {
 	private MemberVO memberVO;
 	private ShowingListVO showingListVO;
 	private ShowingSeatVO showingSeatVO;
+	private MovieVO movieVO;
 
 	public String getReservationId() {
 		return reservationId;
@@ -134,6 +136,14 @@ public class ReservationVO {
 
 	public void setMileage(String mileage) {
 		this.mileage = mileage;
+	}
+
+	public MovieVO getMovieVO() {
+		return movieVO;
+	}
+
+	public void setMovieVO(MovieVO movieVO) {
+		this.movieVO = movieVO;
 	}
 
 }

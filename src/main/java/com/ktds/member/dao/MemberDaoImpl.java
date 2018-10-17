@@ -66,5 +66,10 @@ public class MemberDaoImpl extends SqlSessionDaoSupport implements MemberDao {
 	public int updateOneMemberById(Map<String, Object> param) {
 		return getSqlSession().insert("MemberDao.updateOneMemberById", param);
 	}
+	
+	@Override
+	public int selectOneGuestUser(MemberVO memberVO) {
+		return getSqlSession().selectOne("MemberDao.selectOneGuestUser", memberVO);
+	}
 
 }

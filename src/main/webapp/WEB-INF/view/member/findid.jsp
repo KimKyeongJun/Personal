@@ -56,22 +56,26 @@
 <body>
 
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
+	
+	<div style="position: relative; top: 100px; text-align: center;">
+	
+		<form id="idSearchForm">
+			<div>
+				<input type="text" id="name" name="name" placeholder="이름" />
+			</div>
+			<div>
+				<input type="email" id="email" name="email" placeholder="이메일" />
+			</div>
+			<div>
+				<input type="text" id="phone" name="phone"
+					placeholder="전화번호" />
+			</div>
+			<div>
+				<input type="button" id="searchBtn" value="찾기" />
+			</div>
+		</form>
 
-	<form id="idSearchForm">
-		<div>
-			<input type="text" id="name" name="name" placeholder="이름" />
-		</div>
-		<div>
-			<input type="email" id="email" name="email" placeholder="이메일" />
-		</div>
-		<div>
-			<input type="text" id="phone" name="phone"
-				placeholder="전화번호" />
-		</div>
-		<div>
-			<input type="button" id="searchBtn" value="찾기" />
-		</div>
-	</form>
+	</div>
 
 </body>
 </html>

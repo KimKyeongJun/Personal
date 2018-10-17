@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ktds.common.session.Session;
@@ -153,15 +154,37 @@ public class MemberController {
 	}
 	
 	@PostMapping("/member/guest")
-	public String doGuestLoginAction( @ModelAttribute MemberVO memberVO, HttpSession session ) {
-		session.setAttribute(Session.GUEST, memberVO);
-		return "redirect:/";
+	@ResponseBody
+	public boolean doGuestLoginAction( @ModelAttribute MemberVO memberVO, HttpSession session ) {
+		boolean isExistUser = this.memberService.readOneGuestUser(memberVO);
+		
+		if ( isExistUser ) {
+			session.setAttribute(Session.GUEST, memberVO);			
+		}
+		return isExistUser;
 	}
 	
 	@GetMapping("/member/logout")
 	public String doMemberLogout(HttpSession session) {
 		session.invalidate();
 		return "redirect:/";
+	}
+	
+	@GetMapping("/member/passwordcheck")
+	public String viewPasswordCheckPage() {
+		return "member/passwordcheck";
+	}
+	
+	@PostMapping("/member/passwordcheck")
+	@ResponseBody
+	public boolean doPasswordCheck(@ModelAttribute MemberVO memberVO, @SessionAttribute(Session.USER) MemberVO loginMemberVO) {
+		memberVO.setId(loginMemberVO.getId());		
+		return this.memberService.readOneMemberForModify(memberVO);
+	}
+	
+	@GetMapping("/member/modify")
+	public String viewMemberModifyPage() {
+		return "member/modify";
 	}
 
 }

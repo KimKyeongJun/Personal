@@ -100,5 +100,13 @@ SET		MILEAGE = MILEAGE - #{mileage}
 WHERE	ID = #{id}
 </update>
 
+<select id="selectOneGuestUser" parameterType="MemberVO" resultType="int">
+SELECT	COUNT(1)
+FROM	MEMBERS
+WHERE	NAME = #{name}
+AND		EMAIL = #{email}
+AND		PHONE = #{phone}
+</select>
+
 </mapper>
   

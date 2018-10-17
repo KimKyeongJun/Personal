@@ -28,7 +28,7 @@
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 
-	<div>
+	<div style="top:100px; position:relative">
 		<form id="registForm">
 			<div>
 				<input type="text" id="writer" name="writer" placeholder="글쓴이" />

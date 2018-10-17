@@ -38,7 +38,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	
+	<div style="top:100px; position:relative">	
 		<div style="text-align: center;">
 			<span><a href="/PersonalProject/notice/notice">공지사항</a></span> <span>QnA</span>
 		</div>
@@ -83,5 +83,6 @@
 		<div>
 			<a href="/PersonalProject/qna/regist">글 작성</a>
 		</div>
+	</div>
 </body>
 </html>

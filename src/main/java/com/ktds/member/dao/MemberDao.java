@@ -25,5 +25,7 @@ public interface MemberDao {
 	public String selectOneMemberIsAdmin(String id);
 	
 	public int updateOneMemberById(Map<String, Object> param);
+	
+	public int selectOneGuestUser(MemberVO memberVO);
 
 }

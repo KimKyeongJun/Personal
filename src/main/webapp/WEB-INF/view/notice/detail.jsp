@@ -8,10 +8,12 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="text-align: center;">	
-		<h1>${notice.subject}</h1>
-		<div><span>${notice.memberVO.name}</span><span>${notice.crtDt}</span></div>
-		<div>${notice.content}</div>
+	<div style="top:100px; position:relative">
+		<div style="text-align: center; ">	
+			<h1>${notice.subject}</h1>
+			<div><span>${notice.memberVO.name}</span><span>${notice.crtDt}</span></div>
+			<div>${notice.content}</div>
+		</div>
 	</div>
 </body>
 </html>
