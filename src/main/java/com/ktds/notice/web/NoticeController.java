@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +31,7 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
-	@GetMapping("/notice/notice")
+	@RequestMapping("/notice/notice")
 	public ModelAndView viewNoticePage(@ModelAttribute NoticeSearchVO noticeSearchVO, HttpServletRequest request, HttpSession session) {
 		ModelAndView view = new ModelAndView("notice/notice");
 		if ( noticeSearchVO.getSearchKeyword() == null ) {

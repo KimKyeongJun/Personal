@@ -56,33 +56,69 @@
 	});
 
 </script>
+<style>
+.formSpan {
+	display:inline-block; 
+	width: 65px;
+	font-weight: bold;
+}
+
+input {
+	vertical-align: middle;
+	width: 450px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 15px;
+	border-radius:10px;
+}
+
+.button {
+	width: 150px;
+	background-color:#2056ac; 
+	color: #FFF; 
+	border:none; 
+	border-radius:10px;
+	font-size: 15px;
+    margin: 4px;
+}
+a {
+	text-decoration: none;	
+}
+
+.loginDiv {
+	padding-bottom: 10px;
+}
+</style>
 </head>
 <body>
 
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="top:100px; position:relative">
-		<div>
-			<span><a href="/PersonalProject/member/login">회원 로그인</a></span>
+	<div style="position:relative; top: 20%; left: 30%; width:525px; text-align:center;">
+		<div style="text-align:center; padding-bottom: 15px;">
+			<span><a href="/PersonalProject/member/login">회원 로그인 </a></span> | 
 			<span>비회원 로그인</span>
 		</div>
 	
 		<form id="guestForm">
-			<div>
+			<div class="loginDiv">
+				<span class="formSpan">이름</span>
 				<input type="text" id="name" name="name" placeholder="이름" />
 			</div>
-			<div>
+			<div class="loginDiv">
+				<span class="formSpan">전화번호</span>
 				<input type="text" id="phone" name="phone"
 					placeholder="전화번호" />
 			</div>
-			<div>
+			<div class="loginDiv">
+				<span class="formSpan">이메일</span>
 				<input type="email" id="email" name="email"
 					placeholder="이메일" />
 			</div>		
-			<div>
-				<input type="button" id="guestBtn" value="등록" />
+			<div style="text-align:right;">
+				<input class="button" type="button" id="guestBtn" value="등록" />
 			</div>
 		</form>
 	</div>
-
+	<jsp:include page="/WEB-INF/view/common/footer.jsp" />
 </body>
 </html>

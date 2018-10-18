@@ -24,33 +24,85 @@
 		});
 	});
 </script>
+<style>
+.formSpan {
+	width: 70px;
+	font-weight: bold;
+	display: inline-block;
+}
+
+input {
+	vertical-align: middle;
+	width: 450px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 15px;	
+	border-radius:10px;
+}
+
+textarea {
+	vertical-align: middle;
+	width: 450px;
+	height: 350px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 15px;	
+	border-radius:10px;
+	resize: none;
+}
+
+.button {
+	width: 150px;
+	background-color:#2056ac; 
+	color: #FFF; 
+	border:none; 
+	border-radius:10px;
+	font-size: 15px;
+    margin: 4px;
+}
+
+.formSpan a {
+	text-decoration: none;	
+}
+
+.formDiv {
+	padding-bottom: 10px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 
-	<div style="top:100px; position:relative">
+	<div style="position:relative; top: 10%; left: 30%; width:550px; text-align:center;">
 		<form id="registForm">
-			<div>
-				<input type="text" id="writer" name="writer" placeholder="글쓴이" />
+			<div class="formDiv">
+				<span class="formSpan">작성자</span>
+				<input type="text" id="writer" name="writer" placeholder="작성자" />
 			</div>
-			<div>
+			<div class="formDiv">
+				<span class="formSpan">비밀번호</span>
 				<input type="password" id="password" name="password" placeholder="비밀번호" />
 			</div>
-			<div>
+			<div class="formDiv">
+				<span class="formSpan">제목</span>
 				<input type="text" id="subject" name="subject" placeholder="제목" />
 			</div>
-			<div>
+			<div class="formDiv">
+				<span class="formSpan">내용</span>
 				<textarea id="content" name="content" placeholder="내용"></textarea>
 			</div>
-			<div>
-				<span><input type="radio" name="isVisible" value="Y" checked="checked" >공개</span>
-				<span><input type="radio" name="isVisible" value="N">비공개</span>
+			<div class="formDiv">
+				<span class="formSpan">공개여부</span>
+				<input style="width: 30px;" type="radio" name="isVisible" value="Y" checked="checked" >공개
+				<input style="width: 30px;" class="notInput" type="radio" name="isVisible" value="N">비공개
 			</div>		
-			<div>
-				<input type="button" id="registBtn" value="등록" />
+			<div class="formDiv" style="text-align:right; padding-right:18px;">
+				<input type="button" id="registBtn" class="button" value="등록" />
 			</div>				
 		</form>
 	</div>
+	
+	<jsp:include page="/WEB-INF/view/common/footer.jsp" />
 
 </body>
 </html>

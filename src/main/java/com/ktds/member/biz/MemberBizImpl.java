@@ -140,4 +140,16 @@ public class MemberBizImpl implements MemberBiz {
 	public boolean readOneGuestUser(MemberVO memberVO) {
 		return this.memberDao.selectOneGuestUser(memberVO) == 0 ;
 	}
+	
+	@Override
+	public boolean updateOneMember(MemberVO memberVO) {
+		if ( memberVO.getPassword() != null && memberVO.getPassword() != "") {
+			String salt = SHA256Util.generateSalt();
+			String password = this.getHashedPassword(salt, memberVO.getPassword());
+
+			memberVO.setPassword(password);
+			memberVO.setSalt(salt);
+		}
+		return this.memberDao.updateOneMember(memberVO) > 0;
+	}
 }

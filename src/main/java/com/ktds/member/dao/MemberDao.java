@@ -27,5 +27,7 @@ public interface MemberDao {
 	public int updateOneMemberById(Map<String, Object> param);
 	
 	public int selectOneGuestUser(MemberVO memberVO);
+	
+	public int updateOneMember(MemberVO memberVO);
 
 }

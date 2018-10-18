@@ -71,4 +71,9 @@ public class MemberServiceImpl implements MemberService {
 	public boolean readOneMemberForModify(MemberVO memberVO) {
 		return this.memberBiz.readOneMemberForModify(memberVO);
 	}
+	
+	@Override
+	public boolean updateOneMember(MemberVO memberVO) {
+		return this.memberBiz.updateOneMember(memberVO);
+	}
 }

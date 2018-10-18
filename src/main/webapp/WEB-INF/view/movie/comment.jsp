@@ -31,6 +31,12 @@
 				$("#movieComment").focus();
 				return;
 			}
+			
+			if ( $("#movieComment").val().length <10 ) {
+				alert("후기는 10자 이상 입력하셔야 합니다");
+				$("#movieComment").focus();
+				return;
+			}
 			if ( isCheck == false ) {
 				alert("평점을 선택해주세요!");
 				return;
@@ -51,7 +57,7 @@ fieldset,
 label {
   margin: 0;
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .rating {
@@ -112,7 +118,7 @@ label {
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="top:100px; position:relative">
+	<div style="position:relative; top: 10%; left: 30%; width:900px;">
 		<div>
 			<img src="/PersonalProject/img/${movieVO.poster}"/>
 			제목 : ${movieVO.movieName}
@@ -122,8 +128,8 @@ label {
 			<c:choose>
 				<c:when test="${not empty  movieVO.movieCommentList}">
 					<c:forEach items="${movieVO.movieCommentList}" var="comment">
-						<div>
-							<h5>${comment.memberVO.name}</h5>
+						<div style="padding-bottom: 5px;">
+							<div style="font-size: 15px; font-weight: bold;">${comment.memberVO.name}</div>
 							<div style="padding-left: 10px;">${comment.content}</div>
 						</div>
 					</c:forEach>
@@ -139,11 +145,12 @@ label {
 					<input type="hidden" name="movieCode" value="${movieVO.movieCode}"/>
 				</div>
 				<div>
-					내용<input type="text" id="movieComment" name="content" placeholder="후기를 입력해주세요">
+					<span style="font-weight:bold; padding-right:10px;">내용</span>
+					<input style="width: 250px;"type="text" id="movieComment" name="content" placeholder="후기를 입력해주세요 (10자 이상 입력)">
 				</div>
 				<div>
 					<fieldset class="rating">
-						<legend>평점</legend>
+						<legend style="font-weight:bold;">평점</legend>
 						<input type="radio" id="5star" name="grade" value="5" />
 						<label class="full" for="5star"></label>
 						
@@ -174,12 +181,12 @@ label {
 						<input type="radio" id="halfstar" name="grade" value="0.5" />
 						<label class="half" for="halfstar"></label>
 			  		</fieldset>
-				</div>
-		  		<div>
+			  		<div style="clear:both;">
 			  		<input type="button" id="registBtn" value="등록"/>
 		  		</div>
-		  		
+				</div>		  		
 			</form>
+			
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/view/common/footer.jsp" />

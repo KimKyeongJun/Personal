@@ -20,18 +20,33 @@
 		
 	});
 </script>
+<style>
+.button {
+	width: 80px;
+	background-color:#2056ac; 
+	color: #FFF; 
+	border:none; 
+	border-radius:5px;
+	font-size: 15px;
+    margin: 4px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 	
-	<div id="container" style="top:100px; position:relative; ">
+	<div id="container" style="position:relative; top: 35%; left: 30%; width:900px;">
 		<c:forEach items="${movieList}" var="movie">
 			<div style="position: relative;">
-				<div style="position: relative; float:left;"><a href="/PersonalProject/movie/comment/${movie.movieCode}"><img src="/PersonalProject/img/${movie.poster}"></a></div>
-				<div style="display: block; position: relative; float:left;">
-					<div>${movie.movieName}</div>
-					<div>상영시간 ${movie.runningTime}분</div>
-					<a class="reserveLink" href="/PersonalProject/movie/showinglist?movieCode=${movie.movieCode}">예매하기</a>
+				<div style="position: relative; float:left;  padding-left: 25px;">
+					<a href="/PersonalProject/movie/comment/${movie.movieCode}">
+						<img src="/PersonalProject/img/${movie.poster}">
+					</a>
+				</div>
+				<div style="display: block; position: relative; float:left; padding-left: 15px;">
+					<div style="padding-bottom:15px">${movie.movieName}</div>
+					<div style="padding-bottom:15px">상영시간 ${movie.runningTime}분</div>
+					<button class="button" onclick="window.location.href='/PersonalProject/movie/showinglist?movieCode=${movie.movieCode}'">예매하기</button>
 				</div>
 			</div>
 		</c:forEach>

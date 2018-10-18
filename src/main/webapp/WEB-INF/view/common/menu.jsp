@@ -35,25 +35,26 @@
 
 #navibar{
 	position: absolute;
-	height: 50px;
+	height: 60px;
 	background-color: #2056ac;
 	width: 100%;
 	top: 0;
 	z-index: 99999;
+	text-align:center;
 }		
 
 #navibar>ul{
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	width: 1200px;
+	width: 1000px;
 	margin: 0 auto;
 }
 
 #navibar>ul>li{
 	float: left;
 	width: 150px;
-	height: 50px;
+	height: 60px;
 }
 
 #navibar>ul>li a{
@@ -63,7 +64,7 @@
 	color: #fff;
 	text-decoration: none;
 	text-align: center;
-	font: bold 14px/50px "맑은고딕",verdana;
+	font: bold 15px/50px "맑은고딕",verdana;
 	transition: all .4s;
 }
 

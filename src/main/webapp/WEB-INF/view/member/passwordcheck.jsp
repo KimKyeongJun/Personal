@@ -31,20 +31,54 @@
 		});
 	});
 </script>
+<style>
+.formSpan {
+	display:inline-block; 
+	width: 65px;
+	font-weight: bold;
+}
+
+input {
+	vertical-align: middle;
+	width: 450px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 15px;
+	border-radius:10px;
+}
+
+.button {
+	width: 150px;
+	background-color:#2056ac; 
+	color: #FFF; 
+	border:none; 
+	border-radius:10px;
+	font-size: 15px;
+    margin: 4px;
+}
+
+.formDiv {
+	padding-bottom: 10px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 	
-	<div style="position: relative; top: 100px; text-align: center;">
+	<div style="position:relative; top: 20%; left: 30%; width:525px; text-align:center;">
 		<form id="pwdForm">
-			<div>
+			<h1 style="text-align: center;">비밀번호 확인</h1>
+			<div class="formDiv">
+				<span class="formSpan"></span>
 				<input id="pwd" type="password" name="password" placeholder="비밀번호 입력"/>
 			</div>
-			<div>
-				<input type="button" id="pwdBtn" value="확인" />
+			<div class="formDiv" style="text-align: right;">
+				<input class="button" type="button" id="pwdBtn" value="확인" />
 			</div>
 		</form>
 	</div>
+	
+	<jsp:include page="/WEB-INF/view/common/footer.jsp" />
 
 </body>
 </html>

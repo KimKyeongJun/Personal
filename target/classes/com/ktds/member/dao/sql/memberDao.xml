@@ -108,5 +108,17 @@ AND		EMAIL = #{email}
 AND		PHONE = #{phone}
 </select>
 
+<update id="updateOneMember" parameterType="MemberVO">
+UPDATE	MEMBERS
+SET		NAME = #{name}
+<if test="password != null or password !=''">
+		, PASSWORD = #{password}
+		, SALT = #{salt}
+</if>
+		, PHONE = #{phone}
+		, EMAIL = #{email}
+WHERE	ID = #{id}
+</update>
+
 </mapper>
   

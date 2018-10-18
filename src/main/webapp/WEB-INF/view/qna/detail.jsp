@@ -33,55 +33,81 @@
 		});
 	});
 </script>
+<style>
+.button {
+	width: 60px;
+	background-color:#2056ac; 
+	color: #FFF; 
+	border:none;
+	font-size: 15px;
+    margin: 4px;
+}
+#headDiv {
+	text-align:center;
+	font-weight:bold;
+	font-size:20px;
+	padding:50px;
+}
+
+.detailDiv {
+	border:1px solid #2056ac;
+	padding:10px;
+	margin: 10px;
+}
+
+#contentDiv {
+	border:1px solid #2056ac;
+	padding:10px;
+	margin: 10px;
+	height: 350px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 
-	<div style="top:100px; position:relative">
-		 <div style="text-align: center;">
-		 	<div style="border-width: 1px; border-style:solid;">
-		 		<span>제목</span><span>${qna.subject}</span>
-		 	</div>
-		 	<div>
-		 		<span>작성자</span><span>${qna.writer}</span>
-		 	</div>
-		 	<div>
-		 		<span>작성일</span><span>${qna.crtDt}</span>
-		 	</div>
-		 	<div>
-		 		<span>내용</span><span>${qna.content}</span>
-		 	</div>	 
+	<div style="position:relative; top: 5%; left: 30%; width:525px; height:550px;">
+		 <div>
+		 	<div id="headDiv">QnA</div>	
+			<div class="detailDiv">${qna.subject}</div>
+			<div class="detailDiv">${qna.writer}</div>
+			<div class="detailDiv">${qna.crtDt}</div>
+			<div id ="contentDiv">${qna.content}</div>
 		 </div>
 		 
 		 <div>	 	
 		 	<c:choose>
 		 		<c:when test="${not empty qnaReplyList}">
 		 			<c:forEach items="${qnaReplyList}" var="qnaReply">
-		 				<div>
+		 				<div style="padding-left: 15px;">
 		 					<span>${qnaReply.memberVO.name}</span>
 		 					<span>${qnaReply.crtDt}</span>
 		 				</div>
-		 				<div>
+		 				<div style="padding-left: 35px;">
 		 					${qnaReply.content}
 		 				</div>
 		 			</c:forEach>
 		 		</c:when>
 		 	</c:choose>
 		 </div>
-		 <s:authorize access="hasRole('ROLE_ADMIN')">
-			 <div>
-			 	<form id="qnaReplyForm">
-			 		<input type="hidden" id="qnaId" name="qnaId" value="${qna.qnaId}" />
-			 		<input type="hidden" id="adminId" name="adminId" value="${sessionScope._USER_.id}" />
-			 		<textarea id="content" name="content" placeholder="내용"></textarea>
-			 		<input type="button" id="registBtn" value="등록" />
-			 	</form>
-			 </div>
-		 </s:authorize>
-		 <div>
-		 	<a href="/PersonalProject/qna/qna">목록</a>
-		 </div>
+		 <c:if test="${empty qnaReplyList}">
+			 <s:authorize access="hasRole('ROLE_ADMIN')">
+				 <div>
+				 	<form id="qnaReplyForm">
+				 		<input type="hidden" id="qnaId" name="qnaId" value="${qna.qnaId}" />
+				 		<input type="hidden" id="adminId" name="adminId" value="${sessionScope._USER_.id}" />
+				 		<textarea id="content" name="content" placeholder="내용"></textarea>
+				 		<input type="button" id="registBtn" value="등록" />
+				 	</form>
+				 </div>
+			 </s:authorize>
+		 </c:if>
+		 <div style="text-align:right; padding-right: 10px">
+			<button class="button" onclick="window.location.href='/PersonalProject/qna/qna'">목록</button>
+		</div>
 	</div>
+	
+	<jsp:include page="/WEB-INF/view/common/footer.jsp" />
 
 </body>
 </html>

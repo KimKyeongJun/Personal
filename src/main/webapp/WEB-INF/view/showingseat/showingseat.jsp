@@ -18,7 +18,7 @@
 		$(".seatBtn").each(function(i,e) {
 			for ( var i in list ) {
 				if ( $(this).val() == list[i] ) {
-					$(this).css('background-color', 'gray');
+					$(this).css('background-color', '#d3d3d3');
 					$(this).prop('disabled', true);
 				}
 			}
@@ -44,7 +44,7 @@
 					alert("한 사람당 최대 예매 가능한 매수는 4매 입니다.");
 				}
 				else {						
-					$(this).css('background-color', 'gray');
+					$(this).css('background-color', '#d3d3d3');
 					$("#shadowInput").append(input);
 					$("#reserveForm").append(formInput);
 					price += seat.data('price');
@@ -81,52 +81,53 @@
 		});
 	});
 </script>
+<style type="text/css">
+.seatBtn {
+	width: 30px; 
+	height: 30px; 
+	background-color: #f44336;
+	border: none;
+	border-radius: 5px;
+}
+</style>
 </head>
 <body>
 	<div style="text-align: center;">
-		<span>
-			<select name="date">
-			</select>
-		</span>
-		
-		<span>
-			<select name="movie">
-			
-			</select>
-		</span>
-		<span>
-		</span>
-	</div>
-	<!-- 좌표값을 데이터로 줘서 한다. -->
-	<div style="text-align:center">		
-		<div id="seatList">
-			<c:forEach items="${showingSeat}" var="seat" varStatus="status">
-				<span style="padding: 5px;">
-					<button class="seatBtn"
-						value="${seat.seatNumber}"
-						style="width: 30px; height: 35px; background-color: #f44336;" data-price="${seat.price}" data-count="${status.count}"></button>
-				</span>
-				<c:if test="${ status.count%10 eq 0 }">
-					<br />
-				</c:if>				
-			</c:forEach>
-		</div>		
-	</div>
-	<div style="text-align:right; clear: both;">		
-		<hr/>
-		<div>
-			<form id="reserveForm">
-				<input type="hidden" name="showingId" value="${showingId}" />
-				<input type="hidden" name="showingNum" value="${showingNum}" />
-				<input type="hidden" name="price" id="priceForm" />
-			</form>
+	
+		<div style="border:1px solid #2056ac; margin: 15px; height:50px; text-align:center; background-color: #6a6a6a;">
+			<p style="color: #FFF; font-weight: bold;">SCREEN</p>
 		</div>
-		<div id="shadowInput">
+		<!-- 좌표값을 데이터로 줘서 한다. -->
+		<div style="text-align:center">		
+			<div id="seatList">
+				<c:forEach items="${showingSeat}" var="seat" varStatus="status">
+					<span style="padding-right: 5px; padding-bottom:5px;">
+						<button class="seatBtn"
+							value="${seat.seatNumber}" data-price="${seat.price}" data-count="${status.count}">
+						</button>
+					</span>
+					<c:if test="${ status.count%10 eq 0 }">
+						<br />
+					</c:if>				
+				</c:forEach>
+			</div>		
 		</div>
-		<div id="totalPrice">가격: 0원</div>
-			<input type="button" value="좌석 다시 선택" onClick="window.location.reload()">
-			<input type="button" id="reserveBtn" value="예매하기" /> 
-		<!-- <a href="/PersonalProject/reserve">예매하기</a> -->
+		<div style="text-align:right; clear: both;">		
+			<hr/>
+			<div>
+				<form id="reserveForm">
+					<input type="hidden" name="showingId" value="${showingId}" />
+					<input type="hidden" name="showingNum" value="${showingNum}" />
+					<input type="hidden" name="price" id="priceForm" />
+				</form>
+			</div>
+			<div id="shadowInput">
+			</div>
+			<div id="totalPrice">가격: 0원</div>
+				<input type="button" value="좌석 다시 선택" onClick="window.location.reload()">
+				<input type="button" id="reserveBtn" value="예매하기" /> 
+			<!-- <a href="/PersonalProject/reserve">예매하기</a> -->
+		</div>
 	</div>
 	
 	<c:set var="items" value="${reservationSeatList}"></c:set>

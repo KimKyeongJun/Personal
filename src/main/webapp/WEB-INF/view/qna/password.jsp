@@ -26,12 +26,14 @@
 </head>
 <body>
 	<div style="text-align:center;">
-		비밀글 입니다. 비밀번호를 입력해주세요
-		<form id="passwordForm">
-			<input type="hidden" name="qnaId" id="qnaId" value="${qnaId}"/>
-			<input type="password" name="password" id="password"/>
-			<input type="button" id="confirmBtn" value="확인"/>
-		</form>
+		<font style="font-weight:bold;">비밀글 입니다. 비밀번호를 입력해주세요</font>
+		<div style="padding-top: 10px;">
+			<form id="passwordForm">
+				<input type="hidden" name="qnaId" id="qnaId" value="${qnaId}"/>
+				<input type="password" name="password" id="password"/>
+				<input type="button" id="confirmBtn" value="확인"/>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

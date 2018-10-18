@@ -28,5 +28,7 @@ public interface MemberService {
 	public boolean readOneGuestUser(MemberVO memberVO);
 	
 	public boolean readOneMemberForModify(MemberVO memberVO);
+	
+	public boolean updateOneMember(MemberVO memberVO);
 
 }

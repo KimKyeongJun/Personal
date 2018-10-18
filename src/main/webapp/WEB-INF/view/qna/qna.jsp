@@ -23,7 +23,7 @@
 					location.href="/PersonalProject/qna/detail?qnaId="+qnaId;
 				}
 				else{
-					window.open("/PersonalProject/qna/password?qnaId="+qnaId,'상세','width=400, height=150, left=400, top=350, toolbar=no, status=no, scrollbars=yes');
+					window.open("/PersonalProject/qna/password?qnaId="+qnaId,'상세','width=500, height=250, left=400, top=350, toolbar=no, status=no, scrollbars=yes');
 				}
 			}
 		});
@@ -38,9 +38,10 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="top:100px; position:relative">	
-		<div style="text-align: center;">
-			<span><a href="/PersonalProject/notice/notice">공지사항</a></span> <span>QnA</span>
+	<div style=" top: 10%; left: 25%; width: 900px; position:relative">	
+		<div style="text-align: center; padding-bottom: 50px; padding-top: 30px;">
+			<span><a href="/PersonalProject/notice/notice" style="text-decoration: none; color: #00008b; font-weight: bold;">공지사항 </a></span>
+			<span style="color: #00008b; font-weight: bold;"> | QnA</span>
 		</div>
 		
 		<div id="wrapper">
@@ -69,9 +70,8 @@
 		      </div> 
 	    </c:otherwise>     
       </c:choose>
-      </div>
-      
-      <div class="padded">
+      </div>      
+      <div class="padded" style="text-align:center">
       	<form id="searchForm" onsubmit="javascript:movePage(0);">
       		${pagenation}
       		<div>
@@ -80,9 +80,11 @@
       		</div>
       	</form>
       </div>
-		<div>
-			<a href="/PersonalProject/qna/regist">글 작성</a>
+		<div style="text-align:right; padding-top: 15px;">
+			<a href="/PersonalProject/qna/regist" style="padding-right: 20px; font-weight: bold; color: #00008b; text-decoration: none;">글 작성</a>
 		</div>
 	</div>
+	
+	<jsp:include page="/WEB-INF/view/common/footer.jsp" />
 </body>
 </html>

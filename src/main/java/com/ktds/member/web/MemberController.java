@@ -186,5 +186,12 @@ public class MemberController {
 	public String viewMemberModifyPage() {
 		return "member/modify";
 	}
+	
+	@PostMapping("/member/modify")
+	@ResponseBody
+	public boolean doMemberModifyAction(@ModelAttribute MemberVO memberVO, @SessionAttribute(Session.USER) MemberVO loginMemberVO ) {
+		memberVO.setId(loginMemberVO.getId());
+		return this.memberService.updateOneMember(memberVO);
+	}
 
 }

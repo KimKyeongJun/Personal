@@ -18,9 +18,7 @@
 				}
 				else {
 					$("#fid").val("");
-					setTimeout( function(){ 
-						$("#fid").focus(); 
-						}, 10);
+					$("#fid").focus();
 					alert(response.data);
 				}
 			});					
@@ -121,35 +119,72 @@
 				});
 	});
 </script>
+<style>
+.formSpan {
+	display:inline-block; 
+	width: 65px;
+	font-weight: bold;
+}
+
+input {
+	vertical-align: middle;
+	width: 450px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	font-size: 15px;
+	border-radius:10px;
+}
+
+.button {
+	width: 150px;
+	background-color:#2056ac; 
+	color: #FFF; 
+	border:none; 
+	border-radius:10px;
+	font-size: 15px;
+    margin: 4px;
+}
+
+.formDiv {
+	padding-bottom: 10px;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="top:100px; position:relative">
+	<div style="position:relative; top: 15%; left: 30%; width:525px;">
 		<form id="registForm">
-			<div>
+			<h1 style="text-align: center;">회원 가입</h1>
+			<div class="formDiv">
+				<span class="formSpan">아이디</span>
 				<input type="text" id="fid" name="id" placeholder="아이디" />
 			</div>
-			<div>
+			<div class="formDiv">
+				<span class="formSpan">이름</span>
 				<input type="text" id="fname" name="name" placeholder="이름" />
 			</div>
-			<div>
+			<div class="formDiv">
+				<span class="formSpan">비밀번호</span>
 				<input type="password" id="fpassword" name="password"
 					placeholder="비밀번호" />
 			</div>
-			<div>
+			<div class="formDiv">
+				<span class="formSpan">비밀번호 확인</span>
 				<input type="password" id="fpasswordConfirm" placeholder="비밀번호 확인" />
 			</div>
-			<div>
+			<div class="formDiv">
+				<span class="formSpan">휴대폰 번호</span>
 				<input type="text" id="fphone" name="phone" placeholder="휴대폰 번호 ( -없이 입력 )" />
 			</div>
-			<div>
+			<div class="formDiv">
+				<span class="formSpan">이메일</span>
 				<input type="email" id="femail" name="email" placeholder="이메일" />
 			</div>
-			<div>
-				<input type="button" id="registBtn" value="가입하기" />
+			<div style="text-align: right;">
+				<input class="button" type="button" id="registBtn" value="가입하기" />
 			</div>
 		</form>
 	</div>
-
+	<jsp:include page="/WEB-INF/view/common/footer.jsp" />
 </body>
 </html>
