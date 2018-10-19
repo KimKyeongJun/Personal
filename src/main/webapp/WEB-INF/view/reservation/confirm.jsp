@@ -123,9 +123,9 @@ input {
 				
 				<div class="formDiv">
 					<span class="formSpan"> 결제 수단 </span>
-					<input class="radio" type="radio" name="payment">계좌 이체
-					<input class="radio" type="radio" name="payment">신용카드
+					<input class="radio" type="radio" name="payment" checked>신용카드
 					<input class="radio" type="radio" name="payment">휴대폰 결제
+					<input class="radio" type="radio" name="payment">계좌 이체
 				</div>
 				<div class="formDiv">
 					<span class="formSpan">결제 금액  </span><span id="payPrice">${reservationVO.price}원</span>

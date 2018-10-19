@@ -66,7 +66,11 @@
 				<span class="subject box">${showing.movieVO.movieName}</span>
 				<span class="showingDate box">${showing.startDate}</span>
 				<span class="showingNum box">${showing.showingNum}</span>
-				<span><button class="button" onclick="window.open('/PersonalProject/reserve/showingseat?movieCode=${showing.movieVO.movieCode}&showingId=${showing.showingId}&showingNum=${showing.showingNum}', '_blank', 'width=800 height=700')">예매하기</button></span>
+				<span>
+					<button class="button" onclick="window.open('/PersonalProject/reserve/showingseat?movieCode=${showing.movieVO.movieCode}&showingId=${showing.showingId}&showingNum=${showing.showingNum}', '_blank', 'width=800 top=80 left=400 height=750')">
+						예매하기
+					</button>
+				</span>
 			</div>
 		</c:forEach>
 	</div>

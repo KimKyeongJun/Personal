@@ -18,8 +18,11 @@
 				}
 				else {
 					$("#fid").val("");
-					$("#fid").focus();
+					setTimeout( function() { 
+						$("#fid").focus(); 
+						}, 10);
 					alert(response.data);
+					return;
 				}
 			});					
 		});
@@ -31,9 +34,6 @@
 					$("#fpasswordConfirm").focus(); 
 					}, 10);
 				return;
-			}
-			else {
-				
 			}
 		});
 		
@@ -122,7 +122,7 @@
 <style>
 .formSpan {
 	display:inline-block; 
-	width: 65px;
+	width: 120px;
 	font-weight: bold;
 }
 
@@ -152,7 +152,7 @@ input {
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
-	<div style="position:relative; top: 15%; left: 30%; width:525px;">
+	<div style="position:relative; top: 15%; left: 30%; width:600px;">
 		<form id="registForm">
 			<h1 style="text-align: center;">회원 가입</h1>
 			<div class="formDiv">

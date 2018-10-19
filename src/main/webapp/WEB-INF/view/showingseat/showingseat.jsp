@@ -44,7 +44,7 @@
 					alert("한 사람당 최대 예매 가능한 매수는 4매 입니다.");
 				}
 				else {						
-					$(this).css('background-color', '#d3d3d3');
+					$(this).css('background-color', '#949494');
 					$("#shadowInput").append(input);
 					$("#reserveForm").append(formInput);
 					price += seat.data('price');
@@ -89,6 +89,12 @@
 	border: none;
 	border-radius: 5px;
 }
+.confirmBtn {
+	background-color: #6a6a6a;
+	color: #FFF;
+	border: none;
+	height: 30px;
+}
 </style>
 </head>
 <body>
@@ -121,11 +127,11 @@
 					<input type="hidden" name="price" id="priceForm" />
 				</form>
 			</div>
-			<div id="shadowInput">
+			<div id="shadowInput" style="font-weight:bold; color:#6a6a6a; padding-bottom: 5px;">
 			</div>
-			<div id="totalPrice">가격: 0원</div>
-				<input type="button" value="좌석 다시 선택" onClick="window.location.reload()">
-				<input type="button" id="reserveBtn" value="예매하기" /> 
+			<div id="totalPrice" style="font-weight:bold; color:#6a6a6a; padding-bottom: 5px;">가격: 0원</div>
+				<input type="button" class="confirmBtn" value="좌석 다시 선택" onClick="window.location.reload()">
+				<input type="button" id="reserveBtn" class="confirmBtn"  value="예매하기" /> 
 			<!-- <a href="/PersonalProject/reserve">예매하기</a> -->
 		</div>
 	</div>

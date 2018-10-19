@@ -51,7 +51,7 @@ WHERE	S.MOVIE_CODE = M.MOVIE_CODE
 <if test="_parameter != null">
 AND		S.MOVIE_CODE = #{_parameter}
 </if>
-ORDER	BY	SHOWING_NUM
+ORDER	BY	S.START_TIME DESC
 </select>
 
 <select id="selectStartDateTimeMovie" parameterType="ShowingListVO" resultType="int">

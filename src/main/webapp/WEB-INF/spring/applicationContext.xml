@@ -16,6 +16,7 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/reserve/**"/>
+			<mvc:mapping path="/movie/showinglist"/>
 			<mvc:exclude-mapping path="/movie/movie"/>
 			<mvc:exclude-mapping path="/movie/regist"/>
 			<mvc:exclude-mapping path="/movie/comment"/>

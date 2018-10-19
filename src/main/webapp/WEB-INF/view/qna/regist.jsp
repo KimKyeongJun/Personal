@@ -77,7 +77,7 @@ textarea {
 		<form id="registForm">
 			<div class="formDiv">
 				<span class="formSpan">작성자</span>
-				<input type="text" id="writer" name="writer" placeholder="작성자" />
+				<input type="text" id="writer" name="writer" value="${sessionScope._USER_.name}" placeholder="작성자" />
 			</div>
 			<div class="formDiv">
 				<span class="formSpan">비밀번호</span>

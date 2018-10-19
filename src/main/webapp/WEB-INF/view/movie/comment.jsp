@@ -16,7 +16,7 @@
 		
 		if ( userSession == "" ) {
 			$("#movieComment").prop('readonly',true);
-			$("#movieComment").val("영화 후기는 회원만 등록하실 수 있습니다");
+			$("#movieComment").val("영화 후기는 회원만 등록하실 수 있습니다.");
 			$("#registBtn").prop("disabled", true);
 		}
 		
@@ -120,17 +120,31 @@ label {
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 	<div style="position:relative; top: 10%; left: 30%; width:900px;">
 		<div>
-			<img src="/PersonalProject/img/${movieVO.poster}"/>
-			제목 : ${movieVO.movieName}
-			평점 : ${movieVO.grade}
+			<div style="float:left; padding-right: 20px;">
+				<img src="/PersonalProject/img/${movieVO.poster}"/>
+			</div>
+			<div style="margin: 15px;">
+				<div style="padding-bottom:10px;">
+					<span style="display: inline-block; width: 75px;font-weight: bold; padding-right:10px;">제목</span>
+					<span>${movieVO.movieName}</span>
+				</div>
+				<div style="padding-bottom:10px;">
+					<span style="display: inline-block; width: 75px;font-weight: bold; padding-right:10px;">상영시간</span>
+					<span>${movieVO.runningTime}분</span>
+				</div>
+				<div style="padding-bottom:10px;">
+					<span style="display: inline-block; width: 75px;font-weight: bold; padding-right:10px;">평점 </span>
+					<span> ${movieVO.grade}</span>
+				</div>			
+			</div>
 		</div>
 		<div>
 			<c:choose>
 				<c:when test="${not empty  movieVO.movieCommentList}">
 					<c:forEach items="${movieVO.movieCommentList}" var="comment">
-						<div style="padding-bottom: 5px;">
+						<div style="padding-top: 15px; clear:both;">
 							<div style="font-size: 15px; font-weight: bold;">${comment.memberVO.name}</div>
-							<div style="padding-left: 10px;">${comment.content}</div>
+							<div style="padding-left: 12px;">${comment.content}</div>
 						</div>
 					</c:forEach>
 				</c:when>
@@ -139,7 +153,7 @@ label {
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div>
+		<div style="padding-top: 15px;">
 			<form id="registForm">
 				<div>
 					<input type="hidden" name="movieCode" value="${movieVO.movieCode}"/>
@@ -185,8 +199,7 @@ label {
 			  		<input type="button" id="registBtn" value="등록"/>
 		  		</div>
 				</div>		  		
-			</form>
-			
+			</form>			
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/view/common/footer.jsp" />

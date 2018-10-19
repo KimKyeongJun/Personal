@@ -15,7 +15,7 @@ footer {
 
 <footer style="color: #fff;">
 	<div style="text-align: center; padding-top: 20px;">	
-		푸터다
+		KJ CINEMA
 	</div>
 	
 </footer>

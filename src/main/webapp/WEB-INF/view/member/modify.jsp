@@ -74,7 +74,7 @@
 <style>
 .formSpan {
 	display:inline-block; 
-	width: 65px;
+	width: 120px;
 	font-weight: bold;
 }
 
@@ -106,7 +106,7 @@ input {
 
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 	
-	<div style="position:relative; top: 20%; left: 30%; width:525px;">
+	<div style="position:relative; top: 20%; left: 30%; width:600px;">
 		<form id="modifyForm">
 			<h1 style="text-align:center;">회원 정보 수정</h1>
 			<div class="formDiv">

@@ -5,7 +5,7 @@
 <script src="/PersonalProject/js/jquery-3.3.1.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$().ready(function() {
-		$("#ticket").click(function() {
+		$(".reserveLink").click(function() {
 			var userCheck = "${sessionScope._USER_.id}";
 			var guestCheck = "${sessionScope._GUEST_.name}";
 			if( userCheck == "" && guestCheck == "" ) {
@@ -114,7 +114,7 @@
 			<li><a>영화</a>
 				<ul class="smenu">
 					<li><a href="#">영화 정보</a></li>
-					<li><a href="/PersonalProject/movie/showinglist">상영 중 영화</a></li>
+					<li><a class="reserveLink" href="/PersonalProject/movie/showinglist">상영 중 영화</a></li>
 					<s:authorize access="hasRole('ROLE_ADMIN')" var="isAdmin" />
 					<c:choose>
 						<c:when test="${isAdmin}">
@@ -142,7 +142,8 @@
 							<li><a href="/PersonalProject/member/passwordcheck">회원정보수정</a></li>
 						</ul>
 					</li>
-					<li style="width:250px;"><a>${sessionScope._USER_.name}님 (보유 마일리지: ${sessionScope._USER_.mileage}점)</a>
+					<li style="width:250px;">
+						<a>${sessionScope._USER_.name}님 (보유 마일리지: ${sessionScope._USER_.mileage}점)</a>
 					</li>
 					<li><a class="menuLink" href="/PersonalProject/member/logout">로그아웃</a></li>
 				</c:when>

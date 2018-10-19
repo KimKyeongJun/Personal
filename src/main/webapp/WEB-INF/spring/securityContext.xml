@@ -26,6 +26,8 @@
 			access="permitAll" />		
 		<s:intercept-url pattern="/member/resultfindid"
 			access="permitAll" />				
+		<s:intercept-url pattern="/member/logout"
+			access="permitAll" />				
 		<s:intercept-url pattern="/member"
 			access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 		<s:intercept-url pattern="/member/**"
