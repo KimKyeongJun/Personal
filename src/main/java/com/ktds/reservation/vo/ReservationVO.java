@@ -1,7 +1,5 @@
 package com.ktds.reservation.vo;
 
-import java.util.List;
-
 import com.ktds.member.vo.MemberVO;
 import com.ktds.movie.vo.MovieVO;
 import com.ktds.showing.list.vo.ShowingListVO;
@@ -10,16 +8,14 @@ import com.ktds.showing.seat.vo.ShowingSeatVO;
 public class ReservationVO {
 
 	private String reservationId;
-	private String reservationDate;
+	private int originPrice;
+	private int payPrice;
+	private int useMileage;
 	private String showingId;
-	private List<String> seatNumberList;
-	private String seatNumber;
-	private int showingNum;
-	private String name;
-	private String phone;
 	private String id;
-	private String price;
-	private String mileage;
+	private String reservationDate;
+	private String phone;
+	private String name;
 
 	private MemberVO memberVO;
 	private ShowingListVO showingListVO;
@@ -34,16 +30,36 @@ public class ReservationVO {
 		this.reservationId = reservationId;
 	}
 
-	public String getReservationDate() {
-		return reservationDate;
+	public int getOriginPrice() {
+		return originPrice;
 	}
 
-	public void setReservationDate(String reservationDate) {
-		this.reservationDate = reservationDate;
+	public void setOriginPrice(int originPrice) {
+		this.originPrice = originPrice;
+	}
+
+	public int getPayPrice() {
+		return payPrice;
+	}
+
+	public void setPayPrice(int payPrice) {
+		this.payPrice = payPrice;
+	}
+
+	public int getUseMileage() {
+		return useMileage;
+	}
+
+	public void setUseMileage(int useMileage) {
+		this.useMileage = useMileage;
 	}
 
 	public String getShowingId() {
 		return showingId;
+	}
+
+	public void setShowingId(String showingId) {
+		this.showingId = showingId;
 	}
 
 	public String getId() {
@@ -54,24 +70,12 @@ public class ReservationVO {
 		this.id = id;
 	}
 
-	public void setShowingId(String showingId) {
-		this.showingId = showingId;
+	public String getReservationDate() {
+		return reservationDate;
 	}
 
-	public int getShowingNum() {
-		return showingNum;
-	}
-
-	public void setShowingNum(int showingNum) {
-		this.showingNum = showingNum;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setReservationDate(String reservationDate) {
+		this.reservationDate = reservationDate;
 	}
 
 	public String getPhone() {
@@ -82,28 +86,12 @@ public class ReservationVO {
 		this.phone = phone;
 	}
 
-	public String getSeatNumber() {
-		return seatNumber;
+	public String getName() {
+		return name;
 	}
 
-	public void setSeatNumber(String seatNumber) {
-		this.seatNumber = seatNumber;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
-	public List<String> getSeatNumberList() {
-		return seatNumberList;
-	}
-
-	public void setSeatNumberList(List<String> seatNumberList) {
-		this.seatNumberList = seatNumberList;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public MemberVO getMemberVO() {
@@ -128,14 +116,6 @@ public class ReservationVO {
 
 	public void setShowingSeatVO(ShowingSeatVO showingSeatVO) {
 		this.showingSeatVO = showingSeatVO;
-	}
-
-	public String getMileage() {
-		return mileage;
-	}
-
-	public void setMileage(String mileage) {
-		this.mileage = mileage;
 	}
 
 	public MovieVO getMovieVO() {

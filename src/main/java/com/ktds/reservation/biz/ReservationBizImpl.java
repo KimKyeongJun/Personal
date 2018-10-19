@@ -17,11 +17,6 @@ public class ReservationBizImpl implements ReservationBiz {
 	
 	@Override
 	public boolean registOneReservation(ReservationVO reservationVO) {
-		
-		for ( String seatNumber : reservationVO.getSeatNumberList() ) {
-			reservationVO.setSeatNumber(seatNumber);
-			this.reservationDao.insertOneReservation(reservationVO);
-		}
 		return true;
 	}
 	
