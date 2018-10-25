@@ -124,7 +124,7 @@
 				<form id="reserveForm">
 					<input type="hidden" name="showingId" value="${showingId}" />
 					<input type="hidden" name="showingNum" value="${showingNum}" />
-					<input type="hidden" name="price" id="priceForm" />
+					<input type="hidden" name="originPrice" id="priceForm" />
 				</form>
 			</div>
 			<div id="shadowInput" style="font-weight:bold; color:#6a6a6a; padding-bottom: 5px;">

@@ -17,8 +17,8 @@
 				$(this).focus();
 			}
 			else {
-				var price = "${reservationVO.price}" - $(this).val();
-				$("#payPrice").text(price+"원");
+				var price = "${reservationVO.originPrice}" - $(this).val();
+				$("#payPrice").val(price);
 			}
 		});
 		
@@ -26,12 +26,12 @@
 			var isCheck = $(this).prop("checked");
 			if ( isCheck ) {
 				$("#chkMileage").val("${sessionScope._USER_.mileage}");
-				var price = "${reservationVO.price}" - "${sessionScope._USER_.mileage}";
-				$("#payPrice").text(price+"원");
+				var price = "${reservationVO.originPrice}" - "${sessionScope._USER_.mileage}";
+				$("#payPrice").val(price);
 			}
 			else {
 				$("#chkMileage").val("");
-				$("#payPrice").text("${reservationVO.price}원");
+				$("#payPrice").val("${reservationVO.originPrice}");
 			}
 		});
 		
@@ -117,7 +117,7 @@ input {
 				
 				<div class="formDiv">
 					<span class="formSpan">마일리지</span>
-					<input type="text" id="chkMileage" name="mileage" placeholder="마일리지" />
+					<input type="text" id="chkMileage" name="useMileage" value="0" placeholder="마일리지" />
 					<input style="width: 10px;"type="checkbox" id="chkBox" name="chkMileage" />전액사용 (보유 마일리지 : ${sessionScope._USER_.mileage}점)
 				</div>
 				
@@ -128,7 +128,8 @@ input {
 					<input class="radio" type="radio" name="payment">계좌 이체
 				</div>
 				<div class="formDiv">
-					<span class="formSpan">결제 금액  </span><span id="payPrice">${reservationVO.price}원</span>
+					<span class="formSpan">결제 금액  </span>
+					<input name="payPrice" id="payPrice" style="width: 50px;"readonly value="${reservationVO.originPrice}" /><span>원</span>
 				</div>
 				
 				<div>

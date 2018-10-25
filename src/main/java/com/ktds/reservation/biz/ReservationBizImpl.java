@@ -17,7 +17,7 @@ public class ReservationBizImpl implements ReservationBiz {
 	
 	@Override
 	public boolean registOneReservation(ReservationVO reservationVO) {
-		return true;
+		return this.reservationDao.insertOneReservation(reservationVO) > 0;
 	}
 	
 	@Override

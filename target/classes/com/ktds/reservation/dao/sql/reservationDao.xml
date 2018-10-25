@@ -9,10 +9,10 @@
 INSERT	INTO	RESERVATION	(
 								RESERVATION_ID
 								, ID
-								, RESERVATION_DATE
+								, PAY_PRICE
+								, USE_MILEAGE
 								, SHOWING_ID
-								, SEAT_NUMBER
-								, SHOWING_NUM
+								, RESERVATION_DATE
 								, NAME
 								, PHONE							
 							)
@@ -26,10 +26,10 @@ VALUES						(
 									, ''
 									</otherwise>
 								</choose>
-								, SYSDATE
+								, #{payPrice}
+								, #{useMileage}
 								, #{showingId}
-								, #{seatNumber}
-								, #{showingNum}
+								, SYSDATE
 								<choose>
 									<when test ="name != null and phone != null">
 									, #{name}

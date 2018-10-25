@@ -1,5 +1,7 @@
 package com.ktds.reservation.vo;
 
+import java.util.List;
+
 import com.ktds.member.vo.MemberVO;
 import com.ktds.movie.vo.MovieVO;
 import com.ktds.showing.list.vo.ShowingListVO;
@@ -12,10 +14,13 @@ public class ReservationVO {
 	private int payPrice;
 	private int useMileage;
 	private String showingId;
+	private int showingNum;
 	private String id;
 	private String reservationDate;
 	private String phone;
 	private String name;
+
+	private List<String> seatNumberList;
 
 	private MemberVO memberVO;
 	private ShowingListVO showingListVO;
@@ -62,6 +67,14 @@ public class ReservationVO {
 		this.showingId = showingId;
 	}
 
+	public int getShowingNum() {
+		return showingNum;
+	}
+
+	public void setShowingNum(int showingNum) {
+		this.showingNum = showingNum;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -92,6 +105,14 @@ public class ReservationVO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<String> getSeatNumberList() {
+		return seatNumberList;
+	}
+
+	public void setSeatNumberList(List<String> seatNumberList) {
+		this.seatNumberList = seatNumberList;
 	}
 
 	public MemberVO getMemberVO() {

@@ -1,7 +1,6 @@
 package com.ktds.reservation.web;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,6 +41,9 @@ public class ReservationController {
 	@PostMapping("/reserve")
 	@ResponseBody
 	public boolean doMovieRegistAction(@ModelAttribute ReservationVO reservationVO, HttpSession session) {
+		System.out.println("Reservation Controller" + reservationVO.getPayPrice());
+		System.out.println("Reservation Controller!" + reservationVO.getUseMileage());
+		System.out.println("Reservation Controller!!" + reservationVO.getSeatNumberList());
 		
 		MemberVO userMemberVO = (MemberVO) session.getAttribute(Session.USER);
 		MemberVO guestMemberVO = (MemberVO) session.getAttribute(Session.GUEST);

@@ -6,6 +6,10 @@
 <mapper namespace="TicketingDao">
 
 <insert id="insertOneTicketing" parameterType="TicketingVO">
+<selectKey resultType="string" keyProperty="reservationId" order="BEFORE">
+	SELECT	MAX(RESERVATION_ID)	reservationId
+	FROM	RESERVATION
+</selectKey>
 INSERT	INTO	TICKETING	(
 								TICKETING_ID
 								, SEAT_NUMBER
