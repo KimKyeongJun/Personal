@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TicketingDao">
+
+<insert id="insertOneTicketing" parameterType="TicketingVO">
+INSERT	INTO	TICKETING	(
+								TICKETING_ID
+								, SEAT_NUMBER
+								, SHOWING_NUM
+								, RESERVATION_ID						
+							)
+VALUES						(
+								'TC-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(TKT_SEQ_ID.NEXTVAL, 6, '0')
+								, #{seatNumber}
+								, #{showingNum}
+								, #{reservationId}
+							)
+</insert>
+
+<select	id="selectTicketingSeatList" parameterType="string" resultType="string">
+SELECT	SEAT_NUMBER
+FROM    TICKETING	T
+		, RESERVATION R
+		, SHOWINGLIST S
+WHERE   T.RESERVATION_ID = R.RESERVATION_ID
+AND		R.SHOWING_ID = S.SHOWING_ID
+AND		S.SHOWING_ID = #{showingId}
+</select>
+
+</mapper>
+  

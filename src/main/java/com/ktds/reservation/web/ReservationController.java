@@ -25,7 +25,7 @@ public class ReservationController {
 	
 	@Autowired
 	private ReservationService reservationService;
-	
+	/*
 	@GetMapping("/reserve/showingseat")
 	public ModelAndView viewReservationPage(@RequestParam String movieCode, @RequestParam String showingId, @RequestParam int showingNum) {
 		ModelAndView view = new ModelAndView("showingseat/showingseat");
@@ -38,7 +38,7 @@ public class ReservationController {
 		
 		
 		return view;
-	}
+	}*/
 	
 	@PostMapping("/reserve")
 	@ResponseBody

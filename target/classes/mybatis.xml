@@ -18,6 +18,7 @@
 		<typeAlias type="com.ktds.showing.vo.ShowingVO" alias="ShowingVO"/>
 		<typeAlias type="com.ktds.reservation.vo.ReservationVO" alias="ReservationVO"/>
 		<typeAlias type="com.ktds.movie.comments.vo.MovieCommentVO" alias="MovieCommentVO"/>
+		<typeAlias type="com.ktds.ticketing.vo.TicketingVO" alias="TicketingVO"/>
 		
 	</typeAliases>
 	
