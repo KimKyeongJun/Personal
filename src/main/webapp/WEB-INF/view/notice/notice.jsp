@@ -64,7 +64,7 @@
 	      	</form>
       	</div>	
 		<div style="text-align:right; padding-top: 15px;">
-			<s:authorize access="hasRole('ROLE_ADMIN')">				
+			<s:authorize access="hasRole('ROLE_ADMIN')">
 				<a href="/PersonalProject/notice/regist" style="padding-right: 20px; font-weight: bold; color: #00008b; text-decoration: none;">글 작성</a>
 			</s:authorize>
 		</div>

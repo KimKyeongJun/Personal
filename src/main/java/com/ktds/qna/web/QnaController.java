@@ -22,7 +22,6 @@ import com.ktds.qna.service.QnaService;
 import com.ktds.qna.vo.QnaSearchVO;
 import com.ktds.qna.vo.QnaVO;
 import com.ktds.showing.seat.dao.ShowingSeatDao;
-import com.ktds.showing.seat.vo.ShowingSeatVO;
 import com.nhncorp.lucy.security.xss.XssFilter;
 
 import io.github.seccoding.web.pager.explorer.PageExplorer;

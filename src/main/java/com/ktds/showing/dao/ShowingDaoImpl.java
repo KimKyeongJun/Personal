@@ -7,8 +7,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ktds.showing.vo.ShowingVO;
-
 @Repository
 public class ShowingDaoImpl extends SqlSessionDaoSupport implements ShowingDao {
 

@@ -6,7 +6,6 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -21,7 +20,6 @@ import com.ktds.member.vo.MemberVO;
 public class UserService implements AuthenticationProvider {
 	
 	public UserService() {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 	
 	@Autowired
@@ -58,7 +56,6 @@ public class UserService implements AuthenticationProvider {
 			String token = UUID.randomUUID().toString();
 			String grade= "ROLE_USER";
 			String isAdmin = this.memberService.readOneMemberIsAdmin(userId);
-			System.out.println("UserService 출력 : " + isAdmin);
 			if ( isAdmin.equals("Y") ){
 				grade = "ROLE_ADMIN";
 			}
