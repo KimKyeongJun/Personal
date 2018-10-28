@@ -27,5 +27,15 @@ public class TicketingDaoImpl extends SqlSessionDaoSupport implements TicketingD
 	public List<String> selectTicketingSeatList(String showingId) {
 		return getSqlSession().selectList("TicketingDao.selectTicketingSeatList", showingId);
 	}
+	
+	@Override
+	public int selectCountByReservationId(String reservationId) {
+		return getSqlSession().selectOne("TicketingDao.selectCountByReservationId", reservationId);
+	}
+	
+	@Override
+	public List<TicketingVO> selectAllTicketingByReservationId(String reservatonId) {
+		return getSqlSession().selectList("TicketingDao.selectAllTicketingByReservationId", reservatonId);
+	}
 
 }

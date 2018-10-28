@@ -19,6 +19,7 @@ public class ReservationVO {
 	private String reservationDate;
 	private String phone;
 	private String name;
+	private int ticketCount;
 
 	private List<String> seatNumberList;
 
@@ -105,6 +106,14 @@ public class ReservationVO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getTicketCount() {
+		return ticketCount;
+	}
+
+	public void setTicketCount(int ticketCount) {
+		this.ticketCount = ticketCount;
 	}
 
 	public List<String> getSeatNumberList() {

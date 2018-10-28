@@ -9,5 +9,9 @@ public interface TicketingBiz {
 	public boolean createOneTicketing(TicketingVO ticketingVO);
 	
 	public List<String> readTicketingSeatList(String showingId);
+	
+	public int readCountByReservationId(String reservationId);
+	
+	public List<TicketingVO> readAllTicketingByReservationId(String reservationId);
 
 }

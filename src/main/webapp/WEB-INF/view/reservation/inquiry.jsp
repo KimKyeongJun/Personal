@@ -9,13 +9,13 @@
 <style>
 #wrapper {
 	font-weight:bold;
-	width: 600px;
+	width: 650px;
 	padding-bottom: 15px;
 	padding-top: 30px;
 }
 
 .reserveWrapper {
-	width: 600px;
+	width: 650px;
 	padding-bottom: 15px;
 }
 
@@ -34,17 +34,22 @@
 .reserveDate {
 	width: 150px;
 }
+
+.ticketCount {
+	width: 50px;
+}
 </style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 	
-	<div style="position:relative; top: 10%; left: 30%; width:525px; text-align: center;">
+	<div style="position:relative; top: 10%; left: 30%; width:700px; text-align: center;">
 		<font style="font-size:30px; font-weight:bold;">예매 내역</font>
 		<div id="wrapper">
 			<span class="reserveNum box">예매번호</span>
 			<span class="movieName box">영화명</span>
 			<span class="reserveDate box">예매날짜</span>
+			<span class="ticketCount box">예매수</span>
 		</div>
 		<c:choose>
 			<c:when test="${not empty reservationList}">			
@@ -53,6 +58,7 @@
 						<span class="reserveNum box"><a href="/PersonalProject/reserve/detail/${reservation.reservationId}">${reservation.reservationId}</a></span>
 						<span class="movieName box">${reservation.movieVO.movieName}</span>
 						<span class="reserveDate box">${reservation.reservationDate}</span>
+						<span class="ticketCount box">${reservation.ticketCount}매</span>
 					</div>
 				</c:forEach>
 			</c:when>

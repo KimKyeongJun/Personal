@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -79,14 +78,6 @@ public class ReservationController {
 			List<ReservationVO> reservationList = this.reservationService.readAllReservationList(guestMemberVO);
 			view.addObject("reservationList", reservationList);
 		}
-		return view;
-	}
-	
-	@GetMapping("/reserve/detail/{reservationId}")
-	public ModelAndView viewReservationDetailPage(@PathVariable String reservationId) {
-		ModelAndView view  = new ModelAndView("reservation/detail");
-		ReservationVO reservationVO = this.reservationService.readOneReservation(reservationId);
-		view.addObject("reservationVO", reservationVO);
 		return view;
 	}
 

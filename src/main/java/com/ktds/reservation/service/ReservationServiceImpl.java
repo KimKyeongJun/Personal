@@ -9,12 +9,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ktds.member.biz.MemberBiz;
 import com.ktds.member.vo.MemberVO;
 import com.ktds.reservation.biz.ReservationBiz;
 import com.ktds.reservation.vo.ReservationVO;
 import com.ktds.showing.seat.biz.ShowingSeatBiz;
 import com.ktds.showing.seat.vo.ShowingSeatVO;
+import com.ktds.ticketing.biz.TicketingBiz;
+import com.ktds.ticketing.vo.TicketingVO;
 
 @Service
 public class ReservationServiceImpl implements ReservationService{
@@ -26,11 +27,18 @@ public class ReservationServiceImpl implements ReservationService{
 	private ShowingSeatBiz showingSeatBiz;
 	
 	@Autowired
-	private MemberBiz memberBiz;
+	private TicketingBiz ticketingBiz;
 	
 	@Override
 	public boolean registOneReservation(ReservationVO reservationVO, HttpSession session) {
-		return this.reservationBiz.registOneReservation(reservationVO);
+		boolean isRegist = this.reservationBiz.registOneReservation(reservationVO);
+		for ( String seatNumber : reservationVO.getSeatNumberList() ) {
+			TicketingVO ticketingVO = new TicketingVO();
+			ticketingVO.setSeatNumber(seatNumber);
+			ticketingVO.setShowingNum(reservationVO.getShowingNum());
+			this.ticketingBiz.createOneTicketing(ticketingVO);
+		}
+		return isRegist;
 	}
 	
 	@Override
@@ -47,7 +55,13 @@ public class ReservationServiceImpl implements ReservationService{
 	
 	@Override
 	public List<ReservationVO> readAllReservationList(MemberVO memberVO) {
-		return this.reservationBiz.readAllReservationList(memberVO);
+		List<ReservationVO> reservationList = this.reservationBiz.readAllReservationList(memberVO);
+		
+		for (ReservationVO reservationVO : reservationList) {
+			int ticketCount = this.ticketingBiz.readCountByReservationId(reservationVO.getReservationId());
+			reservationVO.setTicketCount(ticketCount);
+		}
+		return reservationList;
 	}
 	
 	@Override

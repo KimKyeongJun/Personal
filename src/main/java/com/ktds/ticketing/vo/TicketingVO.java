@@ -1,15 +1,20 @@
 package com.ktds.ticketing.vo;
 
-import java.util.List;
+import com.ktds.movie.vo.MovieVO;
+import com.ktds.reservation.vo.ReservationVO;
+import com.ktds.showing.list.vo.ShowingListVO;
 
 public class TicketingVO {
 
 	private String ticketingId;
 	private String seatNumber;
-	private List<String> seatNumberList;
 	private int showingNum;
 	private String reservationId;
 
+	private MovieVO movieVO;
+	private ShowingListVO showingListVO;
+	private ReservationVO reservationVO;
+	
 	public String getTicketingId() {
 		return ticketingId;
 	}
@@ -26,14 +31,6 @@ public class TicketingVO {
 		this.seatNumber = seatNumber;
 	}
 
-	public List<String> getSeatNumberList() {
-		return seatNumberList;
-	}
-
-	public void setSeatNumberList(List<String> seatNumberList) {
-		this.seatNumberList = seatNumberList;
-	}
-
 	public int getShowingNum() {
 		return showingNum;
 	}
@@ -48,6 +45,30 @@ public class TicketingVO {
 
 	public void setReservationId(String reservationId) {
 		this.reservationId = reservationId;
+	}
+
+	public MovieVO getMovieVO() {
+		return movieVO;
+	}
+
+	public void setMovieVO(MovieVO movieVO) {
+		this.movieVO = movieVO;
+	}
+
+	public ShowingListVO getShowingListVO() {
+		return showingListVO;
+	}
+
+	public void setShowingListVO(ShowingListVO showingListVO) {
+		this.showingListVO = showingListVO;
+	}
+
+	public ReservationVO getReservationVO() {
+		return reservationVO;
+	}
+
+	public void setReservationVO(ReservationVO reservationVO) {
+		this.reservationVO = reservationVO;
 	}
 
 }

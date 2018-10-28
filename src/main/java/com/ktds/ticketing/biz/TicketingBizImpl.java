@@ -24,7 +24,14 @@ public class TicketingBizImpl implements TicketingBiz{
 		return this.ticketingDao.selectTicketingSeatList(showingId);
 	}
 	
+	@Override
+	public int readCountByReservationId(String reservationId) {
+		return this.ticketingDao.selectCountByReservationId(reservationId);
+	}
 	
-	
+	@Override
+	public List<TicketingVO> readAllTicketingByReservationId(String reservationId) {
+		return this.ticketingDao.selectAllTicketingByReservationId(reservationId);
+	}
 	
 }

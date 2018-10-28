@@ -51,11 +51,12 @@ WHERE   SHOWING_ID = #{showingId}
 
 <resultMap type="ReservationVO" id="reservationMap">
 	<id property="reservationId" column="RESERVATION_ID" />
-	<result property="id" column="R_ID"/>
-	<result property="reservationDate" column="RESERVATION_DATE"/>
+	<result property="payPrice" column="PAY_PRICE"/>
+	<result property="useMileage" column="USE_MILEAGE"/>
 	<result property="showingId" column="R_SHOWING_ID"/>
-	<result property="seatNumber" column="SEAT_NUMBER"/>
-	<result property="showingNum" column="R_SHOWING_NUM"/>
+	<result property="reservationDate" column="RESERVATION_DATE"/>
+	<result property="id" column="R_ID"/>
+	<result property="name" column="NAME"/>
 	<result property="phone" column="PHONE"/>
 	
 	<association property="memberVO" javaType="MemberVO">
@@ -89,18 +90,18 @@ WHERE   SHOWING_ID = #{showingId}
 
 <select id="selectAllReservationList" parameterType="MemberVO" resultMap="reservationMap">
 SELECT  R.RESERVATION_ID
-		, R.ID	R_ID
+		, R.PAY_PRICE
+		, R.USE_MILEAGE
+		, R.SHOWING_ID R_SHOWING_ID
 		, R.RESERVATION_DATE
-		, R.SHOWING_ID	R_SHOWING_ID
-		, R.SEAT_NUMBER
-		, R.SHOWING_NUM	R_SHOWING_NUM
 		, R.NAME
+		, R.ID
 		, R.PHONE
 		, S.SHOWING_ID	S_SHOWING_ID
 		, S.MOVIE_CODE	S_MOVIE_CODE
 		, S.SHOWING_NUM	S_SHOWING_NUM
 		, S.START_TIME
-		, S.END_TIME		
+		, S.END_TIME
 		, MO.MOVIE_CODE	MO_MOVIE_CODE
 		, MO.MOVIE_NAME
 		, MO.RUNNING_TIME
@@ -137,29 +138,29 @@ AND     R.SHOWING_ID = S.SHOWING_ID
 </choose>
 </select>
 
-<select	id="selectOneReservation" parameterType="string" resultMap="reservationMap">
+<select id="selectOneReservation" parameterType="string" resultMap="reservationMap">
 SELECT  R.RESERVATION_ID
-		, R.ID	R_ID
+		, R.PAY_PRICE
+		, R.USE_MILEAGE
+		, R.SHOWING_ID R_SHOWING_ID
 		, R.RESERVATION_DATE
-		, R.SHOWING_ID	R_SHOWING_ID
-		, R.SEAT_NUMBER
-		, R.SHOWING_NUM	R_SHOWING_NUM
 		, R.NAME
+		, R.ID
 		, R.PHONE
 		, S.SHOWING_ID	S_SHOWING_ID
 		, S.MOVIE_CODE	S_MOVIE_CODE
 		, S.SHOWING_NUM	S_SHOWING_NUM
 		, S.START_TIME
-		, S.END_TIME		
+		, S.END_TIME
 		, MO.MOVIE_CODE	MO_MOVIE_CODE
 		, MO.MOVIE_NAME
 		, MO.RUNNING_TIME
 		, MO.POSTER
-FROM    RESERVATION R
-        , SHOWINGLIST S
-        , MOVIE MO
-WHERE   MO.MOVIE_CODE = S.MOVIE_CODE
-AND     R.SHOWING_ID = S.SHOWING_ID
+FROM	RESERVATION R
+		, SHOWINGLIST S
+		, MOVIE MO
+WHERE	R.SHOWING_ID = S.SHOWING_ID
+AND		S.MOVIE_CODE = MO.MOVIE_CODE
 AND		R.RESERVATION_ID = #{reservationId}
 </select>
 </mapper>
