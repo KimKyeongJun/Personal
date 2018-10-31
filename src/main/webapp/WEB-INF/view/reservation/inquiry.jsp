@@ -55,7 +55,7 @@
 			<c:when test="${not empty reservationList}">			
 				<c:forEach items="${reservationList}" var="reservation">
 					<div class="reserveWrapper">
-						<span class="reserveNum box"><a href="/PersonalProject/reserve/detail/${reservation.reservationId}">${reservation.reservationId}</a></span>
+						<span class="reserveNum box"><a style="color: #000000; text-decoration:none;" href="/PersonalProject/reserve/detail/${reservation.reservationId}">${reservation.reservationId}</a></span>
 						<span class="movieName box">${reservation.movieVO.movieName}</span>
 						<span class="reserveDate box">${reservation.reservationDate}</span>
 						<span class="ticketCount box">${reservation.ticketCount}매</span>

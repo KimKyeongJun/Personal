@@ -78,8 +78,8 @@ input {
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 	<div style="position:relative; top: 20%; left: 30%; width:525px; text-align:center;">
 		<div style="text-align:center; padding-bottom: 15px;">
-			<span class="loginSpan"> 회원 로그인  |</span>
-			<span class="loginSpan"><a href="/PersonalProject/member/guest">비회원 로그인</a></span>
+			<span class="loginSpan" style="color: #00008b; font-weight: bold;"> 회원 로그인  |</span>
+			<span class="loginSpan"><a href="/PersonalProject/member/guest" style="text-decoration: none; color: #00008b; font-weight: bold;">비회원 로그인</a></span>
 		</div>
 	
 		<form id="loginForm">

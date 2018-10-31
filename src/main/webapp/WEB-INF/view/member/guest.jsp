@@ -95,8 +95,8 @@ a {
 	<jsp:include page="/WEB-INF/view/common/menu.jsp" />
 	<div style="position:relative; top: 20%; left: 30%; width:525px; text-align:center;">
 		<div style="text-align:center; padding-bottom: 15px;">
-			<span><a href="/PersonalProject/member/login">회원 로그인 </a></span> | 
-			<span>비회원 로그인</span>
+			<span><a href="/PersonalProject/member/login" style="text-decoration: none; color: #00008b; font-weight: bold;">회원 로그인 </a></span> | 
+			<span style="color: #00008b; font-weight: bold;">비회원 로그인</span>
 		</div>
 	
 		<form id="guestForm">

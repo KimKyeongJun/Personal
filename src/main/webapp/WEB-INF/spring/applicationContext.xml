@@ -25,6 +25,12 @@
 				<property name="memberDao" ref="memberDaoImpl" />
 			</bean>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean	id="logInterceptor"
+					class="com.ktds.common.interceptors.LogInterceptor">
+			</bean>			
+		</mvc:interceptor>
 	</mvc:interceptors>
 	
 	<bean 

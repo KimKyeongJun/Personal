@@ -76,7 +76,7 @@
       		${pagenation}
       		<div>
       			<input type="text" name="searchKeyword" value="${qnaSearchVO.searchKeyword}" placeholder="작성자">
-      			<a href="/PersonalProject/qna/init">검색 초기화</a>
+      			<a href="/PersonalProject/qna/init" style="padding-right: 20px; font-weight: bold; color: #00008b; text-decoration: none;">검색 초기화</a>
       		</div>
       	</form>
       </div>

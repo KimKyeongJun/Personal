@@ -68,7 +68,7 @@
 			<c:forEach items="${ticketList}" var="ticket">
 				<div class="reserveWrapper">
 					<span class="reserveNum box">${ticket.ticketingId}</span>
-					<span class="seatNum box">${ticket.seatNumber}</span>
+					<span class="seatNum box">${ticket.showingNum}관 ${ticket.seatNumber}</span>
 				</div>
 			</c:forEach>
 			<div style="clear:both; text-align:right;">

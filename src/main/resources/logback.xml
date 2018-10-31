@@ -36,6 +36,13 @@
 			<pattern>Statistics : DateTime: %d{HH:mm:ss.SSS}, %msg%n</pattern>
 		</encoder>
 	</appender>
+	
+	<appender name="qos" class="ch.qos.logback.core.FileAppender">
+		    <file>D:/logs/QoS.log</file>
+		<encoder>
+			<pattern>#%d{yyyy:MM:dd:HH:mm:ss}%msg%n</pattern>
+		</encoder>
+  	</appender>
 
 	<appender name="param"
 		class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -54,6 +61,10 @@
 
 	<logger level="info" name="list.statistics">
 		<appender-ref ref="statistics" />
+	</logger>
+	
+	<logger level="debug" name="com.ktds">
+		<appender-ref ref="qos" />
 	</logger>
 
 	<logger level="debug" name="com.ktds">

@@ -41,7 +41,7 @@
 		      <c:forEach items="${noticeList}" var="notice">
 		         <div class="contentWrapper">
 		            <div class="number box">${notice.rowNum}</div><!-- 
-		            --><div class="subject box"><a style="text-decoration:none;" href="/PersonalProject/notice/detail/${notice.noticeId}">${notice.subject}</a></div><!-- 
+		            --><div class="subject box"><a style="text-decoration:none; color: #000000;" href="/PersonalProject/notice/detail/${notice.noticeId}">${notice.subject}</a></div><!-- 
 		            --><div class="writer box">${notice.memberVO.name}</div><!-- 
 		             --><div class="create-date box">${notice.crtDt}</div>
 		         </div>

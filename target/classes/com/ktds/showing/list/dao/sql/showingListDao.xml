@@ -48,6 +48,7 @@ SELECT	S.SHOWING_ID
 FROM	SHOWINGLIST S
 		, MOVIE M
 WHERE	S.MOVIE_CODE = M.MOVIE_CODE
+AND		S.START_TIME >= SYSDATE - 1/24 / 30
 <if test="_parameter != null">
 AND		S.MOVIE_CODE = #{_parameter}
 </if>
