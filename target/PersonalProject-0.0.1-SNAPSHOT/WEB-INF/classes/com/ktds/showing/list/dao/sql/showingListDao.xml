@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ShowingListDao">
+
+<insert id="insertOneShowingList" parameterType="ShowingListVO">
+INSERT	INTO	SHOWINGLIST
+								(
+									SHOWING_ID
+									, MOVIE_CODE
+									, SHOWING_NUM
+									, START_TIME
+									, END_TIME
+								)
+VALUES	(
+			'SL-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(SHO_ID_SEQ.NEXTVAL, 6, '0')
+			, #{movieCode}
+			, #{showingNum}
+			, #{startDate}
+			, #{endDate}
+		)
+</insert>
+
+<resultMap id="showingListMap" type="ShowingListVO">
+	<id column="SHOWING_ID" property="showingId"/>
+	<result property="movieCode" column="S_MOVIE_CODE"/>
+	<result property="showingNum" column="SHOWING_NUM"/>
+	<result property="startDate" column="START_TIME"/>
+	<result property="endDate" column="END_TIME"/>
+	<association property="movieVO" javaType="MovieVO">
+		<id property="movieCode" column="M_MOVIE_CODE"/>
+		<result property="movieName" column="MOVIE_NAME"/>
+		<result property="runningTime" column="RUNNING_TIME"/>
+	</association>
+</resultMap>
+
+<select	id="selectAllShowingList" parameterType="String" resultMap="showingListMap">
+SELECT	S.SHOWING_ID
+		, S.MOVIE_CODE	S_MOVIE_CODE
+		, S.SHOWING_NUM
+		, S.START_TIME
+		, S.END_TIME
+		, M.MOVIE_CODE	M_MOVIE_CODE
+		, M.MOVIE_NAME
+		, M.RUNNING_TIME
+FROM	SHOWINGLIST S
+		, MOVIE M
+WHERE	S.MOVIE_CODE = M.MOVIE_CODE
+AND		S.START_TIME >= SYSDATE - 1/24 / 30
+<if test="_parameter != null">
+AND		S.MOVIE_CODE = #{_parameter}
+</if>
+ORDER	BY	S.START_TIME DESC
+</select>
+
+<select id="selectStartDateTimeMovie" parameterType="ShowingListVO" resultType="int">
+SELECT	COUNT(1)
+FROM	SHOWINGLIST
+WHERE	START_TIME <![CDATA[>=]]> #{startDate}
+AND		END_TIME <![CDATA[<=]]> #{endDate}
+AND		SHOWING_NUM = #{showingNum}
+</select>
+
+<select	id="selectOneShowingList" parameterType="string" resultMap="showingListMap">
+SELECT	S.SHOWING_ID
+		, S.MOVIE_CODE	S_MOVIE_CODE
+		, S.SHOWING_NUM
+		, S.START_TIME
+		, S.END_TIME
+		, M.MOVIE_CODE	M_MOVIE_CODE
+		, M.MOVIE_NAME
+		, M.RUNNING_TIME
+FROM	SHOWINGLIST S
+		, MOVIE M
+WHERE	S.MOVIE_CODE = M.MOVIE_CODE
+AND		S.SHOWING_ID = #{showingId}
+</select>
+</mapper>
+  

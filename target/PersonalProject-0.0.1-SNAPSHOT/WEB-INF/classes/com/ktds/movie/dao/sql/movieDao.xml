@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MovieDao">
+
+<resultMap id="movieMap" type="MovieVO">
+	<id property="movieCode" column="MOVIE_CODE"/>
+	<result property="movieName" column="MOVIE_NAME"/>
+	<result property="runningTime" column="RUNNING_TIME"/>
+	<result property="poster" column="POSTER"/>
+</resultMap>
+
+<select id="selectAllMovies" resultMap="movieMap">
+SELECT	MOVIE_CODE
+		, MOVIE_NAME
+		, RUNNING_TIME
+		, POSTER
+FROM	MOVIE
+</select>
+<select id="selectOneMovie" parameterType="string" resultMap="movieMap">
+SELECT	MOVIE_CODE
+		, MOVIE_NAME
+		, RUNNING_TIME
+		, POSTER
+FROM	MOVIE
+WHERE	MOVIE_CODE = #{movieCode}
+</select>
+
+<select id="selectOneMovieRunningTime" parameterType="string" resultType="int">
+SELECT	RUNNING_TIME
+FROM	MOVIE
+WHERE	MOVIE_CODE = #{movieCode}
+</select>
+
+<select	id="selectOneMovieGrade" parameterType="string" resultType="double">
+SELECT	NVL( AVG(GRADE), 0 )
+FROM	MOVIECOMMENTS
+WHERE	MOVIE_CODE = #{movieCode}
+</select>
+
+
+</mapper>
+  

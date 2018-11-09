@@ -12,6 +12,14 @@
 		<typeAlias type="com.ktds.qna.reply.vo.QnaReplyVO" alias="QnaReplyVO"/>
 		<typeAlias type="com.ktds.notice.vo.NoticeVO" alias="NoticeVO"/>
 		<typeAlias type="com.ktds.notice.vo.NoticeSearchVO" alias="NoticeSearchVO"/>
+		<typeAlias type="com.ktds.showing.seat.vo.ShowingSeatVO" alias="ShowingSeatVO"/>
+		<typeAlias type="com.ktds.movie.vo.MovieVO" alias="MovieVO"/>
+		<typeAlias type="com.ktds.showing.list.vo.ShowingListVO" alias="ShowingListVO"/>
+		<typeAlias type="com.ktds.showing.vo.ShowingVO" alias="ShowingVO"/>
+		<typeAlias type="com.ktds.reservation.vo.ReservationVO" alias="ReservationVO"/>
+		<typeAlias type="com.ktds.movie.comments.vo.MovieCommentVO" alias="MovieCommentVO"/>
+		<typeAlias type="com.ktds.ticketing.vo.TicketingVO" alias="TicketingVO"/>
+		
 	</typeAliases>
 	
 </configuration>

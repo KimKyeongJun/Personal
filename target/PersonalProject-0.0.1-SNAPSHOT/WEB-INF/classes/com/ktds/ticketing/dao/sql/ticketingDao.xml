@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TicketingDao">
+
+<insert id="insertOneTicketing" parameterType="TicketingVO">
+<selectKey resultType="string" keyProperty="reservationId" order="BEFORE">
+	SELECT	MAX(RESERVATION_ID)	reservationId
+	FROM	RESERVATION
+</selectKey>
+INSERT	INTO	TICKETING	(
+								TICKETING_ID
+								, SEAT_NUMBER
+								, SHOWING_NUM
+								, RESERVATION_ID						
+							)
+VALUES						(
+								'TC-' || TO_CHAR(SYSDATE, 'YYYYMMDDHH24') || '-' || LPAD(TKT_SEQ_ID.NEXTVAL, 6, '0')
+								, #{seatNumber}
+								, #{showingNum}
+								, #{reservationId}
+							)
+</insert>
+
+<select	id="selectTicketingSeatList" parameterType="string" resultType="string">
+SELECT	SEAT_NUMBER
+FROM    TICKETING	T
+		, RESERVATION R
+		, SHOWINGLIST S
+WHERE   T.RESERVATION_ID = R.RESERVATION_ID
+AND		R.SHOWING_ID = S.SHOWING_ID
+AND		S.SHOWING_ID = #{showingId}
+</select>
+
+<select id="selectCountByReservationId" parameterType="string" resultType="int">
+SELECT  COUNT(*)
+FROM    TICKETING
+WHERE   RESERVATION_ID = #{reservationId}
+</select>
+
+<resultMap type="TicketingVO" id="ticketingMap">
+	<id property="ticketingId" column="TICKETING_ID" />
+	<result property="seatNumber" column="SEAT_NUMBER" />
+	<result property="showingNum" column="T_SHOWING_NUM" />
+	<result property="reservationId" column="T_RESERVATION_ID" />	
+
+	<association property="reservationVO" javaType="ReservationVO">
+		<id property="reservationId" column="R_RESERVATION_ID" />
+		<result property="payPrice" column="PAY_PRICE"/>
+		<result property="useMileage" column="USE_MILEAGE"/>
+		<result property="showingId" column="R_SHOWING_ID"/>
+		<result property="reservationDate" column="RESERVATION_DATE"/>
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+		<result property="phone" column="PHONE"/>
+	</association>
+	
+	<association property="showingListVO" javaType="ShowingListVO">
+		<id property="showingId" column="S_SHOWING_ID" />
+		<result property="movieCode" column="S_MOVIE_CODE"/>
+		<result property="showingNum" column="S_SHOWING_NUM"/>
+		<result property="startDate" column="START_TIME"/>
+		<result property="endDate" column="END_TIME"/>
+	</association>
+	
+	<association property="movieVO" javaType="MovieVO">
+		<id property="movieCode" column="M_MOVIE_CODE" />
+		<result property="movieName" column="MOVIE_NAME"/>
+		<result property="runningTime" column="RUNNING_TIME"/>
+		<result property="poster" column="POSTER"/>
+	</association>
+</resultMap>
+
+<select id="selectAllTicketingByReservationId" parameterType="string" resultMap="ticketingMap">
+SELECT	T.TICKETING_ID
+		, T.SEAT_NUMBER
+		, T.SHOWING_NUM T_SHOWING_NUM
+		, T.RESERVATION_ID T_RESERVATION_ID
+		, R.RESERVATION_ID R_RESERVATION_ID
+		, R.PAY_PRICE
+		, R.USE_MILEAGE
+		, R.SHOWING_ID R_SHOWING_ID
+		, R.RESERVATION_DATE
+		, R.NAME
+		, R.ID
+		, R.PHONE
+		, S.SHOWING_ID S_SHOWING_ID
+		, S.MOVIE_CODE S_MOVIE_CODE
+		, S.START_TIME
+		, S.SHOWING_NUM S_SHOWING_NUM
+		, S.END_TIME
+		, M.MOVIE_CODE M_MOVIE_CODE
+		, M.MOVIE_NAME
+		, M.RUNNING_TIME
+		, M.POSTER
+FROM	TICKETING T
+		, RESERVATION R
+		, SHOWINGlIST S
+		, MOVIE M
+WHERE	T.RESERVATION_ID = #{reservationId}
+AND		T.RESERVATION_ID = R.RESERVATION_ID
+AND		R.SHOWING_ID = S.SHOWING_ID
+AND		S.MOVIE_CODE = M.MOVIE_CODE
+</select>
+
+</mapper>
+  

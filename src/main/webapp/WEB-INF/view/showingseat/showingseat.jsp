@@ -24,6 +24,7 @@
 			}
 		});
 		
+		
 		var price = 0;
 		$(".seatBtn").click(function() {
 			var input = '<div class="seatDiv" data-count ="'+$(this).data('count')+'">'+$(this).val()+'</div>';

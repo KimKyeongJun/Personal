@@ -37,44 +37,35 @@
 		</encoder>
 	</appender>
 	
+	<appender name="qos"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>D:/logs/QoS.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>D:/logs/QoS_%d{yyyy-MM-dd HH}.log</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}%msg%n</pattern>
+		</encoder>
+	</appender>
+<!-- 	
 	<appender name="qos" class="ch.qos.logback.core.FileAppender">
 		    <file>D:/logs/QoS.log</file>
 		<encoder>
 			<pattern>#%d{yyyy:MM:dd:HH:mm:ss}%msg%n</pattern>
 		</encoder>
   	</appender>
+ -->
 
-	<appender name="param"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<file>D:/param.log</file>
-		<rollingPolicy
-			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!-- daily rollover -->
-			<fileNamePattern>D:/logs/param.%d{yyyy-MM-dd}.log</fileNamePattern>
-
-		</rollingPolicy>
-		<encoder>
-			<pattern>Param : %d{HH:mm:ss.SSS} %logger.%method:%line %msg%n
-			</pattern>
-		</encoder>
-	</appender>
 
 	<logger level="info" name="list.statistics">
 		<appender-ref ref="statistics" />
 	</logger>
 	
-	<logger level="debug" name="com.ktds">
+	<logger level="debug" name="qos">
 		<appender-ref ref="qos" />
 	</logger>
-
-	<logger level="debug" name="com.ktds">
-		<appender-ref ref="param" />
-	</logger>
-
-	<!-- <logger level="debug" name="org.springframework">
-		<appender-ref ref="STDOUT" />
-		<appender-ref ref="STDOUT_File" />
-	</logger> -->
 
 	<root level="debug"> 
 		<appender-ref ref="STDOUT"/>

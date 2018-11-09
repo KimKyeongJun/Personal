@@ -26,7 +26,7 @@
 					window.open("/PersonalProject/qna/password?qnaId="+qnaId,'상세','width=500, height=250, left=400, top=350, toolbar=no, status=no, scrollbars=yes');
 				}
 			}
-		});
+});
 	});
 </script>
 <style>
