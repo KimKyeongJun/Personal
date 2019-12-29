@@ -111,7 +111,6 @@ public class MemberController {
 		
 		/*
 		boolean isLogin = memberService.readOneMember(memberVO, session);
-		System.out.println("출력 : isLogin" + isLogin);
 		if ( !isLogin ) {
 			result.put("message", "로그인 실패. 아이디와 비밀번호를 확인하세요");
 		}

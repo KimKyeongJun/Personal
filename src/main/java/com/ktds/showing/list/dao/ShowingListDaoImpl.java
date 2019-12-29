@@ -30,7 +30,6 @@ public class ShowingListDaoImpl extends SqlSessionDaoSupport implements ShowingL
 	
 	@Override
 	public int selectStartDateTimeMovie(ShowingListVO showingListVO) {
-		System.out.println("Dao 출력 " + getSqlSession().selectOne("ShowingListDao.selectStartDateTimeMovie", showingListVO));
 		return getSqlSession().selectOne("ShowingListDao.selectStartDateTimeMovie", showingListVO);
 	}
 	

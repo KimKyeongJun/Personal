@@ -27,19 +27,15 @@ public class ShowingListServiceImpl implements ShowingListService {
 	public boolean registOneShowingList(ShowingListVO showingListVO) {
 		int movieRunningTime = this.movieBiz.readOneMovieRunningTime(showingListVO.getMovieCode());
 		String startDate = showingListVO.getStartDate().replace("T", " ");
-		System.out.println("Service 출력 : " + startDate);
 		showingListVO.setStartDate(startDate);
 		try {
 			Date date = new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(startDate);
-			System.out.println("Service date 형변환 출력 : " + date);
 			Calendar cal = Calendar.getInstance();
 			/*cal.get(Calendar.HOUR_OF_DAY);
 			cal.set(Calendar.AM_PM, Calendar.AM);*/
 		    cal.setTime(date);
 		    cal.add(Calendar.MINUTE, movieRunningTime);
-		    System.out.println("Service cal 출력 : " + cal.getTime());
 			String finishDate = new SimpleDateFormat("yyyy-MM-dd kk:mm").format(cal.getTime());
-			System.out.println("Service 끝나는 시간 출력 : " + finishDate);
 			showingListVO.setEndDate(finishDate);
 		} catch (ParseException e) {
 			e.printStackTrace();

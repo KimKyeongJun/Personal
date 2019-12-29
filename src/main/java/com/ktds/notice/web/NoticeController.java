@@ -70,7 +70,6 @@ public class NoticeController {
 	public Map<String, Object> doNoticeRegistAction (@ModelAttribute NoticeVO noticeVO, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
 		MemberVO loginMemberVO = (MemberVO) session.getAttribute(Session.USER);
-		System.out.println(noticeVO.getContent());
 		noticeVO.setAdminId(loginMemberVO.getId());
 		
 		boolean isRegist = this.noticeService.createOnaNotice(noticeVO);

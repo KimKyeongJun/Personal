@@ -32,7 +32,6 @@ public class ShowingListBizImpl implements ShowingListBiz {
 	@Override
 	public boolean findStartDateTimeMovie(ShowingListVO showingListVO) {
 		int resultShowingListVO  = this.showingListDao.selectStartDateTimeMovie(showingListVO);
-		System.out.println("Biz 출력 : " + resultShowingListVO);
 		return true;
 		/*
 		if ( resultShowingListVO == null ) {

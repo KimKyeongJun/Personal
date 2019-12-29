@@ -103,7 +103,6 @@ public class QnaController {
 	public ModelAndView viewQnaDetailPage(@RequestParam String qnaId) {
 		ModelAndView view = new ModelAndView("qna/detail");
 		QnaVO oneQnaVO = this.qnaService.readOneQna(qnaId);
-		System.out.println("QnaController 출력" + qnaId);
 		XssFilter filter = XssFilter.getInstance("lucy-xss-superset.xml");
 		oneQnaVO.setWriter(filter.doFilter(oneQnaVO.getWriter()));
 		oneQnaVO.setSubject(filter.doFilter(oneQnaVO.getSubject()));

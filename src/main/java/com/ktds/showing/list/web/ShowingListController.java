@@ -34,7 +34,6 @@ public class ShowingListController {
 	
 	@GetMapping("/movie/showinglist")
 	public ModelAndView viewShowingListPage(@RequestParam(required=false) String movieCode) {
-		System.out.println("QQQ"+movieCode);
 		List<ShowingListVO> showingList = this.showingListService.readAllShowingList(movieCode);
 		ModelAndView view = new ModelAndView("movie/showinglist");
 		view.addObject("showingList", showingList);
@@ -44,8 +43,6 @@ public class ShowingListController {
 	@GetMapping("/reserve/confirm")
 	public ModelAndView viewReservationConfirmPage(@ModelAttribute ReservationVO reservationVO) {
 		ShowingListVO showingListVO = this.showingListService.readOneShowingList(reservationVO.getShowingId());
-		System.out.println("ReservationController " + showingListVO.getMovieVO().getMovieName());
-		System.out.println("!!!ReservationController" + reservationVO.getShowingId());
 		ModelAndView view = new ModelAndView("reservation/confirm");
 		view.addObject("showingListVO", showingListVO);
 		return view;

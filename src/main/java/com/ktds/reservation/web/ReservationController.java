@@ -40,9 +40,6 @@ public class ReservationController {
 	@PostMapping("/reserve")
 	@ResponseBody
 	public boolean doMovieRegistAction(@ModelAttribute ReservationVO reservationVO, HttpSession session) {
-		System.out.println("Reservation Controller" + reservationVO.getPayPrice());
-		System.out.println("Reservation Controller!" + reservationVO.getUseMileage());
-		System.out.println("Reservation Controller!!" + reservationVO.getSeatNumberList());
 		
 		MemberVO userMemberVO = (MemberVO) session.getAttribute(Session.USER);
 		MemberVO guestMemberVO = (MemberVO) session.getAttribute(Session.GUEST);
